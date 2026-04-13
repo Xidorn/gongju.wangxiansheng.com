@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>汇率兑换工具 - 在线货币换算 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供在线汇率兑换工具，支持多币种实时换算，默认美元兑换人民币，支持自动换算、交换货币、复制结果和显示汇率更新时间。" />
+  <meta name="keywords" content="汇率兑换,货币换算,美元兑人民币,在线汇率换算,实时汇率,外汇换算,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/huilv.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="汇率兑换工具 - 在线货币换算 | 王先生工具" />
+  <meta property="og:description" content="支持多币种实时换算，默认美元兑换人民币，支持自动换算、交换货币、复制结果和显示汇率更新时间。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/huilv.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="汇率兑换工具 - 在线货币换算 | 王先生工具" />
+  <meta name="twitter:description" content="支持多币种实时换算，默认美元兑换人民币，支持自动换算、交换货币、复制结果和显示汇率更新时间。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .status-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-chip.success {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background: #ecfdf5;
+    }
+
+    .status-chip.warning {
+      color: var(--warning);
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .status-chip.error {
+      color: var(--danger);
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .tool-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: #fcfcfd;
+    }
+
+    .card-head h2 {
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .card-head p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr auto auto;
+      gap: 12px;
+      margin-bottom: 14px;
+      align-items: end;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .input {
+      font-family: var(--mono);
+      letter-spacing: 0.2px;
+    }
+
+    .input:focus,
+    .select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    .hero-result {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      border: 1px solid #dbeafe;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .hero-result-left {
+      min-width: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero-value {
+      font-family: var(--mono);
+      font-size: 28px;
+      line-height: 1.4;
+      font-weight: 700;
+      color: #1e293b;
+      word-break: break-all;
+    }
+
+    .hero-sub {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.8;
+      word-break: break-all;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .detail-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .detail-label {
+      font-size: 13px;
+      color: var(--sub);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .detail-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.7;
+      word-break: break-all;
+      font-family: var(--mono);
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1080px) {
+      .field-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .detail-grid,
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-result {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar,
+      .tool-body,
+      .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .toolbar-right {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-value {
+        font-size: 22px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "汇率兑换工具",
+    "url": "https://gongju.wangxiansheng.com/huilv.html",
+    "description": "支持多币种实时汇率换算，默认美元兑换人民币，并显示更新时间的在线汇率兑换工具。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "汇率兑换工具",
+        "item": "https://gongju.wangxiansheng.com/huilv.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "汇率兑换工具",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/huilv.html",
+    "description": "支持多币种实时汇率换算，默认美元兑换人民币，支持自动换算、交换货币、复制结果和显示更新时间。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">汇率兑换工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>汇率兑换工具</h1>
+      <p>
+        王先生工具提供简洁易用的在线汇率兑换页面，支持多币种实时换算，默认美元兑换人民币，
+        页面打开自动换算，输入金额和切换货币时也会自动更新结果。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="screen-reader-text">汇率兑换工具</h2>
+
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="toolbar-right">
+            <div id="statusChip" class="status-chip">Ready</div>
+            <button type="button" class="btn btn-primary" id="convertBtn">换算</button>
+            <button type="button" class="btn btn-light" id="swapBtn">交换货币</button>
+            <button type="button" class="btn btn-light" id="copyBtn">复制结果</button>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <section class="card" aria-labelledby="input-title">
+            <div class="card-head">
+              <h2 id="input-title">输入换算</h2>
+              <p>默认 USD → CNY，页面加载后自动换算，你也可以随时切换币种和金额。</p>
+            </div>
+
+            <div class="card-body">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="currencyAmount">输入金额</label>
+                  <input id="currencyAmount" class="input" type="number" inputmode="decimal" step="any" placeholder="输入金额" aria-label="输入金额" />
+                </div>
+
+                <div class="field">
+                  <label for="currencyFrom">源货币</label>
+                  <select id="currencyFrom" class="select" aria-label="选择源货币"></select>
+                </div>
+
+                <div class="field">
+                  <label for="currencyTo">目标货币</label>
+                  <select id="currencyTo" class="select" aria-label="选择目标货币"></select>
+                </div>
+
+                <div class="field">
+                  <button type="button" class="btn btn-light" id="clearBtn">清空重置</button>
+                </div>
+
+                <div class="field">
+                  <button type="button" class="btn btn-primary" id="sampleBtn">填充示例</button>
+                </div>
+              </div>
+
+              <div class="hero-result">
+                <div class="hero-result-left">
+                  <div class="hero-badge">实时汇率结果</div>
+                  <div class="hero-value" id="resultValue">-</div>
+                  <div class="hero-sub" id="resultDesc">等待查询汇率...</div>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-primary" id="copyMainBtn">复制结果</button>
+                </div>
+              </div>
+
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">汇率说明</div>
+                  <div class="detail-value" id="rateInfo">-</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">更新时间信息</div>
+                  <div class="detail-value" id="updateInfo">-</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            这个在线汇率兑换工具适合快速查看不同货币之间的实时换算结果。页面默认显示美元兑换人民币，
+            同时支持多币种选择、自动换算、交换货币和复制结果，适合日常结算、出海业务、旅行预算和财务参考场景。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用方法</h2>
+          <ol>
+            <li>输入金额，默认金额为 1。</li>
+            <li>选择源货币和目标货币，默认 USD → CNY。</li>
+            <li>页面会自动调用汇率接口并换算，也可以点击“换算”按钮手动执行。</li>
+            <li>点击“交换货币”可快速反向换算，点击“复制结果”可复制当前换算结果。</li>
+          </ol>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary>页面打开后为什么会自动显示 1 美元兑换人民币？</summary>
+            <div class="answer">
+              这是默认示例配置，方便用户打开页面后立即看到可用结果，不需要先手动输入。
+            </div>
+          </details>
+
+          <details>
+            <summary>汇率更新时间显示的是什么时间？</summary>
+            <div class="answer">
+              页面会显示接口返回的最后更新时间和下次更新时间，并转换为中国时区格式显示，便于直接查看。
+            </div>
+          </details>
+
+          <details>
+            <summary>为什么我切换币种后结果会自动变化？</summary>
+            <div class="answer">
+              这个页面默认启用了自动换算，所以在金额输入、源货币变化、目标货币变化时都会自动重新计算。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <script>
+    const currencyMap = {
+      AED: "阿联酋迪拉姆 (AED)",
+      AFN: "阿富汗尼 (AFN)",
+      ALL: "阿尔巴尼亚列克 (ALL)",
+      AMD: "亚美尼亚德拉姆 (AMD)",
+      ANG: "荷属安的列斯盾 (ANG)",
+      AOA: "宽扎 (AOA)",
+      ARS: "阿根廷比索 (ARS)",
+      AUD: "澳元 (AUD)",
+      AWG: "阿鲁巴弗洛林 (AWG)",
+      AZN: "阿塞拜疆马纳特 (AZN)",
+      BAM: "可兑换马克 (BAM)",
+      BBD: "巴巴多斯元 (BBD)",
+      BDT: "塔卡 (BDT)",
+      BGN: "保加利亚列瓦 (BGN)",
+      BHD: "巴林第纳尔 (BHD)",
+      BIF: "布隆迪法郎 (BIF)",
+      BMD: "百慕大元 (BMD)",
+      BND: "文莱元 (BND)",
+      BOB: "玻利维亚诺 (BOB)",
+      BRL: "巴西雷亚尔 (BRL)",
+      BSD: "巴哈马元 (BSD)",
+      BTN: "努扎姆 (BTN)",
+      BWP: "普拉 (BWP)",
+      BYN: "白俄罗斯卢布 (BYN)",
+      BZD: "伯利兹元 (BZD)",
+      CAD: "加元 (CAD)",
+      CDF: "刚果法郎 (CDF)",
+      CHF: "瑞士法郎 (CHF)",
+      CLP: "智利比索 (CLP)",
+      CNY: "人民币 (CNY)",
+      COP: "哥伦比亚比索 (COP)",
+      CRC: "哥斯达黎加科朗 (CRC)",
+      CUP: "古巴比索 (CUP)",
+      CVE: "佛得角埃斯库多 (CVE)",
+      CZK: "捷克克朗 (CZK)",
+      DJF: "吉布提法郎 (DJF)",
+      DKK: "丹麦克朗 (DKK)",
+      DOP: "多米尼加比索 (DOP)",
+      DZD: "阿尔及利亚第纳尔 (DZD)",
+      EGP: "埃及镑 (EGP)",
+      ERN: "纳法克 (ERN)",
+      ETB: "埃塞俄比亚比尔 (ETB)",
+      EUR: "欧元 (EUR)",
+      FJD: "斐济元 (FJD)",
+      FKP: "福克兰群岛镑 (FKP)",
+      FOK: "法罗群岛克朗 (FOK)",
+      GBP: "英镑 (GBP)",
+      GEL: "拉里 (GEL)",
+      GGP: "根西岛镑 (GGP)",
+      GHS: "加纳赛地 (GHS)",
+      GIP: "直布罗陀镑 (GIP)",
+      GMD: "达拉西 (GMD)",
+      GNF: "几内亚法郎 (GNF)",
+      GTQ: "格查尔 (GTQ)",
+      GYD: "圭亚那元 (GYD)",
+      HKD: "港元 (HKD)",
+      HNL: "伦皮拉 (HNL)",
+      HRK: "库纳 (HRK)",
+      HTG: "古德 (HTG)",
+      HUF: "福林 (HUF)",
+      IDR: "印尼卢比 (IDR)",
+      ILS: "新谢克尔 (ILS)",
+      IMP: "曼岛镑 (IMP)",
+      INR: "印度卢比 (INR)",
+      IQD: "伊拉克第纳尔 (IQD)",
+      IRR: "伊朗里亚尔 (IRR)",
+      ISK: "冰岛克朗 (ISK)",
+      JEP: "泽西岛镑 (JEP)",
+      JMD: "牙买加元 (JMD)",
+      JOD: "约旦第纳尔 (JOD)",
+      JPY: "日元 (JPY)",
+      KES: "肯尼亚先令 (KES)",
+      KGS: "索姆 (KGS)",
+      KHR: "瑞尔 (KHR)",
+      KID: "基里巴斯元 (KID)",
+      KMF: "科摩罗法郎 (KMF)",
+      KRW: "韩元 (KRW)",
+      KWD: "科威特第纳尔 (KWD)",
+      KYD: "开曼群岛元 (KYD)",
+      KZT: "腾格 (KZT)",
+      LAK: "基普 (LAK)",
+      LBP: "黎巴嫩镑 (LBP)",
+      LKR: "斯里兰卡卢比 (LKR)",
+      LRD: "利比里亚元 (LRD)",
+      LSL: "鲁梯 (LSL)",
+      LYD: "利比亚第纳尔 (LYD)",
+      MAD: "摩洛哥迪拉姆 (MAD)",
+      MDL: "摩尔多瓦列伊 (MDL)",
+      MGA: "阿里亚里 (MGA)",
+      MKD: "第纳尔 (MKD)",
+      MMK: "缅甸元 (MMK)",
+      MNT: "图格里克 (MNT)",
+      MOP: "澳门元 (MOP)",
+      MRU: "乌吉亚 (MRU)",
+      MUR: "毛里求斯卢比 (MUR)",
+      MVR: "拉菲亚 (MVR)",
+      MWK: "克瓦查 (MWK)",
+      MXN: "墨西哥比索 (MXN)",
+      MYR: "马来西亚林吉特 (MYR)",
+      MZN: "莫桑比克梅蒂卡尔 (MZN)",
+      NAD: "纳米比亚元 (NAD)",
+      NGN: "奈拉 (NGN)",
+      NIO: "尼加拉瓜新科多巴 (NIO)",
+      NOK: "挪威克朗 (NOK)",
+      NPR: "尼泊尔卢比 (NPR)",
+      NZD: "新西兰元 (NZD)",
+      OMR: "阿曼里亚尔 (OMR)",
+      PAB: "巴波亚 (PAB)",
+      PEN: "新索尔 (PEN)",
+      PGK: "基那 (PGK)",
+      PHP: "菲律宾比索 (PHP)",
+      PKR: "巴基斯坦卢比 (PKR)",
+      PLN: "兹罗提 (PLN)",
+      PYG: "瓜拉尼 (PYG)",
+      QAR: "卡塔尔里亚尔 (QAR)",
+      RON: "罗马尼亚列伊 (RON)",
+      RSD: "塞尔维亚第纳尔 (RSD)",
+      RUB: "俄罗斯卢布 (RUB)",
+      RWF: "卢旺达法郎 (RWF)",
+      SAR: "沙特里亚尔 (SAR)",
+      SBD: "所罗门群岛元 (SBD)",
+      SCR: "塞舌尔卢比 (SCR)",
+      SDG: "苏丹镑 (SDG)",
+      SEK: "瑞典克朗 (SEK)",
+      SGD: "新加坡元 (SGD)",
+      SHP: "圣赫勒拿镑 (SHP)",
+      SLE: "塞拉利昂利昂 (SLE)",
+      SLL: "利昂 (SLL)",
+      SOS: "索马里先令 (SOS)",
+      SRD: "苏里南元 (SRD)",
+      SSP: "南苏丹镑 (SSP)",
+      STN: "多布拉 (STN)",
+      SYP: "叙利亚镑 (SYP)",
+      SZL: "里兰吉尼 (SZL)",
+      THB: "泰铢 (THB)",
+      TJS: "塔吉克斯坦索莫尼 (TJS)",
+      TMT: "土库曼斯坦新马纳特 (TMT)",
+      TND: "突尼斯第纳尔 (TND)",
+      TOP: "潘加 (TOP)",
+      TRY: "土耳其里拉 (TRY)",
+      TTD: "特立尼达和多巴哥元 (TTD)",
+      TVD: "图瓦卢元 (TVD)",
+      TWD: "新台币 (TWD)",
+      TZS: "坦桑尼亚先令 (TZS)",
+      UAH: "格里夫尼亚 (UAH)",
+      UGX: "乌干达先令 (UGX)",
+      USD: "美元 (USD)",
+      UYU: "乌拉圭比索 (UYU)",
+      UZS: "乌兹别克斯坦苏姆 (UZS)",
+      VES: "委内瑞拉玻利瓦尔 (VES)",
+      VND: "越南盾 (VND)",
+      VUV: "瓦图 (VUV)",
+      WST: "塔拉 (WST)",
+      XAF: "中非法郎 (XAF)",
+      XCD: "东加勒比元 (XCD)",
+      XDR: "特别提款权 (XDR)",
+      XOF: "西非法郎 (XOF)",
+      XPF: "太平洋法郎 (XPF)",
+      YER: "也门里亚尔 (YER)",
+      ZAR: "兰特 (ZAR)",
+      ZMW: "赞比亚克瓦查 (ZMW)",
+      ZWG: "津巴布韦金币 (ZWG)",
+      ZWL: "津巴布韦元 (ZWL)"
+    };
+
+    const API_URL = "https://api.mrwang.com/exchange.php?currency=";
+
+    const yearEl = document.getElementById("year");
+    const statusChip = document.getElementById("statusChip");
+    const amountInput = document.getElementById("currencyAmount");
+    const fromSelect = document.getElementById("currencyFrom");
+    const toSelect = document.getElementById("currencyTo");
+    const convertBtn = document.getElementById("convertBtn");
+    const swapBtn = document.getElementById("swapBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const copyMainBtn = document.getElementById("copyMainBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const sampleBtn = document.getElementById("sampleBtn");
+    const resultValueEl = document.getElementById("resultValue");
+    const resultDescEl = document.getElementById("resultDesc");
+    const rateInfoEl = document.getElementById("rateInfo");
+    const updateInfoEl = document.getElementById("updateInfo");
+
+    const rateCache = new Map();
+    let debounceTimer = null;
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function setStatus(text, type) {
+      statusChip.textContent = text;
+      statusChip.className = "status-chip";
+      if (type) statusChip.classList.add(type);
+    }
+
+    function formatNumber(num, digits = 6) {
+      if (!Number.isFinite(num)) return "-";
+      return num.toLocaleString("en-US", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: digits
+      });
+    }
+
+    function formatTimeToChina(utcString) {
+      if (!utcString) return "-";
+      const date = new Date(utcString);
+      if (Number.isNaN(date.getTime())) return utcString;
+      return date.toLocaleString("zh-CN", {
+        timeZone: "Asia/Shanghai",
+        hour12: false
+      });
+    }
+
+    function resetOutput() {
+      resultValueEl.textContent = "-";
+      resultDescEl.textContent = "等待查询汇率...";
+      rateInfoEl.textContent = "-";
+      updateInfoEl.textContent = "-";
+    }
+
+    function fillCurrencyOptions() {
+      const codes = Object.keys(currencyMap).sort();
+      codes.forEach(function(code) {
+        const optionFrom = document.createElement("option");
+        optionFrom.value = code;
+        optionFrom.textContent = currencyMap[code];
+        fromSelect.appendChild(optionFrom);
+
+        const optionTo = document.createElement("option");
+        optionTo.value = code;
+        optionTo.textContent = currencyMap[code];
+        toSelect.appendChild(optionTo);
+      });
+
+      fromSelect.value = "USD";
+      toSelect.value = "CNY";
+      amountInput.value = "1";
+    }
+
+    async function getRates(baseCode) {
+      if (rateCache.has(baseCode)) {
+        return rateCache.get(baseCode);
+      }
+
+      const response = await fetch(API_URL + encodeURIComponent(baseCode), {
+        cache: "no-store"
+      });
+
+      if (!response.ok) {
+        throw new Error("网络错误，无法获取汇率数据");
+      }
+
+      const data = await response.json();
+
+      if (!data || data.result !== "success" || !data.rates) {
+        throw new Error("接口返回异常，无法获取汇率数据");
+      }
+
+      rateCache.set(baseCode, data);
+      return data;
+    }
+
+    async function doConversion() {
+      const amount = parseFloat(amountInput.value);
+      const fromCurrency = fromSelect.value;
+      const toCurrency = toSelect.value;
+
+      if (!Number.isFinite(amount) || amount <= 0) {
+        resetOutput();
+        resultDescEl.textContent = "请输入大于 0 的有效金额。";
+        setStatus("请输入有效金额", "warning");
+        return;
+      }
+
+      setStatus("查询中...", "warning");
+      resultDescEl.textContent = "查询中，请稍候...";
+
+      try {
+        const data = await getRates(fromCurrency);
+        const toRate = data.rates[toCurrency];
+
+        if (typeof toRate !== "number") {
+          throw new Error("所选目标货币汇率不可用");
+        }
+
+        const convertedAmount = amount * toRate;
+        const lastUpdatedChinaTime = formatTimeToChina(data.time_last_update_utc);
+        const nextUpdatedChinaTime = formatTimeToChina(data.time_next_update_utc);
+
+        resultValueEl.textContent = formatNumber(convertedAmount, 6) + " " + toCurrency;
+        resultDescEl.textContent = formatNumber(amount, 6) + " " + fromCurrency + " = " + formatNumber(convertedAmount, 6) + " " + toCurrency;
+        rateInfoEl.textContent = "1 " + fromCurrency + " = " + formatNumber(toRate, 8) + " " + toCurrency;
+        updateInfoEl.textContent = "最后更新：" + lastUpdatedChinaTime + " ｜ 下次更新：" + nextUpdatedChinaTime;
+
+        setStatus("换算成功", "success");
+      } catch (error) {
+        resetOutput();
+        resultDescEl.textContent = "查询失败：" + error.message;
+        setStatus("查询失败", "error");
+      }
+    }
+
+    function scheduleConversion() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(doConversion, 220);
+    }
+
+    function swapCurrencies() {
+      const from = fromSelect.value;
+      const to = toSelect.value;
+      fromSelect.value = to;
+      toSelect.value = from;
+      doConversion();
+    }
+
+    function fillSample() {
+      amountInput.value = "100";
+      fromSelect.value = "USD";
+      toSelect.value = "CNY";
+      doConversion();
+    }
+
+    function clearAll() {
+      amountInput.value = "1";
+      fromSelect.value = "USD";
+      toSelect.value = "CNY";
+      doConversion();
+    }
+
+    async function copyResult() {
+      const text = resultDescEl.textContent;
+      if (!text || text === "等待查询汇率..." || text === "查询中，请稍候...") {
+        setStatus("没有可复制内容", "warning");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("复制成功", "success");
+      } catch (error) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        setStatus("复制成功", "success");
+      }
+    }
+
+    amountInput.addEventListener("input", scheduleConversion);
+    fromSelect.addEventListener("change", doConversion);
+    toSelect.addEventListener("change", doConversion);
+    convertBtn.addEventListener("click", doConversion);
+    swapBtn.addEventListener("click", swapCurrencies);
+    clearBtn.addEventListener("click", clearAll);
+    sampleBtn.addEventListener("click", fillSample);
+    copyBtn.addEventListener("click", copyResult);
+    copyMainBtn.addEventListener("click", copyResult);
+
+    amountInput.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        doConversion();
+      }
+    });
+
+    fillCurrencyOptions();
+    doConversion();
+  </script>
+</body>
+</html>
