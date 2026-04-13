@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Base64 加密解密工具 - 在线编码解码 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供在线 Base64 加密解密工具，支持中文、英文、符号、换行和 Emoji 的 Base64 编码与解码，打开即用，无需安装。" />
+  <meta name="keywords" content="Base64,在线Base64工具,Base64加密,Base64解密,Base64编码,Base64解码,在线编码工具,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/base64.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="Base64 加密解密工具 - 在线编码解码 | 王先生工具" />
+  <meta property="og:description" content="支持中文、英文、符号、换行和 Emoji 的在线 Base64 编码与解码工具，简洁好用，打开即用。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/base64.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Base64 加密解密工具 - 在线编码解码 | 王先生工具" />
+  <meta name="twitter:description" content="支持中文、英文、符号、换行和 Emoji 的在线 Base64 编码与解码工具。" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: #ffffff;
+      --text: #1f2937;
+      --sub: #6b7280;
+      --border: #e5e7eb;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #16a34a;
+      --danger: #dc2626;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 24px 16px;
+      display: flex;
+    }
+
+    .page {
+      width: min(1120px, 100%);
+      margin: auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .topbar h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .topbar p {
+      margin: 0 auto;
+      max-width: 760px;
+      color: var(--sub);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .tool {
+      background: var(--card);
+      border: 1px solid rgba(229, 231, 235, 0.9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #fafbfd;
+      flex-wrap: wrap;
+    }
+
+    .meta .count {
+      color: var(--sub);
+      font-size: 14px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 0;
+      outline: none;
+      cursor: pointer;
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: #eef2ff;
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: #e2e8f0;
+      transform: translateY(-1px);
+    }
+
+    .btn-success {
+      background: #ecfdf5;
+      color: var(--success);
+    }
+
+    .btn-success:hover {
+      background: #dcfce7;
+      transform: translateY(-1px);
+    }
+
+    .btn-danger {
+      background: #fef2f2;
+      color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background: #fee2e2;
+      transform: translateY(-1px);
+    }
+
+    .status {
+      margin: 16px 20px 0;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      display: none;
+      border: 1px solid transparent;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .status.success {
+      background: #ecfdf5;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+
+    .status.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .panel {
+      padding: 18px;
+      min-height: 420px;
+      border-right: 1px solid var(--border);
+    }
+
+    .panel:last-child {
+      border-right: none;
+    }
+
+    .panel h2 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    textarea {
+      width: 100%;
+      height: 340px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      resize: vertical;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+      background: #fbfcfe;
+      outline: none;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+    }
+
+    textarea:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+      background: #fff;
+    }
+
+    .panel-foot {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tips {
+      color: var(--sub);
+      font-size: 13px;
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ul,
+    .content-card ol {
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 13px;
+      padding: 18px 12px 0;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 860px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        min-height: auto;
+      }
+
+      .panel:last-child {
+        border-bottom: none;
+      }
+
+      .topbar h1 {
+        font-size: 26px;
+      }
+
+      textarea {
+        height: 260px;
+      }
+    }
+  </style>
+
+  <!-- WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <!-- WebPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Base64 加密解密工具",
+    "url": "https://gongju.wangxiansheng.com/base64.html",
+    "description": "支持中文、英文、符号、换行和 Emoji 的在线 Base64 编码与解码工具。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <!-- BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Base64 加密解密工具",
+        "item": "https://gongju.wangxiansheng.com/base64.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Base64 加密解密工具",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/base64.html",
+    "description": "一个支持中文、英文、符号、换行和 Emoji 的在线 Base64 编码与解码工具。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    },
+    "featureList": [
+      "Base64 在线编码",
+      "Base64 在线解码",
+      "支持中文和 Emoji",
+      "一键复制结果",
+      "无需安装"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">Base64 加密解密工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>Base64 加密解密工具</h1>
+      <p>
+        王先生工具提供简洁易用的在线 Base64 编码解码服务，支持中文、英文、特殊字符、换行和 Emoji。
+        无需下载，无需安装，打开网页即可快速完成 Base64 在线转换。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="sr-only">Base64 在线工具操作区</h2>
+
+        <div class="meta">
+          <div class="count" id="stats">Characters: 0 | Lines: 1</div>
+          <div class="actions">
+            <button class="btn-primary" type="button" onclick="encodeText()">Base64 编码</button>
+            <button class="btn-primary" type="button" onclick="decodeText()">Base64 解码</button>
+            <button class="btn-light" type="button" onclick="swapText()">交换内容</button>
+            <button class="btn-success" type="button" onclick="copyOutput()">复制结果</button>
+            <button class="btn-danger" type="button" onclick="clearAll()">清空重置</button>
+          </div>
+        </div>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+
+        <div class="grid">
+          <section class="panel" aria-labelledby="input-title">
+            <h2 id="input-title">输入内容</h2>
+            <textarea id="inputText" placeholder="请输入要编码或解码的内容..." aria-label="输入内容"></textarea>
+            <div class="panel-foot">
+              <div class="tips">可输入普通文本或 Base64 字符串</div>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="output-title">
+            <h2 id="output-title">输出结果</h2>
+            <textarea id="outputText" placeholder="结果会显示在这里..." readonly aria-label="输出结果"></textarea>
+            <div class="panel-foot">
+              <div class="tips">支持一键复制结果</div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            Base64 是一种常见的数据编码方式，常用于网页开发、接口传输、图片内联、邮件内容处理等场景。
+            本页面适合开发者、站长、学生和日常办公用户快速完成 Base64 在线编码与解码。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用方法</h2>
+          <ol>
+            <li>在左侧输入框中输入或粘贴原始文本，或者粘贴需要解码的 Base64 字符串。</li>
+            <li>点击“Base64 编码”或“Base64 解码”按钮。</li>
+            <li>右侧会立即显示转换结果。</li>
+            <li>点击“复制结果”可一键复制，点击“交换内容”可继续处理结果。</li>
+          </ol>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary>Base64 工具支持中文和 Emoji 吗？</summary>
+            <div class="answer">
+              支持。当前页面使用 UTF-8 方式处理字符集，因此中文、英文、符号、换行和 Emoji 都可以正常编码与解码。
+            </div>
+          </details>
+
+          <details>
+            <summary>Base64 是真正的加密吗？</summary>
+            <div class="answer">
+              不是。Base64 本质上是编码方式，主要用于数据表示转换，并不是安全加密算法。
+            </div>
+          </details>
+
+          <details>
+            <summary>这个工具需要下载安装吗？</summary>
+            <div class="answer">
+              不需要。它是一个在线工具，打开页面即可直接使用。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <script>
+    const inputEl = document.getElementById("inputText");
+    const outputEl = document.getElementById("outputText");
+    const statsEl = document.getElementById("stats");
+    const statusEl = document.getElementById("status");
+    const yearEl = document.getElementById("year");
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function updateStats() {
+      const text = inputEl.value || "";
+      const characters = text.length;
+      const lines = text.length ? text.split(/\r\n|\r|\n/).length : 1;
+      statsEl.textContent = `Characters: ${characters} | Lines: ${lines}`;
+    }
+
+    function showStatus(message, type = "success") {
+      statusEl.className = `status show ${type}`;
+      statusEl.textContent = message;
+    }
+
+    function clearStatus() {
+      statusEl.className = "status";
+      statusEl.textContent = "";
+    }
+
+    function utf8ToBase64(str) {
+      const bytes = new TextEncoder().encode(str);
+      let binary = "";
+      bytes.forEach(function (b) {
+        binary += String.fromCharCode(b);
+      });
+      return btoa(binary);
+    }
+
+    function base64ToUtf8(base64) {
+      const binary = atob(base64);
+      const bytes = Uint8Array.from(binary, function (char) {
+        return char.charCodeAt(0);
+      });
+      return new TextDecoder().decode(bytes);
+    }
+
+    function normalizeBase64(str) {
+      return str.replace(/\s+/g, "");
+    }
+
+    function encodeText() {
+      clearStatus();
+      const text = inputEl.value;
+
+      if (!text.trim()) {
+        outputEl.value = "";
+        showStatus("请输入需要 Base64 编码的内容。", "error");
+        return;
+      }
+
+      try {
+        outputEl.value = utf8ToBase64(text);
+        showStatus("Base64 编码成功。");
+      } catch (err) {
+        outputEl.value = "";
+        showStatus("编码失败，请检查输入内容。", "error");
+      }
+    }
+
+    function decodeText() {
+      clearStatus();
+      const text = inputEl.value;
+
+      if (!text.trim()) {
+        outputEl.value = "";
+        showStatus("请输入需要 Base64 解码的内容。", "error");
+        return;
+      }
+
+      try {
+        outputEl.value = base64ToUtf8(normalizeBase64(text));
+        showStatus("Base64 解码成功。");
+      } catch (err) {
+        outputEl.value = "";
+        showStatus("解码失败，请确认输入的是合法 Base64 字符串。", "error");
+      }
+    }
+
+    function swapText() {
+      const temp = inputEl.value;
+      inputEl.value = outputEl.value;
+      outputEl.value = temp;
+      updateStats();
+      showStatus("输入和输出内容已交换。");
+    }
+
+    async function copyOutput() {
+      const text = outputEl.value;
+
+      if (!text) {
+        showStatus("当前没有可复制的结果。", "error");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        showStatus("结果已复制到剪贴板。");
+      } catch (err) {
+        outputEl.removeAttribute("readonly");
+        outputEl.select();
+        document.execCommand("copy");
+        outputEl.setAttribute("readonly", "readonly");
+        showStatus("结果已复制到剪贴板。");
+      }
+    }
+
+    function clearAll() {
+      inputEl.value = "";
+      outputEl.value = "";
+      clearStatus();
+      updateStats();
+    }
+
+    inputEl.addEventListener("input", function () {
+      updateStats();
+      clearStatus();
+    });
+
+    updateStats();
+  </script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?be6d24b9969e6282da3ffef0bb6db3e8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+</html>
