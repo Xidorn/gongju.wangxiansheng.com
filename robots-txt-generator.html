@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>robots.txt 生成器 - 在线生成 Robots 协议文件 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供 robots.txt 在线生成器，支持自定义 User-agent、Allow、Disallow、Crawl-delay、Sitemap 和 Host，快速生成标准 robots.txt 文件。" />
+  <meta name="keywords" content="robots.txt生成器,robots.txt,在线robots工具,robots协议生成,User-agent,Disallow,Allow,Sitemap,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/robots-txt-generator.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="robots.txt 生成器 - 在线生成 Robots 协议文件 | 王先生工具" />
+  <meta property="og:description" content="支持自定义 User-agent、Allow、Disallow、Crawl-delay、Sitemap 和 Host，快速生成标准 robots.txt 文件。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/robots-txt-generator.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="robots.txt 生成器 - 在线生成 Robots 协议文件 | 王先生工具" />
+  <meta name="twitter:description" content="支持自定义 User-agent、Allow、Disallow、Crawl-delay、Sitemap 和 Host，快速生成标准 robots.txt 文件。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --editor-font: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --output-bg: #0f172a;
+      --output-text: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: min(1240px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .status-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-chip.success {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background: #ecfdf5;
+    }
+
+    .status-chip.warning {
+      color: var(--warning);
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .editor-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 720px;
+      background: var(--card-solid);
+    }
+
+    .pane {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .pane + .pane {
+      border-left: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .pane-label {
+      padding: 12px 18px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sub);
+      font-weight: 700;
+      background: #fcfcfd;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .form-pane {
+      padding: 18px;
+      overflow: auto;
+    }
+
+    .section-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .section-card h3 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #1e293b;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+      margin-bottom: 12px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .input,
+    .textarea,
+    .select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .input:focus,
+    .textarea:focus,
+    .select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    .textarea {
+      min-height: 96px;
+      resize: vertical;
+      line-height: 1.7;
+      font-family: var(--editor-font);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .rule-group {
+      border: 1px dashed #cbd5e1;
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 14px;
+      background: #fbfdff;
+    }
+
+    .rule-group-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .rule-group-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .group-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-small {
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .btn-add {
+      background: #ecfdf5;
+      color: var(--success);
+    }
+
+    .btn-add:hover {
+      background: #dcfce7;
+    }
+
+    .btn-remove {
+      background: #fef2f2;
+      color: var(--danger);
+    }
+
+    .btn-remove:hover {
+      background: #fee2e2;
+    }
+
+    .preview-pane {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .preview-top {
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      background: #fcfcfd;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .preview-meta {
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    .output-wrap {
+      flex: 1;
+      min-height: 0;
+      background: var(--output-bg);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #output {
+      flex: 1;
+      width: 100%;
+      min-height: 320px;
+      max-height: 420px;
+      border: none;
+      outline: none;
+      resize: vertical;
+      background: transparent;
+      color: var(--output-text);
+      font-size: 14px;
+      line-height: 1.8;
+      font-family: var(--editor-font);
+      white-space: pre;
+      overflow: auto;
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.35);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.55);
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar {
+        padding: 12px 14px;
+      }
+
+      .toolbar-right {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "robots.txt 生成器",
+    "url": "https://gongju.wangxiansheng.com/robots-txt-generator.html",
+    "description": "支持自定义 User-agent、Allow、Disallow、Crawl-delay、Sitemap 和 Host 的 robots.txt 在线生成工具。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "robots.txt 生成器",
+        "item": "https://gongju.wangxiansheng.com/robots-txt-generator.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "robots.txt 生成器",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/robots-txt-generator.html",
+    "description": "支持自定义 User-agent、Allow、Disallow、Crawl-delay、Sitemap 和 Host 的在线 robots.txt 生成器。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    },
+    "featureList": [
+      "多 User-agent 规则组",
+      "Allow / Disallow 规则生成",
+      "Crawl-delay 设置",
+      "Sitemap 生成",
+      "一键复制 robots.txt",
+      "下载 robots.txt"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">robots.txt 生成器</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>robots.txt 生成器</h1>
+      <p>
+        王先生工具提供简洁实用的 robots.txt 在线生成器，支持自定义 User-agent、Allow、Disallow、Crawl-delay、
+        Sitemap 和 Host 配置，适合站长、开发者和 SEO 从业者快速生成标准 Robots 协议文件。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="sr-only">robots.txt 在线生成工具</h2>
+
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="toolbar-right">
+            <div id="statusChip" class="status-chip">Ready</div>
+            <button class="btn btn-primary" type="button" onclick="generateRobots()">生成 robots.txt</button>
+            <button class="btn btn-light" type="button" onclick="copyOutput()">复制结果</button>
+            <button class="btn btn-light" type="button" onclick="downloadOutput()">下载文件</button>
+            <button class="btn btn-light" type="button" onclick="fillExample()">填充示例</button>
+            <button class="btn btn-light" type="button" onclick="clearAll()">清空重置</button>
+          </div>
+        </div>
+
+        <div class="editor-wrapper">
+          <section class="pane" aria-labelledby="form-title">
+            <div class="pane-label">规则配置</div>
+            <div class="form-pane">
+              <div class="section-card">
+                <h3 id="form-title">全局设置</h3>
+                <p class="section-desc">
+                  这里设置 Sitemap、Host 等全局信息。Sitemap 支持填写多行，每行一个完整地址。
+                </p>
+
+                <div class="field">
+                  <label for="sitemap">Sitemap 地址</label>
+                  <textarea id="sitemap" class="textarea" placeholder="https://example.com/sitemap.xml&#10;https://example.com/post-sitemap.xml"></textarea>
+                  <div class="hint">每行一个 sitemap 完整地址，可留空。</div>
+                </div>
+
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="host">Host（可选）</label>
+                    <input id="host" class="input" type="text" placeholder="example.com" />
+                    <div class="hint">通常仅部分搜索引擎场景会用到，可选填写。</div>
+                  </div>
+
+                  <div class="field">
+                    <label for="comment">顶部注释（可选）</label>
+                    <input id="comment" class="input" type="text" placeholder="例如：Generated by 王先生工具" />
+                    <div class="hint">会以注释形式出现在 robots.txt 顶部。</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-card">
+                <div class="rule-group-head">
+                  <div>
+                    <h3 style="margin-bottom: 4px;">规则组</h3>
+                    <p class="section-desc" style="margin-bottom: 0;">
+                      每个规则组对应一个或多个 User-agent，并可分别设置 Allow、Disallow 和 Crawl-delay。
+                    </p>
+                  </div>
+                  <button class="btn-small btn-add" type="button" onclick="addRuleGroup()">新增规则组</button>
+                </div>
+
+                <div id="ruleGroups"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="pane preview-pane" aria-labelledby="preview-title">
+            <div class="pane-label">生成结果</div>
+
+            <div class="preview-top">
+              <div id="preview-title" class="preview-meta">
+                输出会自动整理为标准 robots.txt 文本格式
+              </div>
+              <div id="stats" class="preview-meta">0 字符 · 1 行</div>
+            </div>
+
+            <div class="output-wrap">
+              <textarea id="output" readonly spellcheck="false" aria-label="robots.txt 输出结果"></textarea>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            robots.txt 是网站根目录下的一种爬虫访问规则文件，常用于告诉搜索引擎蜘蛛哪些路径允许抓取、哪些路径禁止抓取。
+            这个工具适合快速生成标准 robots.txt 文本，避免手工书写时格式出错。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用方法</h2>
+          <ol>
+            <li>填写一个或多个规则组，每组指定 User-agent。</li>
+            <li>在 Allow 和 Disallow 中按行填写路径规则。</li>
+            <li>根据需要填写 Crawl-delay、Sitemap 和 Host。</li>
+            <li>点击“生成 robots.txt”后即可复制或下载使用。</li>
+            <li>建议将最终文件部署在网站根目录，例如：<code>/robots.txt</code>。</li>
+          </ol>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary>robots.txt 可以阻止网页被搜索结果收录吗？</summary>
+            <div class="answer">
+              不完全可以。robots.txt 主要用于控制抓取行为，不等同于 noindex。
+              如果你希望页面不出现在搜索结果中，通常还需要结合页面级 noindex 等方式处理。
+            </div>
+          </details>
+
+          <details>
+            <summary>Allow 和 Disallow 怎么填？</summary>
+            <div class="answer">
+              一般写站内路径即可，例如 <code>/admin/</code>、<code>/private/</code>、<code>/images/</code>。
+              不需要填写完整域名。
+            </div>
+          </details>
+
+          <details>
+            <summary>一个 robots.txt 可以写多个 User-agent 吗？</summary>
+            <div class="answer">
+              可以。你可以为不同爬虫分别设置不同规则，也可以对所有爬虫统一写 <code>User-agent: *</code>。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <template id="ruleGroupTemplate">
+    <div class="rule-group">
+      <div class="rule-group-head">
+        <div class="rule-group-title">规则组 <span class="group-index"></span></div>
+        <div class="group-actions">
+          <button class="btn-small btn-add" type="button" data-action="clone">复制此组</button>
+          <button class="btn-small btn-remove" type="button" data-action="remove">删除此组</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>User-agent</label>
+        <input class="input user-agent" type="text" placeholder="例如：* 或 Googlebot" />
+        <div class="hint">多个爬虫可用英文逗号分隔，例如：Googlebot,Bingbot</div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field">
+          <label>Allow</label>
+          <textarea class="textarea allow" placeholder="/&#10;/public/"></textarea>
+          <div class="hint">每行一个允许抓取的路径，可留空。</div>
+        </div>
+
+        <div class="field">
+          <label>Disallow</label>
+          <textarea class="textarea disallow" placeholder="/admin/&#10;/private/"></textarea>
+          <div class="hint">每行一个禁止抓取的路径，可留空。</div>
+        </div>
+      </div>
+
+      <div class="field-grid">
+        <div class="field">
+          <label>Crawl-delay（可选）</label>
+          <input class="input crawl-delay" type="number" min="0" step="1" placeholder="例如：10" />
+          <div class="hint">部分搜索引擎支持该设置，可留空。</div>
+        </div>
+
+        <div class="field">
+          <label>常用预设</label>
+          <select class="select preset">
+            <option value="">选择预设</option>
+            <option value="all-open">全部允许抓取</option>
+            <option value="admin-block">屏蔽后台目录</option>
+            <option value="all-block">全站禁止抓取</option>
+          </select>
+          <div class="hint">选择后会自动填充当前规则组。</div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const ruleGroupsEl = document.getElementById("ruleGroups");
+    const outputEl = document.getElementById("output");
+    const statusChip = document.getElementById("statusChip");
+    const statsEl = document.getElementById("stats");
+    const yearEl = document.getElementById("year");
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function setStatus(text, type) {
+      statusChip.textContent = text;
+      statusChip.className = "status-chip";
+      if (type) {
+        statusChip.classList.add(type);
+      }
+    }
+
+    function updateStats() {
+      const text = outputEl.value || "";
+      const lines = text.length ? text.split(/\r\n|\r|\n/).length : 1;
+      statsEl.textContent = text.length + " 字符 · " + lines + " 行";
+    }
+
+    function normalizeMultiline(text) {
+      return text
+        .split(/\r\n|\r|\n/)
+        .map(item => item.trim())
+        .filter(Boolean);
+    }
+
+    function createRuleGroup(data = {}) {
+      const tpl = document.getElementById("ruleGroupTemplate");
+      const node = tpl.content.firstElementChild.cloneNode(true);
+
+      node.querySelector(".user-agent").value = data.userAgent || "*";
+      node.querySelector(".allow").value = data.allow || "";
+      node.querySelector(".disallow").value = data.disallow || "";
+      node.querySelector(".crawl-delay").value = data.crawlDelay || "";
+      node.querySelector(".preset").value = "";
+
+      node.querySelector('[data-action="remove"]').addEventListener("click", function () {
+        if (ruleGroupsEl.children.length === 1) {
+          clearGroup(node);
+          updateGroupIndex();
+          generateRobots();
+          return;
+        }
+        node.remove();
+        updateGroupIndex();
+        generateRobots();
+      });
+
+      node.querySelector('[data-action="clone"]').addEventListener("click", function () {
+        const cloneData = readGroupData(node);
+        createRuleGroup(cloneData);
+        updateGroupIndex();
+        generateRobots();
+      });
+
+      node.querySelector(".preset").addEventListener("change", function () {
+        applyPreset(node, this.value);
+        generateRobots();
+      });
+
+      node.querySelectorAll("input, textarea").forEach(el => {
+        el.addEventListener("input", generateRobots);
+      });
+
+      ruleGroupsEl.appendChild(node);
+      updateGroupIndex();
+    }
+
+    function clearGroup(node) {
+      node.querySelector(".user-agent").value = "*";
+      node.querySelector(".allow").value = "";
+      node.querySelector(".disallow").value = "";
+      node.querySelector(".crawl-delay").value = "";
+      node.querySelector(".preset").value = "";
+    }
+
+    function readGroupData(node) {
+      return {
+        userAgent: node.querySelector(".user-agent").value.trim(),
+        allow: node.querySelector(".allow").value,
+        disallow: node.querySelector(".disallow").value,
+        crawlDelay: node.querySelector(".crawl-delay").value.trim()
+      };
+    }
+
+    function updateGroupIndex() {
+      [...ruleGroupsEl.children].forEach((group, index) => {
+        group.querySelector(".group-index").textContent = index + 1;
+      });
+    }
+
+    function applyPreset(node, preset) {
+      const userAgent = node.querySelector(".user-agent");
+      const allow = node.querySelector(".allow");
+      const disallow = node.querySelector(".disallow");
+      const crawlDelay = node.querySelector(".crawl-delay");
+
+      if (preset === "all-open") {
+        userAgent.value = "*";
+        allow.value = "/";
+        disallow.value = "";
+        crawlDelay.value = "";
+      } else if (preset === "admin-block") {
+        userAgent.value = "*";
+        allow.value = "";
+        disallow.value = "/admin/\n/login/\n/private/";
+        crawlDelay.value = "";
+      } else if (preset === "all-block") {
+        userAgent.value = "*";
+        allow.value = "";
+        disallow.value = "/";
+        crawlDelay.value = "";
+      }
+    }
+
+    function buildRuleGroupText(group) {
+      const data = readGroupData(group);
+      const userAgents = data.userAgent
+        ? data.userAgent.split(",").map(item => item.trim()).filter(Boolean)
+        : ["*"];
+
+      const allows = normalizeMultiline(data.allow);
+      const disallows = normalizeMultiline(data.disallow);
+      const lines = [];
+
+      userAgents.forEach(agent => {
+        lines.push("User-agent: " + agent);
+      });
+
+      if (allows.length === 0 && disallows.length === 0) {
+        lines.push("Disallow:");
+      } else {
+        allows.forEach(path => lines.push("Allow: " + path));
+        disallows.forEach(path => lines.push("Disallow: " + path));
+      }
+
+      if (data.crawlDelay !== "") {
+        lines.push("Crawl-delay: " + data.crawlDelay);
+      }
+
+      return lines.join("\n");
+    }
+
+    function generateRobots() {
+      const blocks = [];
+      const comment = document.getElementById("comment").value.trim();
+      const host = document.getElementById("host").value.trim();
+      const sitemaps = normalizeMultiline(document.getElementById("sitemap").value);
+
+      if (comment) {
+        blocks.push("# " + comment);
+      }
+
+      [...ruleGroupsEl.children].forEach(group => {
+        blocks.push(buildRuleGroupText(group));
+      });
+
+      if (host) {
+        blocks.push("Host: " + host);
+      }
+
+      if (sitemaps.length) {
+        blocks.push(sitemaps.map(item => "Sitemap: " + item).join("\n"));
+      }
+
+      const result = blocks
+        .map(item => item.trim())
+        .filter(Boolean)
+        .join("\n\n")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+
+      outputEl.value = result;
+      updateStats();
+      setStatus(result ? "生成成功" : "Ready", result ? "success" : "");
+    }
+
+    async function copyOutput() {
+      if (!outputEl.value.trim()) {
+        setStatus("没有可复制内容", "warning");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(outputEl.value);
+        setStatus("复制成功", "success");
+      } catch (error) {
+        outputEl.removeAttribute("readonly");
+        outputEl.select();
+        document.execCommand("copy");
+        outputEl.setAttribute("readonly", "readonly");
+        setStatus("复制成功", "success");
+      }
+    }
+
+    function downloadOutput() {
+      const text = outputEl.value.trim();
+      if (!text) {
+        setStatus("没有可下载内容", "warning");
+        return;
+      }
+
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "robots.txt";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+      setStatus("下载已开始", "success");
+    }
+
+    function addRuleGroup(data) {
+      createRuleGroup(data);
+    }
+
+    function fillExample() {
+      document.getElementById("comment").value = "Generated by 王先生工具";
+      document.getElementById("host").value = "example.com";
+      document.getElementById("sitemap").value = "https://example.com/sitemap.xml\nhttps://example.com/post-sitemap.xml";
+
+      ruleGroupsEl.innerHTML = "";
+
+      createRuleGroup({
+        userAgent: "*",
+        allow: "/",
+        disallow: "/admin/\n/private/\n/tmp/",
+        crawlDelay: ""
+      });
+
+      createRuleGroup({
+        userAgent: "Baiduspider",
+        allow: "/",
+        disallow: "/search/\n/cgi-bin/",
+        crawlDelay: "5"
+      });
+
+      generateRobots();
+    }
+
+    function clearAll() {
+      if (!confirm("确定清空当前配置吗？")) {
+        return;
+      }
+
+      document.getElementById("comment").value = "";
+      document.getElementById("host").value = "";
+      document.getElementById("sitemap").value = "";
+      ruleGroupsEl.innerHTML = "";
+      createRuleGroup({ userAgent: "*", allow: "", disallow: "", crawlDelay: "" });
+      outputEl.value = "";
+      updateStats();
+      setStatus("Ready");
+    }
+
+    document.getElementById("comment").addEventListener("input", generateRobots);
+    document.getElementById("host").addEventListener("input", generateRobots);
+    document.getElementById("sitemap").addEventListener("input", generateRobots);
+
+    createRuleGroup({
+      userAgent: "*",
+      allow: "",
+      disallow: "",
+      crawlDelay: ""
+    });
+
+    generateRobots();
+  </script>
+</body>
+</html>
