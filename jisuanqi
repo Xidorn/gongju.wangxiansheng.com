@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>科学计算器 - 在线计算器与函数计算 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供在线科学计算器，支持加减乘除、括号、幂运算、三角函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式。" />
+  <meta name="keywords" content="科学计算器,在线计算器,三角函数计算器,幂运算,对数计算器,开方计算器,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/jisuanqi.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="科学计算器 - 在线计算器与函数计算 | 王先生工具" />
+  <meta property="og:description" content="支持基础运算、三角函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/jisuanqi.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="科学计算器 - 在线计算器与函数计算 | 王先生工具" />
+  <meta name="twitter:description" content="支持基础运算、三角函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255,255,255,0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --shadow: 0 24px 60px rgba(15,23,42,0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+      --display-bg: #0f172a;
+      --display-text: #e2e8f0;
+      --display-sub: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15,23,42,0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255,255,255,0.6);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .status-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-chip.success {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background: #ecfdf5;
+    }
+
+    .status-chip.warning {
+      color: var(--warning);
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .status-chip.error {
+      color: var(--danger);
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .tool-body {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 18px;
+    }
+
+    .calculator-card,
+    .history-card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15,23,42,0.04);
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      background: #fcfcfd;
+    }
+
+    .card-head h2 {
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .card-head p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .top-controls {
+      display: grid;
+      grid-template-columns: 1fr 180px 180px;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+    }
+
+    .display {
+      background: var(--display-bg);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .display-expression {
+      min-height: 28px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--display-sub);
+      font-family: var(--mono);
+      word-break: break-all;
+    }
+
+    .display-result {
+      min-height: 46px;
+      margin-top: 8px;
+      font-size: 30px;
+      line-height: 1.4;
+      font-weight: 700;
+      color: var(--display-text);
+      font-family: var(--mono);
+      word-break: break-all;
+    }
+
+    .expression-input {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--text);
+      padding: 14px 16px;
+      font-size: 16px;
+      font-family: var(--mono);
+      outline: none;
+      transition: 0.2s ease;
+      margin-bottom: 14px;
+    }
+
+    .expression-input:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37,99,235,0.08);
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .key {
+      min-height: 52px;
+      border: none;
+      border-radius: 14px;
+      background: #f8fafc;
+      color: #1f2937;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+      padding: 10px;
+    }
+
+    .key:hover {
+      background: #eef2ff;
+      transform: translateY(-1px);
+    }
+
+    .key.operator {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .key.operator:hover {
+      background: #dbeafe;
+    }
+
+    .key.action {
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .key.action:hover {
+      background: #ffedd5;
+    }
+
+    .key.equal {
+      background: var(--primary);
+      color: white;
+    }
+
+    .key.equal:hover {
+      background: var(--primary-hover);
+    }
+
+    .history-list {
+      display: grid;
+      gap: 10px;
+      max-height: 560px;
+      overflow: auto;
+    }
+
+    .history-item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: #fff;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .history-item:hover {
+      border-color: #c7d2fe;
+      box-shadow: 0 6px 16px rgba(15,23,42,0.05);
+    }
+
+    .history-exp {
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.7;
+      font-family: var(--mono);
+      word-break: break-all;
+    }
+
+    .history-res {
+      margin-top: 6px;
+      font-size: 16px;
+      color: #1e293b;
+      font-weight: 700;
+      font-family: var(--mono);
+      word-break: break-all;
+    }
+
+    .empty-history {
+      font-size: 14px;
+      color: var(--sub);
+      line-height: 1.8;
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15,23,42,0.04);
+    }
+
+    .content-card h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .content-card h3 {
+      margin-top: 14px;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #334155;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .content-card code {
+      font-family: var(--mono);
+      background: #f8fafc;
+      padding: 1px 6px;
+      border-radius: 6px;
+      color: #0f172a;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1080px) {
+      .tool-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .top-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .keypad {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar,
+      .tool-body,
+      .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .toolbar-right {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .display-result {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .keypad {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "科学计算器",
+    "url": "https://gongju.wangxiansheng.com/jisuanqi.html",
+    "description": "支持基础运算、三角函数、对数、开方、阶乘、常量 π 和 e 的在线科学计算器。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "科学计算器",
+        "item": "https://gongju.wangxiansheng.com/jisuanqi.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "科学计算器",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/jisuanqi.html",
+    "description": "支持基础运算、三角函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式的在线科学计算器。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    },
+    "featureList": [
+      "基础四则运算",
+      "三角函数计算",
+      "对数与自然对数",
+      "幂运算与开方",
+      "阶乘计算",
+      "角度/弧度切换"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">科学计算器</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>科学计算器</h1>
+      <p>
+        王先生工具提供简洁易用的在线科学计算器，支持基础四则运算、括号、幂运算、三角函数、对数、开方、
+        阶乘、π 和 e 常量，适合学习、开发、工程和日常计算场景快速使用。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="screen-reader-text">科学计算器</h2>
+
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="toolbar-right">
+            <div id="statusChip" class="status-chip">Ready</div>
+            <button type="button" class="btn btn-primary" id="evaluateBtn">计算</button>
+            <button type="button" class="btn btn-light" id="copyBtn">复制结果</button>
+            <button type="button" class="btn btn-light" id="clearHistoryBtn">清空历史</button>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <section class="calculator-card" aria-labelledby="calc-title">
+            <div class="card-head">
+              <h2 id="calc-title">计算面板</h2>
+              <p>支持函数输入和按钮输入，按 Enter 或点击“计算”执行。</p>
+            </div>
+
+            <div class="card-body">
+              <div class="top-controls">
+                <div class="field">
+                  <label for="expressionInput">表达式</label>
+                  <input id="expressionInput" class="expression-input" type="text" placeholder="例如：sin(30)+log(100)*sqrt(16)" aria-label="输入表达式" />
+                </div>
+
+                <div class="field">
+                  <label for="angleMode">角度模式</label>
+                  <select id="angleMode" class="select" aria-label="选择角度模式">
+                    <option value="deg" selected>角度 (DEG)</option>
+                    <option value="rad">弧度 (RAD)</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="precision">结果精度</label>
+                  <select id="precision" class="select" aria-label="选择结果精度">
+                    <option value="6">6 位小数</option>
+                    <option value="10" selected>10 位小数</option>
+                    <option value="14">14 位小数</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="display">
+                <div class="display-expression" id="displayExpression">等待输入表达式...</div>
+                <div class="display-result" id="displayResult">0</div>
+              </div>
+
+              <div class="keypad" id="keypad">
+                <button class="key action" data-value="AC">AC</button>
+                <button class="key action" data-value="DEL">DEL</button>
+                <button class="key operator" data-value="(">(</button>
+                <button class="key operator" data-value=")">)</button>
+                <button class="key operator" data-value="%">%</button>
+
+                <button class="key operator" data-value="sin(">sin</button>
+                <button class="key operator" data-value="cos(">cos</button>
+                <button class="key operator" data-value="tan(">tan</button>
+                <button class="key operator" data-value="asin(">asin</button>
+                <button class="key operator" data-value="acos(">acos</button>
+
+                <button class="key operator" data-value="atan(">atan</button>
+                <button class="key operator" data-value="log(">log</button>
+                <button class="key operator" data-value="ln(">ln</button>
+                <button class="key operator" data-value="sqrt(">√</button>
+                <button class="key operator" data-value="abs(">abs</button>
+
+                <button class="key operator" data-value="^">xʸ</button>
+                <button class="key operator" data-value="!">n!</button>
+                <button class="key operator" data-value="pi">π</button>
+                <button class="key operator" data-value="e">e</button>
+                <button class="key operator" data-value="/">÷</button>
+
+                <button class="key" data-value="7">7</button>
+                <button class="key" data-value="8">8</button>
+                <button class="key" data-value="9">9</button>
+                <button class="key operator" data-value="*">×</button>
+                <button class="key operator" data-value="exp(">exp</button>
+
+                <button class="key" data-value="4">4</button>
+                <button class="key" data-value="5">5</button>
+                <button class="key" data-value="6">6</button>
+                <button class="key operator" data-value="-">−</button>
+                <button class="key equal" data-value="=">=</button>
+
+                <button class="key" data-value="1">1</button>
+                <button class="key" data-value="2">2</button>
+                <button class="key" data-value="3">3</button>
+                <button class="key operator" data-value="+">+</button>
+                <button class="key operator" data-value="Ans">Ans</button>
+
+                <button class="key" data-value="0">0</button>
+                <button class="key" data-value=".">.</button>
+              </div>
+            </div>
+          </section>
+
+          <aside class="history-card" aria-labelledby="history-title">
+            <div class="card-head">
+              <h2 id="history-title">计算历史</h2>
+              <p>点击历史记录可重新填回表达式。</p>
+            </div>
+
+            <div class="card-body">
+              <div id="historyList" class="history-list">
+                <div class="empty-history">暂无历史记录。</div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            这个在线科学计算器适合处理基础运算和常见函数计算。支持角度模式切换、括号优先级、幂运算、
+            阶乘、对数、自然对数、三角函数及反三角函数，适合数学学习、工程计算和日常公式计算。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用说明</h2>
+          <ol>
+            <li>在表达式框中直接输入公式，或点击下面的按钮拼出表达式。</li>
+            <li>如果你要计算三角函数，先确认上方模式是 <code>DEG</code> 还是 <code>RAD</code>。</li>
+            <li>输入完成后，按键盘 <code>Enter</code> 或点击“计算”。</li>
+            <li>结果会显示在屏幕区域，并自动加入右侧历史记录。</li>
+            <li>点击历史记录中的任意一条，可以把那条表达式重新放回输入框。</li>
+            <li><code>Ans</code> 表示“上一次计算结果”，例如你先算出 8，再输入 <code>Ans*2</code>，结果就是 16。</li>
+          </ol>
+
+          <h3>输入示例</h3>
+          <ul>
+            <li><code>1+2*3</code>：基础四则运算</li>
+            <li><code>(1+2)*3</code>：括号优先</li>
+            <li><code>2^8</code>：2 的 8 次方</li>
+            <li><code>sqrt(16)</code>：平方根</li>
+            <li><code>log(100)</code>：以 10 为底的对数，结果 2</li>
+            <li><code>ln(e)</code>：自然对数，结果 1</li>
+            <li><code>sin(30)</code>：在角度模式下结果 0.5</li>
+            <li><code>cos(pi/3)</code>：在弧度模式下结果 0.5</li>
+            <li><code>5!</code>：阶乘，结果 120</li>
+            <li><code>abs(-12.5)</code>：绝对值</li>
+            <li><code>exp(1)</code>：e 的 1 次方，也就是 e</li>
+            <li><code>50%</code>：按 0.5 处理</li>
+          </ul>
+        </section>
+
+        <section class="content-card" aria-labelledby="symbol-title">
+          <h2 id="symbol-title">符号与函数说明</h2>
+          <ul>
+            <li><code>+</code>：加法</li>
+            <li><code>-</code>：减法</li>
+            <li><code>*</code> 或按钮 <code>×</code>：乘法</li>
+            <li><code>/</code> 或按钮 <code>÷</code>：除法</li>
+            <li><code>()</code>：括号，控制运算优先级</li>
+            <li><code>^</code>：幂运算，例如 <code>2^3</code> 表示 2 的 3 次方</li>
+            <li><code>%</code>：百分号，目前用于数字后面时按“除以 100”处理，例如 <code>50%</code> = 0.5</li>
+            <li><code>π</code> 或 <code>pi</code>：圆周率 3.1415926...</li>
+            <li><code>e</code>：自然常数 2.7182818...</li>
+            <li><code>Ans</code>：上一次计算结果</li>
+            <li><code>sqrt(x)</code>：平方根</li>
+            <li><code>abs(x)</code>：绝对值</li>
+            <li><code>log(x)</code>：常用对数，也就是以 10 为底</li>
+            <li><code>ln(x)</code>：自然对数，也就是以 e 为底</li>
+            <li><code>exp(x)</code>：e 的 x 次方</li>
+            <li><code>sin(x)</code>、<code>cos(x)</code>、<code>tan(x)</code>：三角函数</li>
+            <li><code>asin(x)</code>、<code>acos(x)</code>、<code>atan(x)</code>：反三角函数</li>
+            <li><code>n!</code>：阶乘，例如 <code>5!</code> = 120</li>
+          </ul>
+
+          <h3>DEG 和 RAD 的区别</h3>
+          <p>
+            <code>DEG</code> 表示角度模式，输入 30 就按 30° 来算。  
+            <code>RAD</code> 表示弧度模式，输入 3.1415926 就按 π 弧度来算。  
+            三角函数和反三角函数都会受到这个模式影响。
+          </p>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary>Ans 是什么意思？</summary>
+            <div class="answer">
+              Ans 是 “Answer” 的缩写，表示上一次计算出来的结果。  
+              例如你先计算得到 12，下一次输入 <code>Ans+3</code>，就会按 <code>12+3</code> 来算。
+            </div>
+          </details>
+
+          <details>
+            <summary>sin、cos、tan 默认按角度还是弧度？</summary>
+            <div class="answer">
+              默认按角度模式计算，也就是 DEG。你可以在上方切换成 RAD 弧度模式。
+            </div>
+          </details>
+
+          <details>
+            <summary>log 和 ln 分别表示什么？</summary>
+            <div class="answer">
+              log 表示以 10 为底的对数，ln 表示自然对数，也就是以 e 为底的对数。
+            </div>
+          </details>
+
+          <details>
+            <summary>阶乘支持小数吗？</summary>
+            <div class="answer">
+              当前只支持非负整数阶乘，例如 5!。负数和小数不会通过计算。
+            </div>
+          </details>
+
+          <details>
+            <summary>百分号怎么计算？</summary>
+            <div class="answer">
+              当前页面里，像 <code>50%</code> 这样的写法会按 <code>50 ÷ 100</code> 处理，也就是 0.5。
+              这个规则适合普通百分数输入。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    const statusChip = document.getElementById("statusChip");
+    const expressionInput = document.getElementById("expressionInput");
+    const angleModeEl = document.getElementById("angleMode");
+    const precisionEl = document.getElementById("precision");
+    const displayExpressionEl = document.getElementById("displayExpression");
+    const displayResultEl = document.getElementById("displayResult");
+    const evaluateBtn = document.getElementById("evaluateBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+    const historyListEl = document.getElementById("historyList");
+    const keypadEl = document.getElementById("keypad");
+
+    let lastAnswer = 0;
+    let historyStore = [];
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function setStatus(text, type) {
+      statusChip.textContent = text;
+      statusChip.className = "status-chip";
+      if (type) statusChip.classList.add(type);
+    }
+
+    function toRadians(x) {
+      return angleModeEl.value === "deg" ? x * Math.PI / 180 : x;
+    }
+
+    function fromRadians(x) {
+      return angleModeEl.value === "deg" ? x * 180 / Math.PI : x;
+    }
+
+    function factorial(n) {
+      if (!Number.isFinite(n) || n < 0 || Math.floor(n) !== n) {
+        throw new Error("阶乘仅支持非负整数。");
+      }
+      let result = 1;
+      for (let i = 2; i <= n; i++) result *= i;
+      return result;
+    }
+
+    function formatResult(value) {
+      if (!Number.isFinite(value)) {
+        throw new Error("结果无效。");
+      }
+      const precision = Number(precisionEl.value);
+      const rounded = Number(value.toFixed(precision));
+      if (Math.abs(rounded) >= 1e12 || (Math.abs(rounded) > 0 && Math.abs(rounded) < 1e-10)) {
+        return rounded.toExponential(Math.min(precision, 8));
+      }
+      return String(rounded);
+    }
+
+    function normalizePercent(expr) {
+      return expr.replace(/(\d+(\.\d+)?)%/g, "($1/100)");
+    }
+
+    function normalizeFactorial(expr) {
+      let result = expr;
+      const pattern = /(\d+(\.\d+)?|\([^()]+\))!/;
+      while (pattern.test(result)) {
+        result = result.replace(pattern, "fact($1)");
+      }
+      return result;
+    }
+
+    function sanitizeExpression(expr) {
+      let e = expr.trim();
+      if (!e) throw new Error("请输入表达式。");
+
+      e = e.replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-");
+      e = e.replace(/\bAns\b/g, String(lastAnswer));
+      e = e.replace(/\bpi\b/gi, "PI");
+      e = e.replace(/\be\b/g, "EULER");
+      e = e.replace(/\^/g, "**");
+      e = normalizePercent(e);
+      e = normalizeFactorial(e);
+
+      if (/[^0-9+\-*/().%!\sA-Za-z_*]/.test(e)) {
+        throw new Error("表达式中包含不支持的字符。");
+      }
+
+      return e;
+    }
+
+    function evaluateExpression() {
+      const raw = expressionInput.value;
+      const expr = sanitizeExpression(raw);
+
+      const scope = {
+        PI: Math.PI,
+        EULER: Math.E,
+        fact: factorial,
+        sin: (x) => Math.sin(toRadians(x)),
+        cos: (x) => Math.cos(toRadians(x)),
+        tan: (x) => Math.tan(toRadians(x)),
+        asin: (x) => fromRadians(Math.asin(x)),
+        acos: (x) => fromRadians(Math.acos(x)),
+        atan: (x) => fromRadians(Math.atan(x)),
+        log: (x) => Math.log10(x),
+        ln: (x) => Math.log(x),
+        sqrt: (x) => Math.sqrt(x),
+        abs: (x) => Math.abs(x),
+        exp: (x) => Math.exp(x)
+      };
+
+      const fn = new Function(
+        "scope",
+        `with (scope) { return (${expr}); }`
+      );
+
+      const value = fn(scope);
+      const formatted = formatResult(value);
+
+      displayExpressionEl.textContent = raw;
+      displayResultEl.textContent = formatted;
+      lastAnswer = Number(formatted);
+
+      addHistory(raw, formatted);
+      setStatus("计算成功", "success");
+    }
+
+    function addHistory(exp, res) {
+      historyStore.unshift({ exp, res });
+      historyStore = historyStore.slice(0, 12);
+      renderHistory();
+    }
+
+    function renderHistory() {
+      if (!historyStore.length) {
+        historyListEl.innerHTML = '<div class="empty-history">暂无历史记录。</div>';
+        return;
+      }
+
+      historyListEl.innerHTML = historyStore.map((item, index) => {
+        return `
+          <div class="history-item" data-index="${index}">
+            <div class="history-exp">${escapeHtml(item.exp)}</div>
+            <div class="history-res">= ${escapeHtml(item.res)}</div>
+          </div>
+        `;
+      }).join("");
+
+      historyListEl.querySelectorAll(".history-item").forEach(function(item) {
+        item.addEventListener("click", function() {
+          const index = Number(item.getAttribute("data-index"));
+          expressionInput.value = historyStore[index].exp;
+          displayExpressionEl.textContent = historyStore[index].exp;
+          displayResultEl.textContent = historyStore[index].res;
+          setStatus("已载入历史表达式", "success");
+        });
+      });
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function insertText(text) {
+      const start = expressionInput.selectionStart;
+      const end = expressionInput.selectionEnd;
+      const value = expressionInput.value;
+      expressionInput.value = value.slice(0, start) + text + value.slice(end);
+      const pos = start + text.length;
+      expressionInput.focus();
+      expressionInput.setSelectionRange(pos, pos);
+      displayExpressionEl.textContent = expressionInput.value || "等待输入表达式...";
+    }
+
+    function handleKeypad(value) {
+      if (value === "AC") {
+        expressionInput.value = "";
+        displayExpressionEl.textContent = "等待输入表达式...";
+        displayResultEl.textContent = "0";
+        setStatus("Ready");
+        return;
+      }
+
+      if (value === "DEL") {
+        const start = expressionInput.selectionStart;
+        const end = expressionInput.selectionEnd;
+        if (start !== end) {
+          const val = expressionInput.value;
+          expressionInput.value = val.slice(0, start) + val.slice(end);
+          expressionInput.setSelectionRange(start, start);
+        } else if (start > 0) {
+          const val = expressionInput.value;
+          expressionInput.value = val.slice(0, start - 1) + val.slice(end);
+          expressionInput.setSelectionRange(start - 1, start - 1);
+        }
+        expressionInput.focus();
+        displayExpressionEl.textContent = expressionInput.value || "等待输入表达式...";
+        return;
+      }
+
+      if (value === "=") {
+        try {
+          evaluateExpression();
+        } catch (error) {
+          displayResultEl.textContent = "Error";
+          setStatus(error.message, "error");
+        }
+        return;
+      }
+
+      insertText(value);
+    }
+
+    async function copyResult() {
+      const text = displayResultEl.textContent;
+      if (!text || (text === "0" && !expressionInput.value.trim())) {
+        setStatus("没有可复制结果", "warning");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("复制成功", "success");
+      } catch (error) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        setStatus("复制成功", "success");
+      }
+    }
+
+    keypadEl.querySelectorAll(".key").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        handleKeypad(btn.getAttribute("data-value"));
+      });
+    });
+
+    evaluateBtn.addEventListener("click", function() {
+      try {
+        evaluateExpression();
+      } catch (error) {
+        displayResultEl.textContent = "Error";
+        setStatus(error.message, "error");
+      }
+    });
+
+    copyBtn.addEventListener("click", copyResult);
+
+    clearHistoryBtn.addEventListener("click", function() {
+      historyStore = [];
+      renderHistory();
+      setStatus("历史已清空", "success");
+    });
+
+    expressionInput.addEventListener("input", function() {
+      displayExpressionEl.textContent = expressionInput.value || "等待输入表达式...";
+      if (!expressionInput.value.trim()) {
+        displayResultEl.textContent = "0";
+        setStatus("Ready");
+      }
+    });
+
+    expressionInput.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        try {
+          evaluateExpression();
+        } catch (error) {
+          displayResultEl.textContent = "Error";
+          setStatus(error.message, "error");
+        }
+      }
+    });
+
+    renderHistory();
+    setStatus("Ready");
+  </script>
+</body>
+</html>
