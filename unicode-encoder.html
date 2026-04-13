@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Unicode 编码工具 - 在线 Unicode 编码解码 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供在线 Unicode 编码解码工具，支持 Unicode 编码、Unicode 解码、\\uXXXX、HTML 实体编码、实时转换、一键复制和清空重置。" />
+  <meta name="keywords" content="Unicode编码,Unicode解码,在线Unicode工具,\\u编码,HTML实体编码,字符编码转换,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/unicode-encoder.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="Unicode 编码工具 - 在线 Unicode 编码解码 | 王先生工具" />
+  <meta property="og:description" content="支持 Unicode 编码、Unicode 解码、\\uXXXX、HTML 实体编码、实时转换、一键复制和清空重置。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/unicode-encoder.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Unicode 编码工具 - 在线 Unicode 编码解码 | 王先生工具" />
+  <meta name="twitter:description" content="支持 Unicode 编码、Unicode 解码、\\uXXXX、HTML 实体编码、实时转换、一键复制和清空重置。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --output-bg: #0f172a;
+      --output-text: #cbd5e1;
+      --mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: min(1240px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .toolbar-center,
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .control {
+      height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+      outline: none;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .status-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-chip.success {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background: #ecfdf5;
+    }
+
+    .status-chip.warning {
+      color: var(--warning);
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .status-chip.error {
+      color: var(--danger);
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .editor-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+      background: var(--card-solid);
+    }
+
+    .pane {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .pane + .pane {
+      border-left: 1px solid var(--border);
+    }
+
+    .pane-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sub);
+      font-weight: 700;
+      background: #fcfcfd;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .pane-meta {
+      font-size: 12px;
+      text-transform: none;
+      letter-spacing: 0;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .editor-box {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+      background: #fff;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 420px;
+      border: none;
+      outline: none;
+      resize: vertical;
+      padding: 20px;
+      font-size: 15px;
+      line-height: 1.9;
+      background: transparent;
+      color: var(--text);
+      overflow: auto;
+      font-family: var(--mono);
+    }
+
+    #outputText {
+      background: var(--output-bg);
+      color: var(--output-text);
+    }
+
+    .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 18px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .bottom-tip {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--sub);
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .content-card code {
+      font-family: var(--mono);
+      background: #f8fafc;
+      padding: 1px 6px;
+      border-radius: 6px;
+      color: #0f172a;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.35);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.55);
+    }
+
+    @media (max-width: 980px) {
+      .editor-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .pane + .pane {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+
+      textarea {
+        min-height: 260px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar {
+        padding: 12px 14px;
+      }
+
+      .toolbar-center,
+      .toolbar-right {
+        width: 100%;
+      }
+
+      .control,
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Unicode 编码工具",
+    "url": "https://gongju.wangxiansheng.com/unicode-encoder.html",
+    "description": "支持 Unicode 编码、Unicode 解码、\\uXXXX、HTML 实体编码、实时转换、一键复制和清空重置的在线工具。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Unicode 编码工具",
+        "item": "https://gongju.wangxiansheng.com/unicode-encoder.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Unicode 编码工具",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/unicode-encoder.html",
+    "description": "支持 Unicode 编码、Unicode 解码、\\uXXXX、HTML 实体编码、实时转换、一键复制和清空重置的在线工具。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    },
+    "featureList": [
+      "Unicode Encode",
+      "Unicode Decode",
+      "\\uXXXX 编码",
+      "HTML 实体编码",
+      "交换内容并切换模式",
+      "清空重置"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">Unicode 编码工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>Unicode 编码工具</h1>
+      <p>
+        王先生工具提供简洁易用的在线 Unicode 编码解码页面，支持 Unicode 编码、Unicode 解码、
+        <code>\uXXXX</code>、HTML 实体编码和反向解析，适合开发、字符处理、接口调试和日常文本转换场景快速使用。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="sr-only">Unicode 编码工具</h2>
+
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="toolbar-center">
+            <select id="mode" class="control" aria-label="选择转换模式">
+              <option value="encode">Unicode 编码</option>
+              <option value="decode">Unicode 解码</option>
+            </select>
+
+            <select id="format" class="control" aria-label="选择编码格式">
+              <option value="js">JS Unicode（\uXXXX）</option>
+              <option value="htmlHex">HTML 实体（&#xXXXX;）</option>
+              <option value="htmlDec">HTML 实体（&#DDDD;）</option>
+            </select>
+          </div>
+
+          <div class="toolbar-right">
+            <div id="statusChip" class="status-chip">Ready</div>
+            <button class="btn btn-primary" type="button" onclick="runConvert()">立即转换</button>
+            <button class="btn btn-light" type="button" onclick="swapText()">交换内容</button>
+            <button class="btn btn-light" type="button" onclick="copyOutput()">复制结果</button>
+            <button class="btn btn-light" type="button" onclick="fillSample()">填充示例</button>
+            <button class="btn btn-light" type="button" onclick="clearAll()">清空重置</button>
+          </div>
+        </div>
+
+        <div class="editor-wrapper">
+          <section class="pane" aria-labelledby="input-title">
+            <div class="pane-label">
+              <span id="input-title">输入内容</span>
+              <span id="inputStats" class="pane-meta">0 字符 · 1 行</span>
+            </div>
+            <div class="editor-box">
+              <textarea id="inputText" placeholder="请输入要进行 Unicode 编码或解码的内容..." aria-label="输入内容"></textarea>
+            </div>
+          </section>
+
+          <section class="pane" aria-labelledby="output-title">
+            <div class="pane-label">
+              <span id="output-title">输出结果</span>
+              <span id="outputStats" class="pane-meta">0 字符 · 1 行</span>
+            </div>
+            <div class="editor-box">
+              <textarea id="outputText" readonly aria-label="输出结果"></textarea>
+            </div>
+          </section>
+        </div>
+
+        <div class="bottom-bar">
+          <div class="bottom-tip">
+            解码模式支持 <code>\uXXXX</code>、<code>\u{1F600}</code>、<code>&#x4F60;</code> 和 <code>&#20320;</code> 等格式。
+          </div>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            Unicode 编码工具适合将普通文本转换成 Unicode 转义格式，或把 Unicode 转义内容还原成原始文本。
+            常见于前端开发、脚本配置、接口传输、字符调试和多语言文本处理场景。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用方法</h2>
+          <ol>
+            <li>在左侧输入框中输入文本或 Unicode 转义内容。</li>
+            <li>选择“Unicode 编码”或“Unicode 解码”模式。</li>
+            <li>编码模式下可选择输出为 <code>\uXXXX</code> 或 HTML 实体格式。</li>
+            <li>系统会自动实时转换，也可以点击“立即转换”手动执行。</li>
+            <li>点击“交换内容并切换模式”后，可快速反向处理。</li>
+          </ol>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary><code>\uXXXX</code> 和 HTML 实体有什么区别？</summary>
+            <div class="answer">
+              <code>\uXXXX</code> 常见于 JavaScript、JSON 等场景；HTML 实体如 <code>&amp;#x4F60;</code> 更常见于 HTML 页面或富文本环境。
+            </div>
+          </details>
+
+          <details>
+            <summary>为什么有些 Emoji 不是一个 <code>\uXXXX</code>？</summary>
+            <div class="answer">
+              因为部分字符超出了基本多文种平面，会使用代理对形式表示，例如 😀 可能会编码成两个 Unicode 转义片段。
+            </div>
+          </details>
+
+          <details>
+            <summary>解码失败怎么办？</summary>
+            <div class="answer">
+              如果输入内容格式不完整，或者包含非法的转义片段，解码时可能失败。可以先检查 <code>\u</code> 或 HTML 实体是否写完整。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <script>
+    const inputEl = document.getElementById("inputText");
+    const outputEl = document.getElementById("outputText");
+    const inputStatsEl = document.getElementById("inputStats");
+    const outputStatsEl = document.getElementById("outputStats");
+    const statusChip = document.getElementById("statusChip");
+    const yearEl = document.getElementById("year");
+    const modeEl = document.getElementById("mode");
+    const formatEl = document.getElementById("format");
+
+    let debounceTimer = null;
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function setStatus(text, type) {
+      statusChip.textContent = text;
+      statusChip.className = "status-chip";
+      if (type) {
+        statusChip.classList.add(type);
+      }
+    }
+
+    function countStats(text) {
+      const content = text || "";
+      const lines = content.length ? content.split(/\r\n|\r|\n/).length : 1;
+      return {
+        chars: content.length,
+        lines: lines
+      };
+    }
+
+    function updateStats() {
+      const inputStats = countStats(inputEl.value);
+      const outputStats = countStats(outputEl.value);
+      inputStatsEl.textContent = inputStats.chars + " 字符 · " + inputStats.lines + " 行";
+      outputStatsEl.textContent = outputStats.chars + " 字符 · " + outputStats.lines + " 行";
+    }
+
+    function codePointToJsEscape(cp) {
+      if (cp <= 0xFFFF) {
+        return "\\u" + cp.toString(16).toUpperCase().padStart(4, "0");
+      }
+      const offset = cp - 0x10000;
+      const high = 0xD800 + (offset >> 10);
+      const low = 0xDC00 + (offset & 0x3FF);
+      return "\\u" + high.toString(16).toUpperCase().padStart(4, "0") +
+             "\\u" + low.toString(16).toUpperCase().padStart(4, "0");
+    }
+
+    function encodeUnicode(text, format) {
+      let result = "";
+      for (const char of text) {
+        const cp = char.codePointAt(0);
+        if (format === "js") {
+          result += codePointToJsEscape(cp);
+        } else if (format === "htmlHex") {
+          result += "&#x" + cp.toString(16).toUpperCase() + ";";
+        } else {
+          result += "&#" + cp + ";";
+        }
+      }
+      return result;
+    }
+
+    function decodeUnicode(text) {
+      let result = text;
+
+      result = result.replace(/\\u\{([0-9a-fA-F]+)\}/g, function (_, hex) {
+        return String.fromCodePoint(parseInt(hex, 16));
+      });
+
+      result = result.replace(/\\u([0-9a-fA-F]{4})/g, function (_, hex) {
+        return String.fromCharCode(parseInt(hex, 16));
+      });
+
+      result = result.replace(/&#x([0-9a-fA-F]+);/g, function (_, hex) {
+        return String.fromCodePoint(parseInt(hex, 16));
+      });
+
+      result = result.replace(/&#([0-9]+);/g, function (_, dec) {
+        return String.fromCodePoint(parseInt(dec, 10));
+      });
+
+      return result;
+    }
+
+    function runConvert() {
+      const text = inputEl.value;
+      const mode = modeEl.value;
+      const format = formatEl.value;
+
+      if (!text.trim()) {
+        outputEl.value = "";
+        updateStats();
+        setStatus("请输入要转换的内容", "warning");
+        return;
+      }
+
+      try {
+        if (mode === "encode") {
+          outputEl.value = encodeUnicode(text, format);
+          setStatus("已完成 Unicode 编码", "success");
+        } else {
+          outputEl.value = decodeUnicode(text);
+          setStatus("已完成 Unicode 解码", "success");
+        }
+      } catch (error) {
+        outputEl.value = "";
+        setStatus("输入内容格式有误，无法解码", "error");
+      }
+
+      updateStats();
+    }
+
+    function scheduleConvert() {
+      updateStats();
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(runConvert, 150);
+    }
+
+    function swapText() {
+      const temp = inputEl.value;
+      inputEl.value = outputEl.value;
+      outputEl.value = temp;
+
+      modeEl.value = modeEl.value === "encode" ? "decode" : "encode";
+
+      updateFormatVisibility();
+      updateStats();
+
+      if (inputEl.value.trim()) {
+        runConvert();
+      } else {
+        setStatus("已交换内容与模式", "success");
+      }
+    }
+
+    function updateFormatVisibility() {
+      formatEl.style.display = modeEl.value === "encode" ? "" : "none";
+    }
+
+    async function copyOutput() {
+      const text = outputEl.value;
+      if (!text) {
+        setStatus("没有可复制内容", "warning");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("复制成功", "success");
+      } catch (error) {
+        outputEl.removeAttribute("readonly");
+        outputEl.select();
+        document.execCommand("copy");
+        outputEl.setAttribute("readonly", "readonly");
+        setStatus("复制成功", "success");
+      }
+    }
+
+    function fillSample() {
+      modeEl.value = "encode";
+      formatEl.value = "js";
+      inputEl.value = "你好，王先生工具 😀";
+      updateFormatVisibility();
+      runConvert();
+      setStatus("已填充示例", "success");
+    }
+
+    function clearAll() {
+      inputEl.value = "";
+      outputEl.value = "";
+      modeEl.value = "encode";
+      formatEl.value = "js";
+      updateFormatVisibility();
+      updateStats();
+      setStatus("Ready");
+    }
+
+    inputEl.addEventListener("input", scheduleConvert);
+
+    modeEl.addEventListener("change", function () {
+      updateFormatVisibility();
+      if (inputEl.value.trim()) {
+        runConvert();
+      } else {
+        setStatus("模式已切换", "success");
+      }
+    });
+
+    formatEl.addEventListener("change", function () {
+      if (modeEl.value === "encode" && inputEl.value.trim()) {
+        runConvert();
+      }
+    });
+
+    inputEl.addEventListener("keydown", function (event) {
+      if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+        event.preventDefault();
+        runConvert();
+      }
+    });
+
+    updateFormatVisibility();
+    updateStats();
+    setStatus("Ready");
+  </script>
+</body>
+</html>
