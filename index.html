@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>工具导航首页 - 在线工具大全 | 王先生工具</title>
-  <meta name="description" content="王先生工具提供常用在线工具导航首页，包含 JSON 格式化、时间戳转换、Base64 编解码、URL 编码解码、MD5 加密、二维码生成等常用网页工具入口。" />
-  <meta name="keywords" content="在线工具,工具导航,JSON格式化,时间戳转换,Base64编解码,URL编码解码,MD5加密,二维码生成,王先生工具" />
+  <meta name="description" content="王先生工具提供常用在线工具导航首页，包含简繁转换、代码格式化、Base64 编解码、robots.txt 生成器、HTML 在线运行、时间戳转换等常用网页工具入口。" />
+  <meta name="keywords" content="在线工具,工具导航,简繁转换,代码格式化,Base64编解码,robots.txt生成器,HTML在线运行,时间戳转换,王先生工具" />
   <meta name="author" content="王先生工具" />
   <meta name="application-name" content="王先生工具" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -20,12 +20,12 @@
   <meta property="og:locale" content="zh_CN" />
   <meta property="og:site_name" content="王先生工具" />
   <meta property="og:title" content="工具导航首页 - 在线工具大全 | 王先生工具" />
-  <meta property="og:description" content="收录常用在线工具入口，支持 JSON 格式化、时间戳转换、Base64 编解码、URL 编码解码、MD5 加密、二维码生成等工具。" />
+  <meta property="og:description" content="收录常用在线工具入口，支持简繁转换、代码格式化、Base64 编解码、robots.txt 生成器、HTML 在线运行、时间戳转换等工具。" />
   <meta property="og:url" content="https://gongju.wangxiansheng.com/" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="工具导航首页 - 在线工具大全 | 王先生工具" />
-  <meta name="twitter:description" content="收录常用在线工具入口，支持 JSON 格式化、时间戳转换、Base64 编解码、URL 编码解码、MD5 加密、二维码生成等工具。" />
+  <meta name="twitter:description" content="收录常用在线工具入口，支持简繁转换、代码格式化、Base64 编解码、robots.txt 生成器、HTML 在线运行、时间戳转换等工具。" />
 
   <style>
     :root {
@@ -335,7 +335,7 @@
       <h1>王先生工具</h1>
       <p>
         这里收录了常用在线工具入口，支持开发、站长、办公和内容处理等常见使用场景。
-        你可以从这里快速进入 JSON 格式化、时间戳转换、Base64 编解码、URL 编码解码、MD5 加密、二维码生成等页面。
+        你可以从这里快速进入简繁转换、代码格式化、Base64 编解码、robots.txt 生成器、HTML 在线运行、时间戳转换等页面。
       </p>
 
       <div class="hero-meta">
@@ -370,9 +370,9 @@
         <section class="content-card" aria-labelledby="category-title">
           <h2 id="category-title">工具类型</h2>
           <ul>
-            <li>开发工具：JSON、Base64、URL、MD5 等编码处理类工具</li>
-            <li>效率工具：时间戳转换、二维码生成等实用工具</li>
-            <li>站长工具：后续可扩展 robots.txt、meta robots、sitemap 等页面</li>
+            <li>开发工具：简繁转换、代码格式化、Base64 等文本处理类工具</li>
+            <li>效率工具：时间戳转换、HTML 在线运行等实用工具</li>
+            <li>站长工具：robots.txt 生成器，以及后续可扩展的 meta robots、sitemap 等页面</li>
           </ul>
         </section>
       </div>
@@ -388,7 +388,7 @@
       {
         name: "简繁转换",
         url: "https://gongju.wangxiansheng.com/jianfan.html",
-        desc: "支持简体中文转繁体中文、繁体中文转简体中文，自动转换、手动转换。"
+        desc: "支持简体中文转繁体中文、繁体中文转简体中文，支持自动转换和手动转换。"
       },
       {
         name: "代码格式化",
@@ -403,8 +403,7 @@
       {
         name: "robots.txt 生成器",
         url: "https://gongju.wangxiansheng.com/robots-txt-generator.html",
-        desc: "简洁实用的 robots.txt 在线生成器，支持自定义 User-agent、Allow、Disallow、Crawl-delay、
-        Sitemap 和 Host 配置。"
+        desc: "简洁实用的 robots.txt 在线生成器，支持自定义 User-agent、Allow、Disallow、Crawl-delay、Sitemap 和 Host 配置。"
       },
       {
         name: "HTML 在线运行",
@@ -425,13 +424,15 @@
     yearEl.textContent = new Date().getFullYear();
     pageCount.textContent = pages.length;
 
-    pageList.innerHTML = pages.map(page => `
-      <a class="card" href="${page.url}">
-        <h2 class="card-title">${page.name}</h2>
-        <p class="card-desc">${page.desc}</p>
-        <div class="card-link">${page.url}</div>
-      </a>
-    `).join("");
+    pageList.innerHTML = pages.map(function(page) {
+      return `
+        <a class="card" href="${page.url}">
+          <h2 class="card-title">${page.name}</h2>
+          <p class="card-desc">${page.desc}</p>
+          <div class="card-link">${page.url}</div>
+        </a>
+      `;
+    }).join("");
   </script>
 </body>
 </html>
