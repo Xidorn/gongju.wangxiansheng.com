@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>代码美化工具 - HTML CSS JavaScript 在线格式化 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供在线代码美化工具，支持 HTML、CSS、JavaScript 在线格式化，支持自动识别语言、实时美化、复制结果和下载代码，打开网页即可使用。" />
+  <meta name="keywords" content="代码美化,在线代码格式化,HTML美化,CSS美化,JavaScript美化,Prettier,在线开发工具,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/code-beautifier.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="代码美化工具 - HTML CSS JavaScript 在线格式化 | 王先生工具" />
+  <meta property="og:description" content="支持 HTML、CSS、JavaScript 在线格式化，支持自动识别语言、实时美化、复制结果和下载代码。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/code-beautifier.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="代码美化工具 - HTML CSS JavaScript 在线格式化 | 王先生工具" />
+  <meta name="twitter:description" content="支持 HTML、CSS、JavaScript 在线格式化，支持自动识别语言、实时美化、复制结果和下载代码。" />
+
+  <script src="https://unpkg.com/prettier@2.8.8/standalone.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-html.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-postcss.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-babel.js"></script>
+  <script src="https://unpkg.com/prettier@2.8.8/parser-estree.js"></script>
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --editor-font: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --output-bg: #0f172a;
+      --output-text: #cbd5e1;
+      --output-line: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: min(1240px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 840px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .toolbar-center,
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .control,
+    .toggle {
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .control {
+      padding: 0 14px;
+      outline: none;
+    }
+
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle input {
+      accent-color: var(--primary);
+    }
+
+    .btn-mini {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .status-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-chip.success {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background: #ecfdf5;
+    }
+
+    .status-chip.warning {
+      color: var(--warning);
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .status-chip.error {
+      color: var(--danger);
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .editor-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 640px;
+      background: var(--card-solid);
+    }
+
+    .pane {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .pane + .pane {
+      border-left: 1px solid var(--border);
+    }
+
+    .pane-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sub);
+      font-weight: 700;
+      background: #fcfcfd;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .pane-meta {
+      font-size: 12px;
+      text-transform: none;
+      letter-spacing: 0;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .editor-box {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .line-numbers {
+      width: 56px;
+      flex: 0 0 56px;
+      padding: 20px 10px 20px 0;
+      text-align: right;
+      font-family: var(--editor-font);
+      font-size: 14px;
+      line-height: 1.7;
+      user-select: none;
+      overflow: hidden;
+      border-right: 1px solid rgba(0, 0, 0, 0.04);
+      background: rgba(15, 23, 42, 0.02);
+      color: #c1c1c7;
+    }
+
+    .line-numbers.dark {
+      background: #111827;
+      color: var(--output-line);
+      border-right: 1px solid #1f2937;
+    }
+
+    textarea {
+      flex: 1;
+      min-width: 0;
+      min-height: 0;
+      border: none;
+      outline: none;
+      resize: none;
+      padding: 20px;
+      font-family: var(--editor-font);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow: auto;
+      tab-size: 4;
+    }
+
+    #inputCode {
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    #outputCode {
+      background: var(--output-bg);
+      color: var(--output-text);
+    }
+
+    .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px 18px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .bottom-tip,
+    .error-message {
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .bottom-tip {
+      color: var(--sub);
+    }
+
+    .error-message {
+      color: var(--danger);
+      max-width: 100%;
+      word-break: break-word;
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(100, 116, 139, 0.35);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(100, 116, 139, 0.55);
+    }
+
+    @media (max-width: 980px) {
+      .editor-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .pane + .pane {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar {
+        padding: 12px 14px;
+      }
+
+      .toolbar-center,
+      .toolbar-right {
+        width: 100%;
+      }
+
+      .control,
+      .toggle,
+      .btn-mini {
+        width: 100%;
+      }
+
+      .line-numbers {
+        width: 48px;
+        flex-basis: 48px;
+        font-size: 13px;
+      }
+
+      textarea {
+        font-size: 13px;
+        padding: 16px;
+      }
+
+      .editor-wrapper {
+        min-height: 520px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "代码美化工具",
+    "url": "https://gongju.wangxiansheng.com/code-beautifier.html",
+    "description": "支持 HTML、CSS、JavaScript 在线格式化的代码美化工具。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "代码美化工具",
+        "item": "https://gongju.wangxiansheng.com/code-beautifier.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "代码美化工具",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/code-beautifier.html",
+    "description": "支持 HTML、CSS、JavaScript 在线格式化，支持自动识别语言、实时美化、复制结果和下载代码的网页工具。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    },
+    "featureList": [
+      "HTML 美化",
+      "CSS 美化",
+      "JavaScript 美化",
+      "自动识别语言",
+      "实时美化",
+      "下载格式化结果"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">代码美化工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>代码美化工具</h1>
+      <p>
+        王先生工具提供简洁高效的在线代码格式化页面，支持 HTML、CSS、JavaScript 在线美化。
+        支持自动识别语言、实时格式化、复制结果和下载代码，适合前端开发、学习调试和快速整理代码。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="sr-only">代码美化编辑器</h2>
+
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="toolbar-center">
+            <select id="language" class="control" aria-label="选择代码语言">
+              <option value="auto" selected>自动识别语言</option>
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+              <option value="babel">JavaScript</option>
+            </select>
+
+            <select id="tabWidth" class="control" aria-label="选择缩进空格数">
+              <option value="2">2 空格</option>
+              <option value="4" selected>4 空格</option>
+            </select>
+
+            <label class="toggle" for="liveFormat">
+              <input id="liveFormat" type="checkbox" checked />
+              <span>实时美化</span>
+            </label>
+          </div>
+
+          <div class="toolbar-right">
+            <div id="statusChip" class="status-chip">Ready</div>
+            <button class="btn-mini btn-primary" type="button" onclick="formatAction()">立即美化</button>
+            <button class="btn-mini btn-light" type="button" onclick="copyResult()">复制结果</button>
+            <button class="btn-mini btn-light" type="button" onclick="downloadResult()">下载代码</button>
+            <button class="btn-mini btn-light" type="button" onclick="clearAll()">清空内容</button>
+          </div>
+        </div>
+
+        <div class="editor-wrapper">
+          <section class="pane" aria-labelledby="input-title">
+            <div class="pane-label">
+              <span id="input-title">源代码（输入）</span>
+              <span id="inputStats" class="pane-meta">0 字符 · 1 行</span>
+            </div>
+            <div class="editor-box">
+              <div id="lineNumbersInput" class="line-numbers">1</div>
+              <textarea id="inputCode" placeholder="在此粘贴 HTML、CSS 或 JavaScript 代码..." spellcheck="false" aria-label="源代码输入区"></textarea>
+            </div>
+          </section>
+
+          <section class="pane" aria-labelledby="output-title">
+            <div class="pane-label">
+              <span id="output-title">美化结果（输出）</span>
+              <span id="outputStats" class="pane-meta">0 字符 · 1 行</span>
+            </div>
+            <div class="editor-box">
+              <div id="lineNumbersOutput" class="line-numbers dark">1</div>
+              <textarea id="outputCode" readonly spellcheck="false" aria-label="美化结果输出区"></textarea>
+            </div>
+          </section>
+        </div>
+
+        <div class="bottom-bar">
+          <div class="bottom-tip">
+            快捷键：<strong>Ctrl/Cmd + Enter</strong> 立即美化，<strong>Tab</strong> 按当前缩进设置插入空格。
+          </div>
+          <div id="errorMessage" class="error-message" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            这个在线代码美化工具基于 Prettier 实现，适合快速整理 HTML、CSS 和 JavaScript 代码格式。
+            不管是复制粘贴后的混乱代码，还是需要统一团队编码风格的代码片段，都可以在这里快速完成格式化。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用方法</h2>
+          <ol>
+            <li>在左侧输入框中粘贴代码内容。</li>
+            <li>可选择“自动识别语言”，也可以手动指定 HTML、CSS 或 JavaScript。</li>
+            <li>根据需要选择 2 空格或 4 空格缩进。</li>
+            <li>开启“实时美化”后会自动格式化，也可以点击“立即美化”手动执行。</li>
+            <li>格式化完成后可复制结果或下载为文件。</li>
+          </ol>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary>支持哪些代码类型？</summary>
+            <div class="answer">
+              当前支持 HTML、CSS 和 JavaScript 三类常见前端代码格式化。
+            </div>
+          </details>
+
+          <details>
+            <summary>自动识别语言是怎么工作的？</summary>
+            <div class="answer">
+              页面会根据代码内容的特征判断更像 HTML、CSS 还是 JavaScript。
+              如果识别结果不符合预期，也可以手动切换语言后重新美化。
+            </div>
+          </details>
+
+          <details>
+            <summary>为什么有时会提示格式化失败？</summary>
+            <div class="answer">
+              一般是因为代码本身存在语法错误或不完整，例如缺少括号、引号或结束标签。
+              这时你可以先检查原始代码，再重新执行美化。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <script>
+    const inputArea = document.getElementById("inputCode");
+    const outputArea = document.getElementById("outputCode");
+    const lineNumbersInput = document.getElementById("lineNumbersInput");
+    const lineNumbersOutput = document.getElementById("lineNumbersOutput");
+    const inputStats = document.getElementById("inputStats");
+    const outputStats = document.getElementById("outputStats");
+    const statusChip = document.getElementById("statusChip");
+    const errorMessage = document.getElementById("errorMessage");
+    const languageSelect = document.getElementById("language");
+    const tabWidthSelect = document.getElementById("tabWidth");
+    const liveFormatCheckbox = document.getElementById("liveFormat");
+    const yearEl = document.getElementById("year");
+
+    let debounceTimer = null;
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function updateLineNumbers(area, lineContainer) {
+      const lines = area.value.split("\n").length;
+      let html = "";
+      for (let i = 1; i <= lines; i++) {
+        html += "<div>" + i + "</div>";
+      }
+      lineContainer.innerHTML = html;
+    }
+
+    function updateStats() {
+      const inputText = inputArea.value || "";
+      const outputText = outputArea.value || "";
+      const inputLines = inputText.length ? inputText.split(/\r\n|\r|\n/).length : 1;
+      const outputLines = outputText.length ? outputText.split(/\r\n|\r|\n/).length : 1;
+
+      inputStats.textContent = inputText.length + " 字符 · " + inputLines + " 行";
+      outputStats.textContent = outputText.length + " 字符 · " + outputLines + " 行";
+    }
+
+    function syncScroll(type) {
+      if (type === "input") {
+        lineNumbersInput.scrollTop = inputArea.scrollTop;
+      } else {
+        lineNumbersOutput.scrollTop = outputArea.scrollTop;
+      }
+    }
+
+    function setStatus(text, type) {
+      statusChip.textContent = text;
+      statusChip.className = "status-chip";
+      if (type) {
+        statusChip.classList.add(type);
+      }
+    }
+
+    function setError(text) {
+      errorMessage.textContent = text || "";
+    }
+
+    function detectLanguage(code) {
+      const text = code.trim();
+
+      if (!text) {
+        return "html";
+      }
+
+      const htmlPattern = /^<!doctype|^<html|^<head|^<body|^<[a-z][\w-]*[\s>]/i;
+      const htmlClosePattern = /<\/[a-z][\w-]*>/i;
+      const cssPattern = /@media|@import|:root|--[\w-]+\s*:|[.#]?[a-zA-Z][\w-]*(\s+[.#]?[a-zA-Z][\w-]*)*\s*\{/;
+      const jsPattern = /\b(function|const|let|var|import|export|class|async|await|return|=>)\b/;
+
+      if (htmlPattern.test(text) || htmlClosePattern.test(text)) {
+        return "html";
+      }
+
+      if (cssPattern.test(text) && !jsPattern.test(text)) {
+        return "css";
+      }
+
+      return "babel";
+    }
+
+    function getCurrentParser() {
+      const selected = languageSelect.value;
+      if (selected !== "auto") {
+        return selected;
+      }
+      return detectLanguage(inputArea.value);
+    }
+
+    function getFileExtension(parser) {
+      if (parser === "html") return "html";
+      if (parser === "css") return "css";
+      return "js";
+    }
+
+    function getTabSize() {
+      return parseInt(tabWidthSelect.value, 10) || 4;
+    }
+
+    function formatAction() {
+      const input = inputArea.value;
+      updateLineNumbers(inputArea, lineNumbersInput);
+      updateStats();
+
+      if (!input.trim()) {
+        outputArea.value = "";
+        updateLineNumbers(outputArea, lineNumbersOutput);
+        updateStats();
+        setStatus("Ready");
+        setError("");
+        return;
+      }
+
+      const parser = getCurrentParser();
+      const tabWidth = getTabSize();
+
+      try {
+        const formatted = prettier.format(input, {
+          parser: parser,
+          plugins: prettierPlugins,
+          tabWidth: tabWidth,
+          htmlWhitespaceSensitivity: "css",
+          singleQuote: false,
+          semi: true
+        });
+
+        outputArea.value = formatted;
+        updateLineNumbers(outputArea, lineNumbersOutput);
+        updateStats();
+
+        const detectedText = languageSelect.value === "auto" ? "已识别为 " : "格式化完成 · ";
+        const parserLabel = parser === "html" ? "HTML" : parser === "css" ? "CSS" : "JavaScript";
+
+        setStatus(detectedText + parserLabel, "success");
+        setError("");
+      } catch (error) {
+        outputArea.value = "";
+        updateLineNumbers(outputArea, lineNumbersOutput);
+        updateStats();
+        setStatus("格式化失败", "error");
+        setError("请检查代码语法是否完整。错误信息：" + error.message);
+      }
+    }
+
+    function scheduleFormat() {
+      updateLineNumbers(inputArea, lineNumbersInput);
+      updateStats();
+
+      if (!liveFormatCheckbox.checked) {
+        setStatus("等待手动美化", "warning");
+        return;
+      }
+
+      setStatus("处理中...", "warning");
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () {
+        formatAction();
+      }, 350);
+    }
+
+    async function copyResult() {
+      const text = outputArea.value;
+      if (!text) {
+        setStatus("没有可复制内容", "warning");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("复制成功", "success");
+      } catch (error) {
+        outputArea.removeAttribute("readonly");
+        outputArea.select();
+        document.execCommand("copy");
+        outputArea.setAttribute("readonly", "readonly");
+        setStatus("复制成功", "success");
+      }
+    }
+
+    function downloadResult() {
+      const text = outputArea.value;
+      if (!text) {
+        setStatus("没有可下载内容", "warning");
+        return;
+      }
+
+      const parser = getCurrentParser();
+      const ext = getFileExtension(parser);
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "formatted-code." + ext;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+      setStatus("下载已开始", "success");
+    }
+
+    function clearAll() {
+      if (!inputArea.value && !outputArea.value) {
+        return;
+      }
+
+      if (confirm("确定清空当前代码内容吗？")) {
+        inputArea.value = "";
+        outputArea.value = "";
+        updateLineNumbers(inputArea, lineNumbersInput);
+        updateLineNumbers(outputArea, lineNumbersOutput);
+        updateStats();
+        setStatus("Ready");
+        setError("");
+      }
+    }
+
+    function insertSpacesAtCursor(textarea, spaces) {
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const before = textarea.value.substring(0, start);
+      const after = textarea.value.substring(end);
+      textarea.value = before + spaces + after;
+      textarea.selectionStart = textarea.selectionEnd = start + spaces.length;
+    }
+
+    inputArea.addEventListener("input", scheduleFormat);
+    inputArea.addEventListener("scroll", function () {
+      syncScroll("input");
+    });
+
+    outputArea.addEventListener("scroll", function () {
+      syncScroll("output");
+    });
+
+    languageSelect.addEventListener("change", function () {
+      if (inputArea.value.trim()) {
+        formatAction();
+      }
+    });
+
+    tabWidthSelect.addEventListener("change", function () {
+      if (inputArea.value.trim()) {
+        formatAction();
+      }
+    });
+
+    liveFormatCheckbox.addEventListener("change", function () {
+      if (liveFormatCheckbox.checked && inputArea.value.trim()) {
+        formatAction();
+      } else if (!liveFormatCheckbox.checked) {
+        setStatus("等待手动美化", "warning");
+      }
+    });
+
+    inputArea.addEventListener("keydown", function (event) {
+      if (event.key === "Tab") {
+        event.preventDefault();
+        insertSpacesAtCursor(this, " ".repeat(getTabSize()));
+        if (liveFormatCheckbox.checked) {
+          scheduleFormat();
+        } else {
+          updateLineNumbers(inputArea, lineNumbersInput);
+          updateStats();
+        }
+      }
+
+      if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+        event.preventDefault();
+        formatAction();
+      }
+    });
+
+    updateLineNumbers(inputArea, lineNumbersInput);
+    updateLineNumbers(outputArea, lineNumbersOutput);
+    updateStats();
+    setStatus("Ready");
+  </script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?be6d24b9969e6282da3ffef0bb6db3e8";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+</html>
