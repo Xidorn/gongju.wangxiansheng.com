@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>进制换算工具 - 二进制到 36 进制在线转换 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供在线进制换算工具，支持二进制、八进制、十进制、十六进制以及 2 到 36 进制互相转换，支持实时换算、一键复制和清空重置。" />
+  <meta name="keywords" content="进制换算,二进制转换,八进制转换,十进制转换,十六进制转换,36进制,在线进制转换,base converter,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/base-converter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="进制换算工具 - 二进制到 36 进制在线转换 | 王先生工具" />
+  <meta property="og:description" content="支持二进制、八进制、十进制、十六进制以及 2 到 36 进制互相转换，支持实时换算、一键复制和清空重置。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/base-converter.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="进制换算工具 - 二进制到 36 进制在线转换 | 王先生工具" />
+  <meta name="twitter:description" content="支持二进制、八进制、十进制、十六进制以及 2 到 36 进制互相转换，支持实时换算、一键复制和清空重置。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .status-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-chip.success {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background: #ecfdf5;
+    }
+
+    .status-chip.warning {
+      color: var(--warning);
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .status-chip.error {
+      color: var(--danger);
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .tool-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: #fcfcfd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-head h2 {
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .card-head p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 180px 180px;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .input {
+      font-family: var(--mono);
+      letter-spacing: 0.2px;
+    }
+
+    .input:focus,
+    .select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .hero-result {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      border: 1px solid #dbeafe;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .hero-result-left {
+      min-width: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero-value {
+      font-family: var(--mono);
+      font-size: 28px;
+      line-height: 1.4;
+      font-weight: 700;
+      color: #1e293b;
+      word-break: break-all;
+    }
+
+    .hero-sub {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.8;
+      word-break: break-all;
+    }
+
+    .base-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .base-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+      transition: 0.2s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .base-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+      border-color: #c7d2fe;
+    }
+
+    .base-item.common {
+      background: linear-gradient(180deg, #fcfdff 0%, #f6f9ff 100%);
+      border-color: #dbeafe;
+    }
+
+    .base-item.common .base-label {
+      color: #2563eb;
+      font-weight: 700;
+    }
+
+    .base-item.active {
+      border-color: #93c5fd;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+    }
+
+    .base-item.active .base-label {
+      color: #1d4ed8;
+      font-weight: 700;
+    }
+
+    .base-item.active::after {
+      content: "当前目标";
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      min-height: 24px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 11px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .base-label {
+      font-size: 13px;
+      color: var(--sub);
+      margin-bottom: 8px;
+      line-height: 1.6;
+      padding-top: 18px;
+    }
+
+    .base-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.6;
+      word-break: break-all;
+      font-family: var(--mono);
+      padding-right: 42px;
+      min-height: 24px;
+    }
+
+    .base-copy {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 30px;
+      height: 30px;
+      border: none;
+      border-radius: 10px;
+      background: var(--light);
+      color: #334155;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .base-copy:hover {
+      background: var(--light-hover);
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1100px) {
+      .base-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .base-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-result {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar,
+      .tool-body,
+      .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .toolbar-right {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .base-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-value {
+        font-size: 22px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "进制换算工具",
+    "url": "https://gongju.wangxiansheng.com/base-converter.html",
+    "description": "支持二进制、八进制、十进制、十六进制以及 2 到 36 进制互相转换的在线工具。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "进制换算工具",
+        "item": "https://gongju.wangxiansheng.com/base-converter.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "进制换算工具",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/base-converter.html",
+    "description": "支持二进制到 36 进制互相转换，支持实时换算、一键复制和清空重置的在线工具。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    },
+    "featureList": [
+      "二进制转换",
+      "八进制转换",
+      "十进制转换",
+      "十六进制转换",
+      "2 到 36 进制互转",
+      "目标进制突出显示"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">进制换算工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>进制换算工具</h1>
+      <p>
+        王先生工具提供简洁易用的在线进制换算页面，支持二进制、八进制、十进制、十六进制以及 2 到 36 进制互相转换，
+        目标进制结果突出显示，同时按 2 到 36 进制顺序展示全部换算结果。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="screen-reader-text">进制换算工具</h2>
+
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="toolbar-right">
+            <div id="statusChip" class="status-chip">Ready</div>
+            <button type="button" class="btn btn-primary" id="convertBtn">立即换算</button>
+            <button type="button" class="btn btn-light" id="swapBtn">交换进制</button>
+            <button type="button" class="btn btn-light" id="clearBtn">清空重置</button>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <section class="card" aria-labelledby="input-title">
+            <div class="card-head">
+              <div>
+                <h2 id="input-title">输入换算</h2>
+                <p>支持 2 到 36 进制。字母不区分大小写，输出统一为大写。</p>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="inputValue">输入数值</label>
+                  <input id="inputValue" class="input" type="text" placeholder="例如：1010、255、FF、1Z" aria-label="输入数值" />
+                  <div class="hint">支持负数，例如 -1010。输入中的空格会自动忽略。</div>
+                </div>
+
+                <div class="field">
+                  <label for="fromBase">原进制</label>
+                  <select id="fromBase" class="select" aria-label="选择原进制"></select>
+                </div>
+
+                <div class="field">
+                  <label for="toBase">目标进制</label>
+                  <select id="toBase" class="select" aria-label="选择目标进制"></select>
+                </div>
+              </div>
+
+              <div class="hero-result">
+                <div class="hero-result-left">
+                  <div class="hero-badge" id="targetBadge">目标进制：16</div>
+                  <div class="hero-value" id="targetResult">-</div>
+                  <div class="hero-sub" id="normalizedInput">标准化输入：-</div>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-primary" id="copyTargetBtn">复制目标结果</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="all-results-title">
+            <div class="card-head">
+              <div>
+                <h2 id="all-results-title">全部进制结果</h2>
+                <p>按 2 进制到 36 进制顺序排列，点击任意卡片或复制按钮即可复制结果。</p>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="base-grid" id="baseGrid"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            这个在线进制换算工具适合快速处理不同进制之间的数值转换。常见于程序开发、算法练习、网络协议分析、
+            计算机组成学习、位运算调试和日常进制换算场景。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用方法</h2>
+          <ol>
+            <li>输入需要换算的数值。</li>
+            <li>选择原进制和目标进制，支持 2 到 36 进制。</li>
+            <li>系统会自动实时换算，也可以点击“立即换算”手动执行。</li>
+            <li>最上方会突出显示目标进制结果。</li>
+            <li>下方会按 2 到 36 进制顺序展示所有结果。</li>
+          </ol>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary>支持哪些进制范围？</summary>
+            <div class="answer">
+              当前支持 2 到 36 进制。超过 10 的进制会使用 A 到 Z 表示 10 到 35。
+            </div>
+          </details>
+
+          <details>
+            <summary>支持负数吗？</summary>
+            <div class="answer">
+              支持。你可以输入像 -1010、-FF、-255 这样的数值进行换算。
+            </div>
+          </details>
+
+          <details>
+            <summary>字母大小写有要求吗？</summary>
+            <div class="answer">
+              没有要求。输入时大小写都可以，输出会统一使用大写字母表示。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    const statusChip = document.getElementById("statusChip");
+    const inputValueEl = document.getElementById("inputValue");
+    const fromBaseEl = document.getElementById("fromBase");
+    const toBaseEl = document.getElementById("toBase");
+    const convertBtn = document.getElementById("convertBtn");
+    const swapBtn = document.getElementById("swapBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const copyTargetBtn = document.getElementById("copyTargetBtn");
+    const targetResultEl = document.getElementById("targetResult");
+    const normalizedInputEl = document.getElementById("normalizedInput");
+    const targetBadgeEl = document.getElementById("targetBadge");
+    const baseGridEl = document.getElementById("baseGrid");
+
+    let debounceTimer = null;
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function setStatus(text, type) {
+      statusChip.textContent = text;
+      statusChip.className = "status-chip";
+      if (type) statusChip.classList.add(type);
+    }
+
+    function fillBaseOptions() {
+      for (let i = 2; i <= 36; i++) {
+        const optionFrom = document.createElement("option");
+        optionFrom.value = String(i);
+        optionFrom.textContent = i + " 进制";
+        if (i === 10) optionFrom.selected = true;
+        fromBaseEl.appendChild(optionFrom);
+
+        const optionTo = document.createElement("option");
+        optionTo.value = String(i);
+        optionTo.textContent = i + " 进制";
+        if (i === 16) optionTo.selected = true;
+        toBaseEl.appendChild(optionTo);
+      }
+    }
+
+    function buildBaseGrid() {
+      let html = "";
+      const commonBases = new Set([2, 8, 10, 16]);
+
+      for (let i = 2; i <= 36; i++) {
+        const commonClass = commonBases.has(i) ? " common" : "";
+        html += `
+          <div class="base-item${commonClass}" id="base-item-${i}" data-base="${i}">
+            <div class="base-label">Base ${i}</div>
+            <div class="base-value" id="base-value-${i}">-</div>
+            <button type="button" class="base-copy" data-copy-base="${i}">复制</button>
+          </div>
+        `;
+      }
+
+      baseGridEl.innerHTML = html;
+
+      baseGridEl.querySelectorAll(".base-item").forEach(function(item) {
+        item.addEventListener("click", function(event) {
+          if (event.target.classList.contains("base-copy")) return;
+          const base = item.getAttribute("data-base");
+          const valueEl = document.getElementById("base-value-" + base);
+          copyText(valueEl.textContent);
+        });
+      });
+
+      baseGridEl.querySelectorAll(".base-copy").forEach(function(btn) {
+        btn.addEventListener("click", function(event) {
+          event.stopPropagation();
+          const base = btn.getAttribute("data-copy-base");
+          const valueEl = document.getElementById("base-value-" + base);
+          copyText(valueEl.textContent);
+        });
+      });
+    }
+
+    function resetOutputs() {
+      targetResultEl.textContent = "-";
+      normalizedInputEl.textContent = "标准化输入：-";
+      targetBadgeEl.textContent = "目标进制：" + toBaseEl.value;
+
+      for (let i = 2; i <= 36; i++) {
+        const valueEl = document.getElementById("base-value-" + i);
+        if (valueEl) valueEl.textContent = "-";
+      }
+
+      updateTargetHighlight(Number(toBaseEl.value));
+    }
+
+    function charToValue(char) {
+      const code = char.charCodeAt(0);
+      if (code >= 48 && code <= 57) return code - 48;
+      if (code >= 65 && code <= 90) return code - 55;
+      return -1;
+    }
+
+    function parseToBigInt(value, base) {
+      let text = String(value).trim().replace(/\s+/g, "").toUpperCase();
+      if (!text) throw new Error("请输入要换算的数值。");
+
+      let negative = false;
+      if (text.startsWith("-")) {
+        negative = true;
+        text = text.slice(1);
+      }
+
+      if (!text) throw new Error("请输入有效数值。");
+
+      const baseBig = BigInt(base);
+      let result = 0n;
+
+      for (const char of text) {
+        const digit = charToValue(char);
+        if (digit < 0 || digit >= base) {
+          throw new Error("当前输入包含不符合该进制的字符：" + char);
+        }
+        result = result * baseBig + BigInt(digit);
+      }
+
+      return {
+        normalized: (negative ? "-" : "") + text,
+        value: negative ? -result : result
+      };
+    }
+
+    function bigintToBase(value, base) {
+      if (base < 2 || base > 36) {
+        throw new Error("目标进制必须在 2 到 36 之间。");
+      }
+
+      if (value === 0n) return "0";
+
+      const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const negative = value < 0n;
+      let current = negative ? -value : value;
+      const baseBig = BigInt(base);
+      let result = "";
+
+      while (current > 0n) {
+        const remainder = current % baseBig;
+        result = chars[Number(remainder)] + result;
+        current = current / baseBig;
+      }
+
+      return negative ? "-" + result : result;
+    }
+
+    function updateTargetHighlight(base) {
+      for (let i = 2; i <= 36; i++) {
+        const itemEl = document.getElementById("base-item-" + i);
+        if (!itemEl) continue;
+        itemEl.classList.toggle("active", i === base);
+      }
+      targetBadgeEl.textContent = "目标进制：" + base;
+    }
+
+    function convertNow() {
+      const rawValue = inputValueEl.value;
+      const fromBase = Number(fromBaseEl.value);
+      const toBase = Number(toBaseEl.value);
+
+      updateTargetHighlight(toBase);
+
+      if (!rawValue.trim()) {
+        resetOutputs();
+        setStatus("请输入数值", "warning");
+        return;
+      }
+
+      try {
+        const parsed = parseToBigInt(rawValue, fromBase);
+        const targetText = bigintToBase(parsed.value, toBase);
+
+        normalizedInputEl.textContent = "标准化输入：" + parsed.normalized;
+        targetResultEl.textContent = targetText;
+        updateTargetHighlight(toBase);
+
+        for (let i = 2; i <= 36; i++) {
+          const valueEl = document.getElementById("base-value-" + i);
+          valueEl.textContent = bigintToBase(parsed.value, i);
+        }
+
+        setStatus("换算成功", "success");
+      } catch (error) {
+        resetOutputs();
+        setStatus(error.message, "error");
+      }
+    }
+
+    function scheduleConvert() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(convertNow, 120);
+    }
+
+    function swapBases() {
+      const from = fromBaseEl.value;
+      const to = toBaseEl.value;
+      fromBaseEl.value = to;
+      toBaseEl.value = from;
+      convertNow();
+    }
+
+    function clearAll() {
+      inputValueEl.value = "";
+      fromBaseEl.value = "10";
+      toBaseEl.value = "16";
+      resetOutputs();
+      setStatus("Ready");
+    }
+
+    async function copyText(text) {
+      if (!text || text === "-") {
+        setStatus("没有可复制内容", "warning");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("复制成功", "success");
+      } catch (error) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        setStatus("复制成功", "success");
+      }
+    }
+
+    inputValueEl.addEventListener("input", scheduleConvert);
+    fromBaseEl.addEventListener("change", convertNow);
+    toBaseEl.addEventListener("change", convertNow);
+    convertBtn.addEventListener("click", convertNow);
+    swapBtn.addEventListener("click", swapBases);
+    clearBtn.addEventListener("click", clearAll);
+    copyTargetBtn.addEventListener("click", function() {
+      copyText(targetResultEl.textContent);
+    });
+
+    inputValueEl.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        convertNow();
+      }
+    });
+
+    fillBaseOptions();
+    buildBaseGrid();
+    resetOutputs();
+    updateTargetHighlight(16);
+    setStatus("Ready");
+  </script>
+</body>
+</html>
