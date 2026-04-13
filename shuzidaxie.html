@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>数字大写转换工具 - 数字转中文大写与人民币大写 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供数字大写转换工具，支持阿拉伯数字转换为中文数字大写和人民币金额大写，支持实时转换、一键复制和清空重置。" />
+  <meta name="keywords" content="数字大写转换,人民币大写,在线金额大写,数字转中文大写,数字转大写,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/number-uppercase-converter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="数字大写转换工具 - 数字转中文大写与人民币大写 | 王先生工具" />
+  <meta property="og:description" content="支持阿拉伯数字转换为中文数字大写和人民币金额大写，支持实时转换、一键复制和清空重置。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/number-uppercase-converter.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="数字大写转换工具 - 数字转中文大写与人民币大写 | 王先生工具" />
+  <meta name="twitter:description" content="支持阿拉伯数字转换为中文数字大写和人民币金额大写，支持实时转换、一键复制和清空重置。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .status-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-chip.success {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background: #ecfdf5;
+    }
+
+    .status-chip.warning {
+      color: var(--warning);
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .status-chip.error {
+      color: var(--danger);
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .tool-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: #fcfcfd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-head h2 {
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .card-head p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .input {
+      font-family: var(--mono);
+      letter-spacing: 0.2px;
+    }
+
+    .input:focus,
+    .select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .hero-result {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      border: 1px solid #dbeafe;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .hero-result-left {
+      min-width: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero-value {
+      font-size: 28px;
+      line-height: 1.5;
+      font-weight: 700;
+      color: #1e293b;
+      word-break: break-all;
+    }
+
+    .hero-sub {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.8;
+      word-break: break-all;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .detail-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .detail-label {
+      font-size: 13px;
+      color: var(--sub);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .detail-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.7;
+      word-break: break-all;
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 980px) {
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-result {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar,
+      .tool-body,
+      .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .toolbar-right {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-value {
+        font-size: 22px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "数字大写转换工具",
+    "url": "https://gongju.wangxiansheng.com/number-uppercase-converter.html",
+    "description": "支持阿拉伯数字转换为中文数字大写和人民币金额大写的在线工具。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "数字大写转换工具",
+        "item": "https://gongju.wangxiansheng.com/number-uppercase-converter.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "数字大写转换工具",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/number-uppercase-converter.html",
+    "description": "支持数字大写和人民币金额大写转换，支持实时转换、一键复制和清空重置的在线工具。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    },
+    "featureList": [
+      "数字转中文大写",
+      "数字转人民币大写",
+      "支持小数与负数",
+      "实时转换",
+      "一键复制结果",
+      "示例填充"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">数字大写转换工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>数字大写转换工具</h1>
+      <p>
+        王先生工具提供简洁易用的数字大写转换页面，支持阿拉伯数字转中文数字大写与人民币金额大写，
+        适合财务、办公、合同填写、票据书写和日常金额处理场景快速使用。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="screen-reader-text">数字大写转换工具</h2>
+
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="toolbar-right">
+            <div id="statusChip" class="status-chip">Ready</div>
+            <button type="button" class="btn btn-primary" id="convertBtn">立即转换</button>
+            <button type="button" class="btn btn-light" id="copyBtn">复制结果</button>
+            <button type="button" class="btn btn-light" id="sampleBtn">填充示例</button>
+            <button type="button" class="btn btn-light" id="clearBtn">清空重置</button>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <section class="card" aria-labelledby="input-title">
+            <div class="card-head">
+              <div>
+                <h2 id="input-title">输入转换</h2>
+                <p>支持整数、小数、负数和千分位逗号输入。</p>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="inputValue">输入数字</label>
+                  <input id="inputValue" class="input" type="text" placeholder="例如：12345.67、-9800、1,234,567.89" aria-label="输入数字" />
+                  <div class="hint">会自动忽略英文逗号和空格。人民币模式最多保留两位小数。</div>
+                </div>
+
+                <div class="field">
+                  <label for="convertMode">转换模式</label>
+                  <select id="convertMode" class="select" aria-label="选择转换模式">
+                    <option value="upper">数字大写</option>
+                    <option value="rmb">人民币金额大写</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="hero-result">
+                <div class="hero-result-left">
+                  <div class="hero-badge" id="modeBadge">当前模式：数字大写</div>
+                  <div class="hero-value" id="resultValue">-</div>
+                  <div class="hero-sub" id="normalizedInput">标准化输入：-</div>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-primary" id="copyMainBtn">复制结果</button>
+                </div>
+              </div>
+
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">数字大写</div>
+                  <div class="detail-value" id="upperResult">-</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">人民币金额大写</div>
+                  <div class="detail-value" id="rmbResult">-</div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            这个在线数字大写转换工具适合将阿拉伯数字转换成中文大写数字和人民币金额大写。
+            常见于合同金额填写、票据书写、财务报销、收据开具和正式文档场景。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用方法</h2>
+          <ol>
+            <li>输入阿拉伯数字，可包含负号、小数点和千分位逗号。</li>
+            <li>选择“数字大写”或“人民币金额大写”模式。</li>
+            <li>系统会自动实时转换，也可以点击“立即转换”手动执行。</li>
+            <li>上方会突出显示当前模式结果，下方会同时显示两种结果。</li>
+          </ol>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary>数字大写和人民币大写有什么区别？</summary>
+            <div class="answer">
+              数字大写更适合普通数字表达，例如“壹万贰仟叁佰”；人民币大写会带上“元、角、分、整”等金额单位。
+            </div>
+          </details>
+
+          <details>
+            <summary>支持负数吗？</summary>
+            <div class="answer">
+              支持。负数会在结果前加“负”字，例如“负壹仟元整”。
+            </div>
+          </details>
+
+          <details>
+            <summary>人民币模式支持几位小数？</summary>
+            <div class="answer">
+              人民币大写通常只处理到分，也就是两位小数。超过两位会自动截取前两位进行转换。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <script>
+    const DIGITS = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+    const SMALL_UNITS = ["", "拾", "佰", "仟"];
+    const BIG_UNITS = ["", "万", "亿", "兆", "京"];
+
+    const yearEl = document.getElementById("year");
+    const statusChip = document.getElementById("statusChip");
+    const inputValueEl = document.getElementById("inputValue");
+    const convertModeEl = document.getElementById("convertMode");
+    const convertBtn = document.getElementById("convertBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const copyMainBtn = document.getElementById("copyMainBtn");
+    const sampleBtn = document.getElementById("sampleBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const modeBadgeEl = document.getElementById("modeBadge");
+    const resultValueEl = document.getElementById("resultValue");
+    const normalizedInputEl = document.getElementById("normalizedInput");
+    const upperResultEl = document.getElementById("upperResult");
+    const rmbResultEl = document.getElementById("rmbResult");
+
+    let debounceTimer = null;
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function setStatus(text, type) {
+      statusChip.textContent = text;
+      statusChip.className = "status-chip";
+      if (type) statusChip.classList.add(type);
+    }
+
+    function normalizeNumberInput(value) {
+      const text = String(value).trim().replace(/,/g, "").replace(/\s+/g, "");
+      if (!text) throw new Error("请输入数字。");
+      if (!/^-?\d+(\.\d+)?$/.test(text)) {
+        throw new Error("请输入有效数字。");
+      }
+      return text;
+    }
+
+    function splitIntegerToGroups(integerText) {
+      const groups = [];
+      for (let i = integerText.length; i > 0; i -= 4) {
+        groups.unshift(integerText.slice(Math.max(0, i - 4), i));
+      }
+      return groups;
+    }
+
+    function convertFourDigits(group) {
+      const padded = group.padStart(4, "0");
+      let result = "";
+      let zeroFlag = false;
+
+      for (let i = 0; i < 4; i++) {
+        const num = Number(padded[i]);
+        const unit = SMALL_UNITS[3 - i];
+
+        if (num === 0) {
+          zeroFlag = result !== "";
+        } else {
+          if (zeroFlag) {
+            result += DIGITS[0];
+            zeroFlag = false;
+          }
+          result += DIGITS[num] + unit;
+        }
+      }
+
+      return result;
+    }
+
+    function integerToUpper(integerText) {
+      integerText = integerText.replace(/^0+/, "") || "0";
+      if (integerText === "0") return DIGITS[0];
+
+      const groups = splitIntegerToGroups(integerText);
+      let result = "";
+
+      for (let i = 0; i < groups.length; i++) {
+        const group = groups[i];
+        const converted = convertFourDigits(group);
+        const unitIndex = groups.length - 1 - i;
+
+        if (converted) {
+          if (result && result.endsWith(DIGITS[0])) {
+            result = result.replace(/零+$/g, "");
+          }
+          result += converted + BIG_UNITS[unitIndex];
+        } else {
+          if (result && !result.endsWith(DIGITS[0])) {
+            result += DIGITS[0];
+          }
+        }
+
+        const currentNum = parseInt(group, 10);
+        const nextGroup = groups[i + 1];
+        if (currentNum > 0 && currentNum < 1000 && nextGroup && parseInt(nextGroup, 10) > 0) {
+          if (!result.endsWith(DIGITS[0])) {
+            result += DIGITS[0];
+          }
+        }
+      }
+
+      result = result.replace(/零+/g, "零");
+      result = result.replace(/零(万|亿|兆|京)/g, "$1");
+      result = result.replace(/亿万/g, "亿");
+      result = result.replace(/兆亿/g, "兆");
+      result = result.replace(/零+$/g, "");
+
+      return result;
+    }
+
+    function numberToUpperText(normalized) {
+      const negative = normalized.startsWith("-");
+      const raw = negative ? normalized.slice(1) : normalized;
+      const parts = raw.split(".");
+      const intPart = parts[0] || "0";
+      const decPart = parts[1] || "";
+
+      let result = integerToUpper(intPart);
+
+      if (decPart) {
+        const decText = decPart.split("").map(function(n) {
+          return DIGITS[Number(n)];
+        }).join("");
+        result += "点" + decText;
+      }
+
+      return negative ? "负" + result : result;
+    }
+
+    function amountToRMB(normalized) {
+      const negative = normalized.startsWith("-");
+      const raw = negative ? normalized.slice(1) : normalized;
+      const parts = raw.split(".");
+      const intPart = (parts[0] || "0").replace(/^0+/, "") || "0";
+      const decRaw = (parts[1] || "").padEnd(2, "0").slice(0, 2);
+
+      let result = integerToUpper(intPart) + "元";
+
+      const jiao = Number(decRaw[0] || 0);
+      const fen = Number(decRaw[1] || 0);
+
+      if (jiao === 0 && fen === 0) {
+        result += "整";
+      } else {
+        if (jiao > 0) {
+          result += DIGITS[jiao] + "角";
+        } else if (fen > 0) {
+          result += "零";
+        }
+
+        if (fen > 0) {
+          result += DIGITS[fen] + "分";
+        }
+      }
+
+      result = result.replace(/零+/g, "零");
+      result = result.replace(/零元整/g, "零元整");
+      result = result.replace(/零分$/g, "");
+      result = result.replace(/零角零分$/g, "整");
+
+      return negative ? "负" + result : result;
+    }
+
+    function updateModeBadge() {
+      const mode = convertModeEl.value;
+      modeBadgeEl.textContent = mode === "upper" ? "当前模式：数字大写" : "当前模式：人民币金额大写";
+    }
+
+    function resetOutputs() {
+      updateModeBadge();
+      resultValueEl.textContent = "-";
+      normalizedInputEl.textContent = "标准化输入：-";
+      upperResultEl.textContent = "-";
+      rmbResultEl.textContent = "-";
+    }
+
+    function convertNow() {
+      updateModeBadge();
+
+      if (!inputValueEl.value.trim()) {
+        resetOutputs();
+        setStatus("请输入数字", "warning");
+        return;
+      }
+
+      try {
+        const normalized = normalizeNumberInput(inputValueEl.value);
+        const upperText = numberToUpperText(normalized);
+        const rmbText = amountToRMB(normalized);
+        const currentMode = convertModeEl.value;
+
+        normalizedInputEl.textContent = "标准化输入：" + normalized;
+        upperResultEl.textContent = upperText;
+        rmbResultEl.textContent = rmbText;
+        resultValueEl.textContent = currentMode === "upper" ? upperText : rmbText;
+
+        setStatus("转换成功", "success");
+      } catch (error) {
+        resetOutputs();
+        setStatus(error.message, "error");
+      }
+    }
+
+    function scheduleConvert() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(convertNow, 120);
+    }
+
+    async function copyText(text) {
+      if (!text || text === "-") {
+        setStatus("没有可复制内容", "warning");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("复制成功", "success");
+      } catch (error) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        setStatus("复制成功", "success");
+      }
+    }
+
+    function clearAll() {
+      inputValueEl.value = "";
+      convertModeEl.value = "upper";
+      resetOutputs();
+      setStatus("Ready");
+    }
+
+    function fillSample() {
+      inputValueEl.value = "12345.67";
+      convertModeEl.value = "rmb";
+      convertNow();
+      setStatus("已填充示例", "success");
+    }
+
+    inputValueEl.addEventListener("input", scheduleConvert);
+    convertModeEl.addEventListener("change", convertNow);
+    convertBtn.addEventListener("click", convertNow);
+    copyBtn.addEventListener("click", function() {
+      copyText(convertModeEl.value === "upper" ? upperResultEl.textContent : rmbResultEl.textContent);
+    });
+    copyMainBtn.addEventListener("click", function() {
+      copyText(resultValueEl.textContent);
+    });
+    sampleBtn.addEventListener("click", fillSample);
+    clearBtn.addEventListener("click", clearAll);
+
+    inputValueEl.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        convertNow();
+      }
+    });
+
+    resetOutputs();
+    setStatus("Ready");
+  </script>
+</body>
+</html>
