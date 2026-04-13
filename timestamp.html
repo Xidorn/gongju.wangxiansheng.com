@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>时间戳转换工具 - Unix Timestamp 在线转换 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供时间戳在线转换工具，支持 Unix 时间戳秒和毫秒与日期时间互相转换，支持一键清空、复制结果和当前时间快速填充。" />
+  <meta name="keywords" content="时间戳转换,Unix timestamp,在线时间戳转换,秒时间戳,毫秒时间戳,日期转时间戳,时间戳转日期,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/timestamp-converter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="时间戳转换工具 - Unix Timestamp 在线转换 | 王先生工具" />
+  <meta property="og:description" content="支持 Unix 时间戳秒和毫秒与日期时间互相转换，支持清空、复制结果和当前时间快速填充。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/timestamp-converter.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="时间戳转换工具 - Unix Timestamp 在线转换 | 王先生工具" />
+  <meta name="twitter:description" content="支持 Unix 时间戳秒和毫秒与日期时间互相转换，支持清空、复制结果和当前时间快速填充。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .status-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-chip.success {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background: #ecfdf5;
+    }
+
+    .status-chip.warning {
+      color: var(--warning);
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .status-chip.error {
+      color: var(--danger);
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .tool-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .card-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: #fcfcfd;
+    }
+
+    .card-head h2 {
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+
+    .card-head p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .input:focus,
+    .select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .result-box {
+      min-height: 64px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #f8fafc;
+      padding: 14px 16px;
+      font-size: 14px;
+      line-height: 1.9;
+      color: #334155;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar,
+      .tool-body,
+      .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .toolbar-right,
+      .btn-group {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "时间戳转换工具",
+    "url": "https://gongju.wangxiansheng.com/timestamp-converter.html",
+    "description": "支持 Unix 时间戳秒和毫秒与日期时间互相转换的在线工具。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "时间戳转换工具",
+        "item": "https://gongju.wangxiansheng.com/timestamp-converter.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "时间戳转换工具",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/timestamp-converter.html",
+    "description": "支持 Unix 时间戳秒和毫秒与日期时间互相转换、复制结果和当前时间快速填充的在线工具。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    },
+    "featureList": [
+      "秒级时间戳转换",
+      "毫秒级时间戳转换",
+      "时间戳转日期时间",
+      "日期时间转时间戳",
+      "当前时间快速填充",
+      "一键复制结果"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">时间戳转换工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>时间戳转换工具</h1>
+      <p>
+        王先生工具提供简洁易用的 Unix 时间戳在线转换页面，支持秒和毫秒两种时间戳与日期时间互相转换，
+        适合开发、测试、日志分析、接口调试和日常办公场景快速使用。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="screen-reader-text">时间戳转换工具</h2>
+
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="toolbar-right">
+            <div id="statusChip" class="status-chip">Ready</div>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <section class="card" aria-labelledby="ts-card-title">
+            <div class="card-head">
+              <h2 id="ts-card-title">时间戳转换为日期时间</h2>
+              <p>支持秒和毫秒两种 Unix 时间戳格式。</p>
+            </div>
+
+            <div class="card-body">
+              <div class="field">
+                <label for="ts-type">选择时间戳类型</label>
+                <select id="ts-type" class="select" aria-describedby="ts-type-desc">
+                  <option value="sec">秒 (Unix timestamp in seconds)</option>
+                  <option value="ms">毫秒 (Unix timestamp in milliseconds)</option>
+                </select>
+                <div id="ts-type-desc" class="screen-reader-text">选择输入和输出的时间戳单位，秒或毫秒。</div>
+              </div>
+
+              <div class="field">
+                <label for="ts-input">输入时间戳（秒或毫秒）</label>
+                <input type="number" id="ts-input" class="input" placeholder="请输入时间戳" aria-label="输入时间戳">
+                <div class="hint">可输入 10 位秒级时间戳或 13 位毫秒级时间戳，也可手动切换上方类型。</div>
+              </div>
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary" id="ts-to-date-btn" aria-live="polite" aria-atomic="true">转换为日期时间</button>
+                <button type="button" class="btn btn-light" id="fill-now-ts-btn">填入当前时间戳</button>
+                <button type="button" class="btn btn-light" id="copy-date-result-btn">复制结果</button>
+                <button type="button" class="btn btn-light" id="clear-ts-btn">清空时间戳输入</button>
+              </div>
+
+              <div class="result-box timestamp-converter-result" id="ts-date-result" aria-live="polite" aria-atomic="true">等待输入时间戳并点击转换...</div>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="date-card-title">
+            <div class="card-head">
+              <h2 id="date-card-title">日期时间转换为时间戳</h2>
+              <p>可选择输出秒级或毫秒级时间戳。</p>
+            </div>
+
+            <div class="card-body">
+              <div class="field">
+                <label for="date-input">输入日期时间</label>
+                <input type="datetime-local" id="date-input" class="input" aria-label="输入日期时间" step="0.001">
+                <div class="hint">输入的是本地时间，转换结果会按本地所选日期时间生成对应 Unix 时间戳。</div>
+              </div>
+
+              <div class="field">
+                <label for="ts-output-type">选择输出时间戳类型</label>
+                <select id="ts-output-type" class="select" aria-describedby="ts-output-type-desc">
+                  <option value="sec">秒 (Unix timestamp in seconds)</option>
+                  <option value="ms">毫秒 (Unix timestamp in milliseconds)</option>
+                </select>
+                <div id="ts-output-type-desc" class="screen-reader-text">选择日期时间转换成的时间戳单位，秒或毫秒。</div>
+              </div>
+
+              <div class="btn-group">
+                <button type="button" class="btn btn-primary" id="date-to-ts-btn" aria-live="polite" aria-atomic="true">转换为时间戳</button>
+                <button type="button" class="btn btn-light" id="fill-now-date-btn">填入当前日期时间</button>
+                <button type="button" class="btn btn-light" id="copy-ts-result-btn">复制结果</button>
+                <button type="button" class="btn btn-light" id="clear-date-btn">清空日期时间输入</button>
+              </div>
+
+              <div class="result-box timestamp-converter-result" id="ts-output-result" aria-live="polite" aria-atomic="true">等待输入日期时间并点击转换...</div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            时间戳是开发和数据处理中常见的时间表示方式，尤其在接口传参、日志排查、数据库存储和系统调试中非常常见。
+            这个工具支持 Unix 时间戳秒和毫秒与日期时间之间的快速双向转换。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用方法</h2>
+          <ol>
+            <li>输入秒级或毫秒级时间戳，选择类型后可转换为日期时间。</li>
+            <li>输入日期时间并选择输出类型后，可转换为秒级或毫秒级时间戳。</li>
+            <li>支持一键填入当前日期时间或当前时间戳。</li>
+            <li>支持复制转换结果，方便开发、测试或记录使用。</li>
+          </ol>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary>秒和毫秒时间戳有什么区别？</summary>
+            <div class="answer">
+              秒级时间戳通常为 10 位，例如 1710000000；毫秒级时间戳通常为 13 位，例如 1710000000000。
+            </div>
+          </details>
+
+          <details>
+            <summary>datetime-local 输入的是什么时间？</summary>
+            <div class="answer">
+              datetime-local 输入的是你当前设备本地时间，不带时区文本显示，转换时会按本地时间解释。
+            </div>
+          </details>
+
+          <details>
+            <summary>这个工具适合哪些场景？</summary>
+            <div class="answer">
+              常见于接口调试、日志排查、开发测试、数据库字段查看、前后端联调和日常时间换算。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    const statusChip = document.getElementById("statusChip");
+
+    const tsTypeEl = document.getElementById("ts-type");
+    const tsInputEl = document.getElementById("ts-input");
+    const tsDateResultEl = document.getElementById("ts-date-result");
+
+    const dateInputEl = document.getElementById("date-input");
+    const tsOutputTypeEl = document.getElementById("ts-output-type");
+    const tsOutputResultEl = document.getElementById("ts-output-result");
+
+    const tsToDateBtn = document.getElementById("ts-to-date-btn");
+    const clearTsBtn = document.getElementById("clear-ts-btn");
+    const fillNowTsBtn = document.getElementById("fill-now-ts-btn");
+    const copyDateResultBtn = document.getElementById("copy-date-result-btn");
+
+    const dateToTsBtn = document.getElementById("date-to-ts-btn");
+    const clearDateBtn = document.getElementById("clear-date-btn");
+    const fillNowDateBtn = document.getElementById("fill-now-date-btn");
+    const copyTsResultBtn = document.getElementById("copy-ts-result-btn");
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function setStatus(text, type) {
+      statusChip.textContent = text;
+      statusChip.className = "status-chip";
+      if (type) {
+        statusChip.classList.add(type);
+      }
+    }
+
+    function pad(num, len = 2) {
+      return String(num).padStart(len, "0");
+    }
+
+    function formatDateForDisplay(date) {
+      const yyyy = date.getFullYear();
+      const mm = pad(date.getMonth() + 1);
+      const dd = pad(date.getDate());
+      const hh = pad(date.getHours());
+      const mi = pad(date.getMinutes());
+      const ss = pad(date.getSeconds());
+      const ms = pad(date.getMilliseconds(), 3);
+
+      return `${yyyy}-${mm}-${dd} ${hh}:${mi}:${ss}.${ms}`;
+    }
+
+    function formatDateForInput(date) {
+      const yyyy = date.getFullYear();
+      const mm = pad(date.getMonth() + 1);
+      const dd = pad(date.getDate());
+      const hh = pad(date.getHours());
+      const mi = pad(date.getMinutes());
+      const ss = pad(date.getSeconds());
+      const ms = pad(date.getMilliseconds(), 3);
+
+      return `${yyyy}-${mm}-${dd}T${hh}:${mi}:${ss}.${ms}`;
+    }
+
+    function convertTimestampToDate() {
+      const raw = tsInputEl.value.trim();
+      const type = tsTypeEl.value;
+
+      if (!raw) {
+        tsDateResultEl.textContent = "请输入时间戳后再转换。";
+        setStatus("请输入时间戳", "warning");
+        return;
+      }
+
+      let tsNumber = Number(raw);
+
+      if (!Number.isFinite(tsNumber)) {
+        tsDateResultEl.textContent = "输入的时间戳无效，请检查后重试。";
+        setStatus("时间戳无效", "error");
+        return;
+      }
+
+      if (type === "sec") {
+        tsNumber = tsNumber * 1000;
+      }
+
+      const date = new Date(tsNumber);
+
+      if (Number.isNaN(date.getTime())) {
+        tsDateResultEl.textContent = "无法解析该时间戳，请确认输入格式。";
+        setStatus("解析失败", "error");
+        return;
+      }
+
+      const localText = formatDateForDisplay(date);
+      const isoText = date.toISOString();
+
+      tsDateResultEl.textContent =
+`本地时间：${localText}
+ISO 时间：${isoText}
+毫秒时间戳：${date.getTime()}
+秒级时间戳：${Math.floor(date.getTime() / 1000)}`;
+
+      setStatus("时间戳转换成功", "success");
+    }
+
+    function convertDateToTimestamp() {
+      const raw = dateInputEl.value;
+      const type = tsOutputTypeEl.value;
+
+      if (!raw) {
+        tsOutputResultEl.textContent = "请输入日期时间后再转换。";
+        setStatus("请输入日期时间", "warning");
+        return;
+      }
+
+      const date = new Date(raw);
+
+      if (Number.isNaN(date.getTime())) {
+        tsOutputResultEl.textContent = "输入的日期时间无效，请检查后重试。";
+        setStatus("日期时间无效", "error");
+        return;
+      }
+
+      const ms = date.getTime();
+      const sec = Math.floor(ms / 1000);
+      const finalValue = type === "sec" ? sec : ms;
+
+      tsOutputResultEl.textContent =
+`转换结果：${finalValue}
+本地时间：${formatDateForDisplay(date)}
+ISO 时间：${date.toISOString()}`;
+
+      setStatus("日期时间转换成功", "success");
+    }
+
+    function fillCurrentTimestamp() {
+      const now = Date.now();
+      tsInputEl.value = tsTypeEl.value === "sec" ? Math.floor(now / 1000) : now;
+      convertTimestampToDate();
+    }
+
+    function fillCurrentDateTime() {
+      dateInputEl.value = formatDateForInput(new Date());
+      convertDateToTimestamp();
+    }
+
+    function clearTimestampInput() {
+      tsInputEl.value = "";
+      tsDateResultEl.textContent = "等待输入时间戳并点击转换...";
+      setStatus("Ready");
+    }
+
+    function clearDateInput() {
+      dateInputEl.value = "";
+      tsOutputResultEl.textContent = "等待输入日期时间并点击转换...";
+      setStatus("Ready");
+    }
+
+    async function copyText(text) {
+      if (!text || !text.trim()) {
+        setStatus("没有可复制内容", "warning");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("复制成功", "success");
+      } catch (error) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        setStatus("复制成功", "success");
+      }
+    }
+
+    tsToDateBtn.addEventListener("click", convertTimestampToDate);
+    clearTsBtn.addEventListener("click", clearTimestampInput);
+    fillNowTsBtn.addEventListener("click", fillCurrentTimestamp);
+    copyDateResultBtn.addEventListener("click", function () {
+      copyText(tsDateResultEl.textContent);
+    });
+
+    dateToTsBtn.addEventListener("click", convertDateToTimestamp);
+    clearDateBtn.addEventListener("click", clearDateInput);
+    fillNowDateBtn.addEventListener("click", fillCurrentDateTime);
+    copyTsResultBtn.addEventListener("click", function () {
+      copyText(tsOutputResultEl.textContent);
+    });
+
+    tsTypeEl.addEventListener("change", function () {
+      if (tsInputEl.value.trim()) {
+        convertTimestampToDate();
+      }
+    });
+
+    tsOutputTypeEl.addEventListener("change", function () {
+      if (dateInputEl.value) {
+        convertDateToTimestamp();
+      }
+    });
+
+    tsInputEl.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        convertTimestampToDate();
+      }
+    });
+
+    dateInputEl.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        convertDateToTimestamp();
+      }
+    });
+
+    setStatus("Ready");
+  </script>
+</body>
+</html>
