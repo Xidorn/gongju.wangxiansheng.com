@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>科学计算器 - 在线计算器与函数计算 | 王先生工具</title>
-  <meta name="description" content="王先生工具提供在线科学计算器，支持加减乘除、括号、幂运算、三角函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式。" />
-  <meta name="keywords" content="科学计算器,在线计算器,三角函数计算器,幂运算,对数计算器,开方计算器,王先生工具" />
+  <meta name="description" content="王先生工具提供在线科学计算器，支持加减乘除、括号、幂运算、三角函数、双曲函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式。" />
+  <meta name="keywords" content="科学计算器,在线计算器,三角函数计算器,双曲函数计算器,幂运算,对数计算器,开方计算器,王先生工具" />
   <meta name="author" content="王先生工具" />
   <meta name="application-name" content="王先生工具" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -20,12 +20,12 @@
   <meta property="og:locale" content="zh_CN" />
   <meta property="og:site_name" content="王先生工具" />
   <meta property="og:title" content="科学计算器 - 在线计算器与函数计算 | 王先生工具" />
-  <meta property="og:description" content="支持基础运算、三角函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式。" />
+  <meta property="og:description" content="支持基础运算、三角函数、双曲函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式。" />
   <meta property="og:url" content="https://gongju.wangxiansheng.com/jisuanqi.html" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="科学计算器 - 在线计算器与函数计算 | 王先生工具" />
-  <meta name="twitter:description" content="支持基础运算、三角函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式。" />
+  <meta name="twitter:description" content="支持基础运算、三角函数、双曲函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式。" />
 
   <style>
     :root {
@@ -69,7 +69,7 @@
     }
 
     .page {
-      width: min(1180px, 100%);
+      width: min(1220px, 100%);
       margin: 0 auto;
     }
 
@@ -110,7 +110,7 @@
     }
 
     .topbar p {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
       font-size: 14px;
       line-height: 1.9;
@@ -346,17 +346,17 @@
 
     .keypad {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 12px;
     }
 
     .key {
-      min-height: 52px;
+      min-height: 50px;
       border: none;
       border-radius: 14px;
       background: #f8fafc;
       color: #1f2937;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       transition: 0.2s ease;
@@ -398,7 +398,7 @@
     .history-list {
       display: grid;
       gap: 10px;
-      max-height: 560px;
+      max-height: 700px;
       overflow: auto;
     }
 
@@ -598,7 +598,7 @@
     "@type": "WebPage",
     "name": "科学计算器",
     "url": "https://gongju.wangxiansheng.com/jisuanqi.html",
-    "description": "支持基础运算、三角函数、对数、开方、阶乘、常量 π 和 e 的在线科学计算器。",
+    "description": "支持基础运算、三角函数、双曲函数、对数、开方、阶乘、常量 π 和 e 的在线科学计算器。",
     "isPartOf": {
       "@type": "WebSite",
       "name": "王先生工具",
@@ -642,7 +642,7 @@
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Web",
     "url": "https://gongju.wangxiansheng.com/jisuanqi.html",
-    "description": "支持基础运算、三角函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式的在线科学计算器。",
+    "description": "支持基础运算、三角函数、双曲函数、对数、开方、阶乘、常量 π 和 e，支持角度与弧度模式的在线科学计算器。",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -656,6 +656,7 @@
     "featureList": [
       "基础四则运算",
       "三角函数计算",
+      "双曲函数计算",
       "对数与自然对数",
       "幂运算与开方",
       "阶乘计算",
@@ -677,8 +678,8 @@
     <header class="topbar">
       <h1>科学计算器</h1>
       <p>
-        王先生工具提供简洁易用的在线科学计算器，支持基础四则运算、括号、幂运算、三角函数、对数、开方、
-        阶乘、π 和 e 常量，适合学习、开发、工程和日常计算场景快速使用。
+        王先生工具提供简洁易用的在线科学计算器，支持基础四则运算、括号、幂运算、三角函数、双曲函数、
+        对数、开方、阶乘、π 和 e 常量，适合学习、开发、工程和日常计算场景快速使用。
       </p>
     </header>
 
@@ -744,45 +745,53 @@
                 <button class="key operator" data-value="(">(</button>
                 <button class="key operator" data-value=")">)</button>
                 <button class="key operator" data-value="%">%</button>
+                <button class="key operator" data-value="Ans">Ans</button>
 
                 <button class="key operator" data-value="sin(">sin</button>
                 <button class="key operator" data-value="cos(">cos</button>
                 <button class="key operator" data-value="tan(">tan</button>
                 <button class="key operator" data-value="asin(">asin</button>
                 <button class="key operator" data-value="acos(">acos</button>
-
                 <button class="key operator" data-value="atan(">atan</button>
+
+                <button class="key operator" data-value="sinh(">sinh</button>
+                <button class="key operator" data-value="cosh(">cosh</button>
+                <button class="key operator" data-value="tanh(">tanh</button>
                 <button class="key operator" data-value="log(">log</button>
                 <button class="key operator" data-value="ln(">ln</button>
+                <button class="key operator" data-value="exp(">exp</button>
+
                 <button class="key operator" data-value="sqrt(">√</button>
                 <button class="key operator" data-value="abs(">abs</button>
+                <button class="key operator" data-value="sq(">x²</button>
+                <button class="key operator" data-value="inv(">1/x</button>
+                <button class="key operator" data-value="tenpow(">10^x</button>
+                <button class="key operator" data-value="rand()">rand</button>
 
                 <button class="key operator" data-value="^">xʸ</button>
                 <button class="key operator" data-value="!">n!</button>
                 <button class="key operator" data-value="pi">π</button>
                 <button class="key operator" data-value="e">e</button>
+                <button class="key operator" data-value=" mod ">mod</button>
                 <button class="key operator" data-value="/">÷</button>
 
                 <button class="key" data-value="7">7</button>
                 <button class="key" data-value="8">8</button>
                 <button class="key" data-value="9">9</button>
                 <button class="key operator" data-value="*">×</button>
-                <button class="key operator" data-value="exp(">exp</button>
+                <button class="key operator" data-value="-">−</button>
+                <button class="key equal" data-value="=">=</button>
 
                 <button class="key" data-value="4">4</button>
                 <button class="key" data-value="5">5</button>
                 <button class="key" data-value="6">6</button>
-                <button class="key operator" data-value="-">−</button>
-                <button class="key equal" data-value="=">=</button>
+                <button class="key operator" data-value="+">+</button>
+                <button class="key" data-value=".">.</button>
+                <button class="key" data-value="0">0</button>
 
                 <button class="key" data-value="1">1</button>
                 <button class="key" data-value="2">2</button>
                 <button class="key" data-value="3">3</button>
-                <button class="key operator" data-value="+">+</button>
-                <button class="key operator" data-value="Ans">Ans</button>
-
-                <button class="key" data-value="0">0</button>
-                <button class="key" data-value=".">.</button>
               </div>
             </div>
           </section>
@@ -807,7 +816,7 @@
           <h2 id="intro-title">工具介绍</h2>
           <p>
             这个在线科学计算器适合处理基础运算和常见函数计算。支持角度模式切换、括号优先级、幂运算、
-            阶乘、对数、自然对数、三角函数及反三角函数，适合数学学习、工程计算和日常公式计算。
+            阶乘、对数、自然对数、三角函数、双曲函数及反三角函数，适合数学学习、工程计算和日常公式计算。
           </p>
         </section>
 
@@ -815,11 +824,11 @@
           <h2 id="usage-title">使用说明</h2>
           <ol>
             <li>在表达式框中直接输入公式，或点击下面的按钮拼出表达式。</li>
-            <li>如果你要计算三角函数，先确认上方模式是 <code>DEG</code> 还是 <code>RAD</code>。</li>
+            <li>如果要计算三角函数，先确认上方模式是 <code>DEG</code> 还是 <code>RAD</code>。</li>
             <li>输入完成后，按键盘 <code>Enter</code> 或点击“计算”。</li>
             <li>结果会显示在屏幕区域，并自动加入右侧历史记录。</li>
             <li>点击历史记录中的任意一条，可以把那条表达式重新放回输入框。</li>
-            <li><code>Ans</code> 表示“上一次计算结果”，例如你先算出 8，再输入 <code>Ans*2</code>，结果就是 16。</li>
+            <li><code>Ans</code> 表示“上一次计算结果”，例如先算出 8，再输入 <code>Ans*2</code>，结果就是 16。</li>
           </ol>
 
           <h3>输入示例</h3>
@@ -828,10 +837,16 @@
             <li><code>(1+2)*3</code>：括号优先</li>
             <li><code>2^8</code>：2 的 8 次方</li>
             <li><code>sqrt(16)</code>：平方根</li>
+            <li><code>sq(5)</code>：平方，结果 25</li>
+            <li><code>inv(4)</code>：倒数，结果 0.25</li>
+            <li><code>10 mod 3</code>：取余，结果 1</li>
+            <li><code>tenpow(3)</code>：10 的 3 次方，结果 1000</li>
+            <li><code>rand()</code>：生成 0 到 1 之间的随机数</li>
             <li><code>log(100)</code>：以 10 为底的对数，结果 2</li>
             <li><code>ln(e)</code>：自然对数，结果 1</li>
             <li><code>sin(30)</code>：在角度模式下结果 0.5</li>
             <li><code>cos(pi/3)</code>：在弧度模式下结果 0.5</li>
+            <li><code>sinh(1)</code>、<code>cosh(1)</code>、<code>tanh(1)</code>：双曲函数</li>
             <li><code>5!</code>：阶乘，结果 120</li>
             <li><code>abs(-12.5)</code>：绝对值</li>
             <li><code>exp(1)</code>：e 的 1 次方，也就是 e</li>
@@ -849,16 +864,22 @@
             <li><code>()</code>：括号，控制运算优先级</li>
             <li><code>^</code>：幂运算，例如 <code>2^3</code> 表示 2 的 3 次方</li>
             <li><code>%</code>：百分号，目前用于数字后面时按“除以 100”处理，例如 <code>50%</code> = 0.5</li>
+            <li><code>mod</code>：取余，例如 <code>10 mod 3</code> = 1</li>
             <li><code>π</code> 或 <code>pi</code>：圆周率 3.1415926...</li>
             <li><code>e</code>：自然常数 2.7182818...</li>
             <li><code>Ans</code>：上一次计算结果</li>
             <li><code>sqrt(x)</code>：平方根</li>
             <li><code>abs(x)</code>：绝对值</li>
+            <li><code>sq(x)</code>：平方，等于 x²</li>
+            <li><code>inv(x)</code>：倒数，等于 1/x</li>
+            <li><code>tenpow(x)</code>：10 的 x 次方</li>
+            <li><code>rand()</code>：随机数函数，返回 0 到 1 之间的随机值</li>
             <li><code>log(x)</code>：常用对数，也就是以 10 为底</li>
             <li><code>ln(x)</code>：自然对数，也就是以 e 为底</li>
             <li><code>exp(x)</code>：e 的 x 次方</li>
             <li><code>sin(x)</code>、<code>cos(x)</code>、<code>tan(x)</code>：三角函数</li>
             <li><code>asin(x)</code>、<code>acos(x)</code>、<code>atan(x)</code>：反三角函数</li>
+            <li><code>sinh(x)</code>、<code>cosh(x)</code>、<code>tanh(x)</code>：双曲函数</li>
             <li><code>n!</code>：阶乘，例如 <code>5!</code> = 120</li>
           </ul>
 
@@ -903,10 +924,10 @@
           </details>
 
           <details>
-            <summary>百分号怎么计算？</summary>
+            <summary>百分号和 mod 有什么区别？</summary>
             <div class="answer">
-              当前页面里，像 <code>50%</code> 这样的写法会按 <code>50 ÷ 100</code> 处理，也就是 0.5。
-              这个规则适合普通百分数输入。
+              <code>%</code> 在这个页面里表示百分号，例如 <code>50%</code> = 0.5。  
+              <code>mod</code> 表示取余，例如 <code>10 mod 3</code> = 1。
             </div>
           </details>
         </section>
@@ -993,6 +1014,7 @@
       e = e.replace(/\bAns\b/g, String(lastAnswer));
       e = e.replace(/\bpi\b/gi, "PI");
       e = e.replace(/\be\b/g, "EULER");
+      e = e.replace(/\bmod\b/gi, "%");
       e = e.replace(/\^/g, "**");
       e = normalizePercent(e);
       e = normalizeFactorial(e);
@@ -1018,18 +1040,21 @@
         asin: (x) => fromRadians(Math.asin(x)),
         acos: (x) => fromRadians(Math.acos(x)),
         atan: (x) => fromRadians(Math.atan(x)),
+        sinh: (x) => Math.sinh(x),
+        cosh: (x) => Math.cosh(x),
+        tanh: (x) => Math.tanh(x),
         log: (x) => Math.log10(x),
         ln: (x) => Math.log(x),
         sqrt: (x) => Math.sqrt(x),
         abs: (x) => Math.abs(x),
-        exp: (x) => Math.exp(x)
+        exp: (x) => Math.exp(x),
+        sq: (x) => x * x,
+        inv: (x) => 1 / x,
+        tenpow: (x) => Math.pow(10, x),
+        rand: () => Math.random()
       };
 
-      const fn = new Function(
-        "scope",
-        `with (scope) { return (${expr}); }`
-      );
-
+      const fn = new Function("scope", `with (scope) { return (${expr}); }`);
       const value = fn(scope);
       const formatted = formatResult(value);
 
@@ -1043,7 +1068,7 @@
 
     function addHistory(exp, res) {
       historyStore.unshift({ exp, res });
-      historyStore = historyStore.slice(0, 12);
+      historyStore = historyStore.slice(0, 20);
       renderHistory();
     }
 
