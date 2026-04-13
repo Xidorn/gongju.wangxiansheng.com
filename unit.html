@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>单位换算工具 - 长度质量面积体积温度汇率等在线转换 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供在线单位换算工具，支持长度、质量、面积、体积、能量、速度、温度、时间、存储、角度、电压、电流以及汇率换算，支持实时转换、一键复制和清空重置。" />
+  <meta name="keywords" content="单位换算,单位转换,长度换算,质量换算,面积换算,温度换算,汇率换算,在线换算工具,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/unit-converter.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="单位换算工具 - 长度质量面积体积温度汇率等在线转换 | 王先生工具" />
+  <meta property="og:description" content="支持长度、质量、面积、体积、能量、速度、温度、时间、存储、角度、电压、电流以及汇率换算，支持实时转换、一键复制和清空重置。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/unit-converter.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="单位换算工具 - 长度质量面积体积温度汇率等在线转换 | 王先生工具" />
+  <meta name="twitter:description" content="支持长度、质量、面积、体积、能量、速度、温度、时间、存储、角度、电压、电流以及汇率换算，支持实时转换、一键复制和清空重置。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .status-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-chip.success {
+      color: var(--success);
+      border-color: #bbf7d0;
+      background: #ecfdf5;
+    }
+
+    .status-chip.warning {
+      color: var(--warning);
+      border-color: #fde68a;
+      background: #fffbeb;
+    }
+
+    .status-chip.error {
+      color: var(--danger);
+      border-color: #fecaca;
+      background: #fef2f2;
+    }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn-light:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .tool-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: #fcfcfd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-head h2 {
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .card-head p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr 220px 220px;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .input {
+      font-family: var(--mono);
+      letter-spacing: 0.2px;
+    }
+
+    .input:focus,
+    .select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .hero-result {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      border: 1px solid #dbeafe;
+      background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .hero-result-left {
+      min-width: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero-value {
+      font-family: var(--mono);
+      font-size: 28px;
+      line-height: 1.4;
+      font-weight: 700;
+      color: #1e293b;
+      word-break: break-all;
+    }
+
+    .hero-sub {
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.8;
+      word-break: break-all;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .detail-item {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    .detail-label {
+      font-size: 13px;
+      color: var(--sub);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .detail-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.7;
+      word-break: break-all;
+      font-family: var(--mono);
+    }
+
+    .currency-meta {
+      display: none;
+      margin-top: 16px;
+      border: 1px solid #e0f2fe;
+      background: #f8fdff;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .currency-meta.show {
+      display: block;
+    }
+
+    .currency-meta h3 {
+      font-size: 15px;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .currency-meta p {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.8;
+      word-break: break-all;
+    }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 1100px) {
+      .field-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .field-grid,
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-result {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar,
+      .tool-body,
+      .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .toolbar-right {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-value {
+        font-size: 22px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "单位换算工具",
+    "url": "https://gongju.wangxiansheng.com/unit-converter.html",
+    "description": "支持长度、质量、面积、体积、能量、速度、温度、时间、存储、角度、电压、电流以及汇率换算的在线工具。",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "王先生",
+        "item": "https://www.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "王先生工具",
+        "item": "https://gongju.wangxiansheng.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "单位换算工具",
+        "item": "https://gongju.wangxiansheng.com/unit-converter.html"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "单位换算工具",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://gongju.wangxiansheng.com/unit-converter.html",
+    "description": "支持长度、质量、面积、体积、能量、速度、温度、时间、存储、角度、电压、电流以及汇率换算，支持实时转换、一键复制和清空重置的在线工具。",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "王先生工具",
+      "url": "https://gongju.wangxiansheng.com/"
+    },
+    "featureList": [
+      "长度换算",
+      "质量换算",
+      "面积换算",
+      "温度换算",
+      "存储换算",
+      "汇率换算"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">单位换算工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>单位换算工具</h1>
+      <p>
+        王先生工具提供简洁易用的在线单位换算页面，支持长度、质量、面积、体积、能量、速度、温度、时间、存储、
+        角度、电阻、电压、电流以及汇率换算，适合开发、学习、办公和日常计算场景快速使用。
+      </p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="screen-reader-text">单位换算工具</h2>
+
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="toolbar-right">
+            <div id="statusChip" class="status-chip">Ready</div>
+            <button type="button" class="btn btn-primary" id="convertBtn">立即换算</button>
+            <button type="button" class="btn btn-light" id="swapBtn">交换单位</button>
+            <button type="button" class="btn btn-light" id="sampleBtn">填充示例</button>
+            <button type="button" class="btn btn-light" id="copyBtn">复制结果</button>
+            <button type="button" class="btn btn-light" id="clearBtn">清空重置</button>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <section class="card" aria-labelledby="input-title">
+            <div class="card-head">
+              <div>
+                <h2 id="input-title">输入换算</h2>
+                <p>先选择分类，再选择原单位和目标单位。汇率会自动调用接口获取最新数据。</p>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="field-grid">
+                <div class="field">
+                  <label for="category">换算分类</label>
+                  <select id="category" class="select" aria-label="选择换算分类"></select>
+                </div>
+
+                <div class="field">
+                  <label for="amount">输入数值</label>
+                  <input id="amount" class="input" type="text" placeholder="例如：123.45" aria-label="输入数值" />
+                  <div class="hint" id="amountHint">支持整数、小数和负数输入。</div>
+                </div>
+
+                <div class="field">
+                  <label for="fromUnit">原单位</label>
+                  <select id="fromUnit" class="select" aria-label="选择原单位"></select>
+                </div>
+
+                <div class="field">
+                  <label for="toUnit">目标单位</label>
+                  <select id="toUnit" class="select" aria-label="选择目标单位"></select>
+                </div>
+              </div>
+
+              <div class="hero-result">
+                <div class="hero-result-left">
+                  <div class="hero-badge" id="heroBadge">当前分类：长度</div>
+                  <div class="hero-value" id="resultValue">-</div>
+                  <div class="hero-sub" id="resultDesc">等待输入并换算。</div>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-primary" id="copyMainBtn">复制结果</button>
+                </div>
+              </div>
+
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <div class="detail-label">标准化输入</div>
+                  <div class="detail-value" id="normalizedInput">-</div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">换算表达式</div>
+                  <div class="detail-value" id="formulaText">-</div>
+                </div>
+              </div>
+
+              <div class="currency-meta" id="currencyMeta">
+                <h3>汇率信息</h3>
+                <p id="currencyMetaText">等待获取汇率...</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card" aria-labelledby="intro-title">
+          <h2 id="intro-title">工具介绍</h2>
+          <p>
+            这个在线单位换算工具适合快速处理不同量纲和单位之间的换算。常见于工程、开发、学习、财务、
+            物流、电气、物理计算和日常生活场景。汇率分类会根据你提供的接口实时获取最新汇率数据。
+          </p>
+        </section>
+
+        <section class="content-card" aria-labelledby="usage-title">
+          <h2 id="usage-title">使用方法</h2>
+          <ol>
+            <li>先选择换算分类，例如长度、质量、温度或汇率。</li>
+            <li>输入数值，再选择原单位和目标单位。</li>
+            <li>系统会自动实时换算，也可以点击“立即换算”手动执行。</li>
+            <li>点击“交换单位”可快速反向换算，点击“复制结果”可复制当前结果。</li>
+          </ol>
+        </section>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">常见问题</h2>
+
+          <details open>
+            <summary>汇率换算是怎么获取数据的？</summary>
+            <div class="answer">
+              汇率分类会根据当前原货币调用接口获取最新汇率，然后换算到目标货币，并显示更新时间信息。
+            </div>
+          </details>
+
+          <details>
+            <summary>温度换算为什么不能直接按比例换？</summary>
+            <div class="answer">
+              温度单位之间不仅有比例关系，还有偏移量，所以会使用专门的换算公式，而不是简单乘除。
+            </div>
+          </details>
+
+          <details>
+            <summary>存储单位默认按什么进位？</summary>
+            <div class="answer">
+              当前页面按 1024 进位处理 KB、MB、GB、TB，更符合常见计算机场景。
+            </div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <script>
+    const CATEGORIES = {
+      length: {
+        label: "长度",
+        kind: "linear",
+        baseUnit: "m",
+        units: {
+          m: { label: "米 (m)", factor: 1 },
+          km: { label: "千米 (km)", factor: 1000 },
+          cm: { label: "厘米 (cm)", factor: 0.01 },
+          mm: { label: "毫米 (mm)", factor: 0.001 },
+          inch: { label: "英寸 (inch)", factor: 0.0254 },
+          ft: { label: "英尺 (ft)", factor: 0.3048 },
+          yd: { label: "码 (yd)", factor: 0.9144 },
+          mile: { label: "英里 (mile)", factor: 1609.344 }
+        }
+      },
+      mass: {
+        label: "质量",
+        kind: "linear",
+        baseUnit: "kg",
+        units: {
+          kg: { label: "千克 (kg)", factor: 1 },
+          g: { label: "克 (g)", factor: 0.001 },
+          mg: { label: "毫克 (mg)", factor: 0.000001 },
+          lb: { label: "磅 (lb)", factor: 0.45359237 },
+          oz: { label: "盎司 (oz)", factor: 0.028349523125 }
+        }
+      },
+      area: {
+        label: "面积",
+        kind: "linear",
+        baseUnit: "sqm",
+        units: {
+          sqm: { label: "平方米 (m²)", factor: 1 },
+          sqkm: { label: "平方千米 (km²)", factor: 1000000 },
+          sqcm: { label: "平方厘米 (cm²)", factor: 0.0001 },
+          sqmm: { label: "平方毫米 (mm²)", factor: 0.000001 },
+          sqinch: { label: "平方英寸 (in²)", factor: 0.00064516 },
+          sqft: { label: "平方英尺 (ft²)", factor: 0.09290304 },
+          sqyd: { label: "平方码 (yd²)", factor: 0.83612736 },
+          acre: { label: "英亩 (acre)", factor: 4046.8564224 },
+          hectare: { label: "公顷 (ha)", factor: 10000 }
+        }
+      },
+      volume: {
+        label: "体积",
+        kind: "linear",
+        baseUnit: "l",
+        units: {
+          l: { label: "升 (L)", factor: 1 },
+          ml: { label: "毫升 (mL)", factor: 0.001 },
+          m3: { label: "立方米 (m³)", factor: 1000 },
+          cm3: { label: "立方厘米 (cm³)", factor: 0.001 },
+          ft3: { label: "立方英尺 (ft³)", factor: 28.316846592 },
+          gal: { label: "加仑 (gal)", factor: 3.785411784 }
+        }
+      },
+      energy: {
+        label: "功/能/热",
+        kind: "linear",
+        baseUnit: "j",
+        units: {
+          j: { label: "焦耳 (J)", factor: 1 },
+          kj: { label: "千焦 (kJ)", factor: 1000 },
+          cal: { label: "卡路里 (cal)", factor: 4.184 },
+          kcal: { label: "千卡 (kcal)", factor: 4184 },
+          wh: { label: "瓦时 (Wh)", factor: 3600 },
+          kwh: { label: "千瓦时 (kWh)", factor: 3600000 }
+        }
+      },
+      speed: {
+        label: "速度",
+        kind: "linear",
+        baseUnit: "mps",
+        units: {
+          mps: { label: "米/秒 (m/s)", factor: 1 },
+          kmph: { label: "公里/小时 (km/h)", factor: 0.2777777778 },
+          mph: { label: "英里/小时 (mph)", factor: 0.44704 },
+          fps: { label: "英尺/秒 (ft/s)", factor: 0.3048 }
+        }
+      },
+      density: {
+        label: "密度",
+        kind: "linear",
+        baseUnit: "kgm3",
+        units: {
+          kgm3: { label: "千克/立方米 (kg/m³)", factor: 1 },
+          gm3: { label: "克/立方厘米 (g/cm³)", factor: 1000 },
+          lbft3: { label: "磅/立方英尺 (lb/ft³)", factor: 16.01846337 }
+        }
+      },
+      force: {
+        label: "力",
+        kind: "linear",
+        baseUnit: "n",
+        units: {
+          n: { label: "牛顿 (N)", factor: 1 },
+          kn: { label: "千牛 (kN)", factor: 1000 },
+          lbf: { label: "磅力 (lbf)", factor: 4.4482216152605 }
+        }
+      },
+      pressure: {
+        label: "压强",
+        kind: "linear",
+        baseUnit: "pa",
+        units: {
+          pa: { label: "帕斯卡 (Pa)", factor: 1 },
+          kpa: { label: "千帕 (kPa)", factor: 1000 },
+          mpa: { label: "兆帕 (MPa)", factor: 1000000 },
+          bar: { label: "巴 (bar)", factor: 100000 },
+          psi: { label: "磅力/平方英寸 (psi)", factor: 6894.757293168 }
+        }
+      },
+      power: {
+        label: "功率",
+        kind: "linear",
+        baseUnit: "w",
+        units: {
+          w: { label: "瓦特 (W)", factor: 1 },
+          kw: { label: "千瓦 (kW)", factor: 1000 },
+          hp: { label: "马力 (hp)", factor: 745.6998715823 }
+        }
+      },
+      temperature: {
+        label: "温度",
+        kind: "temperature",
+        units: {
+          c: { label: "摄氏度 (°C)" },
+          f: { label: "华氏度 (°F)" },
+          k: { label: "开尔文 (K)" }
+        }
+      },
+      time: {
+        label: "时间",
+        kind: "linear",
+        baseUnit: "s",
+        units: {
+          s: { label: "秒 (s)", factor: 1 },
+          min: { label: "分钟 (min)", factor: 60 },
+          h: { label: "小时 (h)", factor: 3600 },
+          day: { label: "天 (day)", factor: 86400 }
+        }
+      },
+      storage: {
+        label: "存储",
+        kind: "linear",
+        baseUnit: "b",
+        units: {
+          b: { label: "字节 (B)", factor: 1 },
+          kb: { label: "千字节 (KB)", factor: 1024 },
+          mb: { label: "兆字节 (MB)", factor: 1024 ** 2 },
+          gb: { label: "千兆字节 (GB)", factor: 1024 ** 3 },
+          tb: { label: "太字节 (TB)", factor: 1024 ** 4 }
+        }
+      },
+      angle: {
+        label: "角度",
+        kind: "linear",
+        baseUnit: "deg",
+        units: {
+          deg: { label: "度 (°)", factor: 1 },
+          rad: { label: "弧度 (rad)", factor: 180 / Math.PI },
+          grad: { label: "梯度 (grad)", factor: 0.9 }
+        }
+      },
+      currency: {
+        label: "汇率",
+        kind: "currency",
+        units: {
+          AED: "阿联酋迪拉姆",
+          AFN: "阿富汗尼",
+          ALL: "阿尔巴尼亚列克",
+          AMD: "亚美尼亚德拉姆",
+          ANG: "荷属安的列斯盾",
+          AOA: "宽扎",
+          ARS: "阿根廷比索",
+          AUD: "澳元",
+          AWG: "阿鲁巴弗洛林",
+          AZN: "阿塞拜疆马纳特",
+          BAM: "可兑换马克",
+          BBD: "巴巴多斯元",
+          BDT: "塔卡",
+          BGN: "保加利亚列瓦",
+          BHD: "巴林第纳尔",
+          BIF: "布隆迪法郎",
+          BMD: "百慕大元",
+          BND: "文莱元",
+          BOB: "玻利维亚诺",
+          BRL: "巴西雷亚尔",
+          BSD: "巴哈马元",
+          BTN: "努扎姆",
+          BWP: "普拉",
+          BYN: "白俄罗斯卢布",
+          BZD: "伯利兹元",
+          CAD: "加元",
+          CDF: "刚果法郎",
+          CHF: "瑞士法郎",
+          CLP: "智利比索",
+          CNY: "人民币",
+          COP: "哥伦比亚比索",
+          CRC: "哥斯达黎加科朗",
+          CUP: "古巴比索",
+          CVE: "佛得角埃斯库多",
+          CZK: "捷克克朗",
+          DJF: "吉布提法郎",
+          DKK: "丹麦克朗",
+          DOP: "多米尼加比索",
+          DZD: "阿尔及利亚第纳尔",
+          EGP: "埃及镑",
+          ERN: "纳法克",
+          ETB: "埃塞俄比亚比尔",
+          EUR: "欧元",
+          FJD: "斐济元",
+          FKP: "福克兰群岛镑",
+          FOK: "法罗群岛克朗",
+          GBP: "英镑",
+          GEL: "拉里",
+          GGP: "根西岛镑",
+          GHS: "加纳赛地",
+          GIP: "直布罗陀镑",
+          GMD: "达拉西",
+          GNF: "几内亚法郎",
+          GTQ: "格查尔",
+          GYD: "圭亚那元",
+          HKD: "港元",
+          HNL: "伦皮拉",
+          HRK: "库纳",
+          HTG: "古德",
+          HUF: "福林",
+          IDR: "卢比",
+          ILS: "新谢克尔",
+          IMP: "曼岛镑",
+          INR: "印度卢比",
+          IQD: "伊拉克第纳尔",
+          IRR: "伊朗里亚尔",
+          ISK: "冰岛克朗",
+          JEP: "泽西岛镑",
+          JMD: "牙买加元",
+          JOD: "约旦第纳尔",
+          JPY: "日元",
+          KES: "肯尼亚先令",
+          KGS: "索姆",
+          KHR: "瑞尔",
+          KID: "基里巴斯元",
+          KMF: "科摩罗法郎",
+          KRW: "韩元",
+          KWD: "科威特第纳尔",
+          KYD: "开曼群岛元",
+          KZT: "腾格",
+          LAK: "基普",
+          LBP: "黎巴嫩镑",
+          LKR: "斯里兰卡卢比",
+          LRD: "利比里亚元",
+          LSL: "鲁梯",
+          LYD: "利比亚第纳尔",
+          MAD: "摩洛哥迪拉姆",
+          MDL: "摩尔多瓦列伊",
+          MGA: "阿里亚里",
+          MKD: "第纳尔",
+          MMK: "缅甸元",
+          MNT: "图格里克",
+          MOP: "澳门元",
+          MRU: "乌吉亚",
+          MUR: "毛里求斯卢比",
+          MVR: "拉菲亚",
+          MWK: "克瓦查",
+          MXN: "墨西哥比索",
+          MYR: "马来西亚林吉特",
+          MZN: "莫桑比克梅蒂卡尔",
+          NAD: "纳米比亚元",
+          NGN: "奈拉",
+          NIO: "尼加拉瓜新科多巴",
+          NOK: "挪威克朗",
+          NPR: "尼泊尔卢比",
+          NZD: "新西兰元",
+          OMR: "阿曼里亚尔",
+          PAB: "巴波亚",
+          PEN: "新索尔",
+          PGK: "基那",
+          PHP: "菲律宾比索",
+          PKR: "巴基斯坦卢比",
+          PLN: "兹罗提",
+          PYG: "瓜拉尼",
+          QAR: "卡塔尔里亚尔",
+          RON: "罗马尼亚列伊",
+          RSD: "塞尔维亚第纳尔",
+          RUB: "俄罗斯卢布",
+          RWF: "卢旺达法郎",
+          SAR: "沙特里亚尔",
+          SBD: "所罗门群岛元",
+          SCR: "塞舌尔卢比",
+          SDG: "苏丹镑",
+          SEK: "瑞典克朗",
+          SGD: "新加坡元",
+          SHP: "圣赫勒拿镑",
+          SLE: "塞拉利昂利昂",
+          SLL: "利昂",
+          SOS: "索马里先令",
+          SRD: "苏里南元",
+          SSP: "南苏丹镑",
+          STN: "多布拉",
+          SYP: "叙利亚镑",
+          SZL: "里兰吉尼",
+          THB: "泰铢",
+          TJS: "塔吉克斯坦索莫尼",
+          TMT: "土库曼斯坦新马纳特",
+          TND: "突尼斯第纳尔",
+          TOP: "潘加",
+          TRY: "土耳其里拉",
+          TTD: "特立尼达和多巴哥元",
+          TVD: "图瓦卢元",
+          TWD: "新台币",
+          TZS: "坦桑尼亚先令",
+          UAH: "格里夫尼亚",
+          UGX: "乌干达先令",
+          USD: "美元",
+          UYU: "乌拉圭比索",
+          UZS: "乌兹别克斯坦苏姆",
+          VES: "委内瑞拉玻利瓦尔",
+          VND: "越南盾",
+          VUV: "瓦图",
+          WST: "塔拉",
+          XAF: "中非法郎",
+          XCD: "东加勒比元",
+          XDR: "特别提款权",
+          XOF: "西非法郎",
+          XPF: "太平洋法郎",
+          YER: "也门里亚尔",
+          ZAR: "兰特",
+          ZMW: "赞比亚克瓦查",
+          ZWG: "津巴布韦金币",
+          ZWL: "津巴布韦元"
+        }
+      },
+      illumination: {
+        label: "光照度",
+        kind: "linear",
+        baseUnit: "lx",
+        units: {
+          lx: { label: "勒克斯 (lx)", factor: 1 },
+          fc: { label: "英尺烛光 (fc)", factor: 10.7639104167 }
+        }
+      },
+      torque: {
+        label: "力矩",
+        kind: "linear",
+        baseUnit: "nm",
+        units: {
+          nm: { label: "牛·米 (Nm)", factor: 1 },
+          ftlb: { label: "英尺·磅 (ft·lb)", factor: 1.3558179483314 }
+        }
+      },
+      resistance: {
+        label: "电阻",
+        kind: "linear",
+        baseUnit: "ohm",
+        units: {
+          ohm: { label: "欧姆 (Ω)", factor: 1 },
+          kohm: { label: "千欧 (kΩ)", factor: 1000 },
+          mohm: { label: "兆欧 (MΩ)", factor: 1000000 }
+        }
+      },
+      voltage: {
+        label: "电压",
+        kind: "linear",
+        baseUnit: "v",
+        units: {
+          v: { label: "伏特 (V)", factor: 1 },
+          kv: { label: "千伏 (kV)", factor: 1000 }
+        }
+      },
+      current: {
+        label: "电流",
+        kind: "linear",
+        baseUnit: "a",
+        units: {
+          a: { label: "安培 (A)", factor: 1 },
+          ma: { label: "毫安 (mA)", factor: 0.001 }
+        }
+      }
+    };
+
+    const currencyCache = new Map();
+    const yearEl = document.getElementById("year");
+    const statusChip = document.getElementById("statusChip");
+    const categoryEl = document.getElementById("category");
+    const amountEl = document.getElementById("amount");
+    const fromUnitEl = document.getElementById("fromUnit");
+    const toUnitEl = document.getElementById("toUnit");
+    const amountHintEl = document.getElementById("amountHint");
+    const heroBadgeEl = document.getElementById("heroBadge");
+    const resultValueEl = document.getElementById("resultValue");
+    const resultDescEl = document.getElementById("resultDesc");
+    const normalizedInputEl = document.getElementById("normalizedInput");
+    const formulaTextEl = document.getElementById("formulaText");
+    const currencyMetaEl = document.getElementById("currencyMeta");
+    const currencyMetaTextEl = document.getElementById("currencyMetaText");
+    const convertBtn = document.getElementById("convertBtn");
+    const swapBtn = document.getElementById("swapBtn");
+    const sampleBtn = document.getElementById("sampleBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const copyMainBtn = document.getElementById("copyMainBtn");
+    const clearBtn = document.getElementById("clearBtn");
+
+    let debounceTimer = null;
+
+    yearEl.textContent = new Date().getFullYear();
+
+    function setStatus(text, type) {
+      statusChip.textContent = text;
+      statusChip.className = "status-chip";
+      if (type) statusChip.classList.add(type);
+    }
+
+    function formatNumber(num) {
+      if (!Number.isFinite(num)) return "-";
+      if (num === 0) return "0";
+      const abs = Math.abs(num);
+      if (abs >= 1e12 || abs < 1e-9) {
+        return num.toExponential(12).replace(/(\.\d*?[1-9])0+e/, "$1e").replace(/\.0+e/, "e");
+      }
+      return num.toLocaleString("en-US", {
+        maximumFractionDigits: 12
+      }).replace(/\.?0+$/, function(match, offset, full) {
+        return full.includes(".") ? "" : match;
+      });
+    }
+
+    function normalizeInput(value) {
+      const text = String(value).trim().replace(/,/g, "").replace(/\s+/g, "");
+      if (!text) throw new Error("请输入数值。");
+      const num = Number(text);
+      if (!Number.isFinite(num)) throw new Error("请输入有效数字。");
+      return { raw: text, value: num };
+    }
+
+    function resetOutputs() {
+      resultValueEl.textContent = "-";
+      resultDescEl.textContent = "等待输入并换算。";
+      normalizedInputEl.textContent = "-";
+      formulaTextEl.textContent = "-";
+      currencyMetaEl.classList.remove("show");
+      currencyMetaTextEl.textContent = "等待获取汇率...";
+    }
+
+    function fillCategoryOptions() {
+      const keys = Object.keys(CATEGORIES);
+      keys.forEach(function(key) {
+        const opt = document.createElement("option");
+        opt.value = key;
+        opt.textContent = CATEGORIES[key].label;
+        categoryEl.appendChild(opt);
+      });
+      categoryEl.value = "length";
+    }
+
+    function populateUnitOptions() {
+      const category = CATEGORIES[categoryEl.value];
+      fromUnitEl.innerHTML = "";
+      toUnitEl.innerHTML = "";
+
+      if (category.kind === "currency") {
+        Object.keys(category.units).sort().forEach(function(code) {
+          const label = category.units[code] + " (" + code + ")";
+          const opt1 = document.createElement("option");
+          opt1.value = code;
+          opt1.textContent = label;
+          fromUnitEl.appendChild(opt1);
+
+          const opt2 = document.createElement("option");
+          opt2.value = code;
+          opt2.textContent = label;
+          toUnitEl.appendChild(opt2);
+        });
+        fromUnitEl.value = "USD";
+        toUnitEl.value = "CNY";
+        amountHintEl.textContent = "汇率分类会调用接口获取最新数据，支持整数和小数。";
+      } else {
+        Object.keys(category.units).forEach(function(unit) {
+          const label = category.units[unit].label;
+          const opt1 = document.createElement("option");
+          opt1.value = unit;
+          opt1.textContent = label;
+          fromUnitEl.appendChild(opt1);
+
+          const opt2 = document.createElement("option");
+          opt2.value = unit;
+          opt2.textContent = label;
+          toUnitEl.appendChild(opt2);
+        });
+
+        fromUnitEl.value = Object.keys(category.units)[0];
+        toUnitEl.value = Object.keys(category.units)[1] || Object.keys(category.units)[0];
+
+        amountHintEl.textContent = categoryEl.value === "storage"
+          ? "支持整数和小数，存储单位默认按 1024 进位。"
+          : "支持整数、小数和负数输入。";
+      }
+
+      heroBadgeEl.textContent = "当前分类：" + category.label;
+      resetOutputs();
+    }
+
+    function convertTemperature(value, from, to) {
+      let celsius;
+      if (from === "c") celsius = value;
+      else if (from === "f") celsius = (value - 32) * 5 / 9;
+      else celsius = value - 273.15;
+
+      if (to === "c") return celsius;
+      if (to === "f") return celsius * 9 / 5 + 32;
+      return celsius + 273.15;
+    }
+
+    async function fetchCurrencyRates(baseCode) {
+      if (currencyCache.has(baseCode)) {
+        return currencyCache.get(baseCode);
+      }
+
+      const url = "https://api.mrwang.com/exchange.php?currency=" + encodeURIComponent(baseCode);
+      const response = await fetch(url, { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error("汇率接口请求失败。");
+      }
+
+      const data = await response.json();
+      if (!data || data.result !== "success" || !data.rates) {
+        throw new Error("汇率接口返回异常。");
+      }
+
+      currencyCache.set(baseCode, data);
+      return data;
+    }
+
+    async function convertNow() {
+      const categoryKey = categoryEl.value;
+      const category = CATEGORIES[categoryKey];
+      const fromUnit = fromUnitEl.value;
+      const toUnit = toUnitEl.value;
+
+      heroBadgeEl.textContent = "当前分类：" + category.label;
+      currencyMetaEl.classList.remove("show");
+
+      if (!amountEl.value.trim()) {
+        resetOutputs();
+        setStatus("请输入数值", "warning");
+        return;
+      }
+
+      try {
+        const normalized = normalizeInput(amountEl.value);
+        normalizedInputEl.textContent = normalized.raw;
+
+        if (category.kind === "linear") {
+          const fromFactor = category.units[fromUnit].factor;
+          const toFactor = category.units[toUnit].factor;
+          const baseValue = normalized.value * fromFactor;
+          const result = baseValue / toFactor;
+
+          resultValueEl.textContent = formatNumber(result);
+          resultDescEl.textContent = category.units[fromUnit].label + " → " + category.units[toUnit].label;
+          formulaTextEl.textContent = formatNumber(normalized.value) + " × " + formatNumber(fromFactor) + " ÷ " + formatNumber(toFactor) + " = " + formatNumber(result);
+          setStatus("换算成功", "success");
+          return;
+        }
+
+        if (category.kind === "temperature") {
+          const result = convertTemperature(normalized.value, fromUnit, toUnit);
+
+          resultValueEl.textContent = formatNumber(result);
+          resultDescEl.textContent = category.units[fromUnit].label + " → " + category.units[toUnit].label;
+          formulaTextEl.textContent = "温度使用专用换算公式，不适用简单乘除。";
+          setStatus("换算成功", "success");
+          return;
+        }
+
+        if (category.kind === "currency") {
+          const data = await fetchCurrencyRates(fromUnit);
+          const rate = data.rates[toUnit];
+          if (typeof rate !== "number") {
+            throw new Error("目标货币汇率不存在。");
+          }
+
+          const result = normalized.value * rate;
+          resultValueEl.textContent = formatNumber(result);
+          resultDescEl.textContent = fromUnit + " → " + toUnit;
+          formulaTextEl.textContent = formatNumber(normalized.value) + " × " + formatNumber(rate) + " = " + formatNumber(result);
+
+          currencyMetaEl.classList.add("show");
+          currencyMetaTextEl.textContent =
+            "基准货币：" + data.base_code +
+            " ｜ 1 " + fromUnit + " = " + formatNumber(rate) + " " + toUnit +
+            " ｜ 更新时间：" + data.time_last_update_utc +
+            " ｜ 下次更新时间：" + data.time_next_update_utc;
+
+          setStatus("汇率换算成功", "success");
+          return;
+        }
+
+        throw new Error("暂不支持当前分类。");
+      } catch (error) {
+        resetOutputs();
+        heroBadgeEl.textContent = "当前分类：" + category.label;
+        normalizedInputEl.textContent = "-";
+        setStatus(error.message, "error");
+      }
+    }
+
+    function scheduleConvert() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(convertNow, 180);
+    }
+
+    function swapUnits() {
+      const from = fromUnitEl.value;
+      const to = toUnitEl.value;
+      fromUnitEl.value = to;
+      toUnitEl.value = from;
+      convertNow();
+    }
+
+    function fillSample() {
+      const key = categoryEl.value;
+      if (key === "currency") {
+        amountEl.value = "100";
+        fromUnitEl.value = "USD";
+        toUnitEl.value = "CNY";
+      } else if (key === "temperature") {
+        amountEl.value = "25";
+        fromUnitEl.value = "c";
+        toUnitEl.value = "f";
+      } else if (key === "length") {
+        amountEl.value = "123.45";
+        fromUnitEl.value = "cm";
+        toUnitEl.value = "m";
+      } else if (key === "storage") {
+        amountEl.value = "2048";
+        fromUnitEl.value = "mb";
+        toUnitEl.value = "gb";
+      } else {
+        amountEl.value = "100";
+      }
+      convertNow();
+      setStatus("已填充示例", "success");
+    }
+
+    async function copyResult() {
+      const text = resultValueEl.textContent;
+      if (!text || text === "-") {
+        setStatus("没有可复制内容", "warning");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus("复制成功", "success");
+      } catch (error) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand("copy");
+        document.body.removeChild(temp);
+        setStatus("复制成功", "success");
+      }
+    }
+
+    function clearAll() {
+      amountEl.value = "";
+      categoryEl.value = "length";
+      populateUnitOptions();
+      resetOutputs();
+      heroBadgeEl.textContent = "当前分类：" + CATEGORIES[categoryEl.value].label;
+      setStatus("Ready");
+    }
+
+    categoryEl.addEventListener("change", function() {
+      populateUnitOptions();
+      if (amountEl.value.trim()) convertNow();
+    });
+
+    amountEl.addEventListener("input", scheduleConvert);
+    fromUnitEl.addEventListener("change", convertNow);
+    toUnitEl.addEventListener("change", convertNow);
+    convertBtn.addEventListener("click", convertNow);
+    swapBtn.addEventListener("click", swapUnits);
+    sampleBtn.addEventListener("click", fillSample);
+    copyBtn.addEventListener("click", copyResult);
+    copyMainBtn.addEventListener("click", copyResult);
+    clearBtn.addEventListener("click", clearAll);
+
+    amountEl.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        convertNow();
+      }
+    });
+
+    fillCategoryOptions();
+    populateUnitOptions();
+    setStatus("Ready");
+  </script>
+</body>
+</html>
