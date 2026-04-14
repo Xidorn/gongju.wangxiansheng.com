@@ -383,39 +383,79 @@
     </footer>
   </div>
 
-  <script>
-    const pages = [
-      {
-        name: "简繁转换",
-        url: "https://gongju.wangxiansheng.com/jianfan.html",
-        desc: "支持简体中文转繁体中文、繁体中文转简体中文，支持自动转换和手动转换。"
-      },
-      {
-        name: "代码格式化",
-        url: "https://gongju.wangxiansheng.com/code-beautifier.html",
-        desc: "支持 HTML、CSS、JavaScript 在线格式化，自动识别语言、实时美化。"
-      },
-      {
-        name: "Base64 编解码",
-        url: "https://gongju.wangxiansheng.com/base64.html",
-        desc: "支持文本 Base64 编码与解码。"
-      },
-      {
-        name: "robots.txt 生成器",
-        url: "https://gongju.wangxiansheng.com/robots-txt-generator.html",
-        desc: "简洁实用的 robots.txt 在线生成器，支持自定义 User-agent、Allow、Disallow、Crawl-delay、Sitemap 和 Host 配置。"
-      },
-      {
-        name: "HTML 在线运行",
-        url: "https://gongju.wangxiansheng.com/html-online-run.html",
-        desc: "支持在线编写、编辑、预览和运行 HTML 代码。"
-      },
-      {
-        name: "时间戳转换",
-        url: "https://gongju.wangxiansheng.com/timestamp.html",
-        desc: "支持 Unix 时间戳秒和毫秒与日期时间互相转换。"
-      }
-    ];
+<script>
+  const pages = [
+    {
+      name: "计算器",
+      url: "/jisuanqi.html",
+      desc: "支持基础算术运算、括号表达式计算，适合日常快速计算。"
+    },
+    {
+      name: "时间戳转换",
+      url: "/timestamp.html",
+      desc: "支持 Unix 时间戳（秒/毫秒）与日期时间互相转换。"
+    },
+    {
+      name: "代码格式化",
+      url: "/code-beautifier.html",
+      desc: "支持 HTML、CSS、JavaScript 在线格式化，自动识别语言并实时美化代码。"
+    },
+    {
+      name: "URL 编码解码",
+      url: "/url-encode-decode.html",
+      desc: "支持 URL 编码与解码，适用于参数处理和链接转换。"
+    },
+    {
+      name: "Base64 编解码",
+      url: "/base64.html",
+      desc: "支持文本 Base64 编码与解码，适用于字符串转换与调试。"
+    },
+    {
+      name: "字数统计",
+      url: "/text-counter.html",
+      desc: "支持中英文字符、字数、空格、段落等内容统计。"
+    },
+    {
+      name: "Unicode 编码",
+      url: "/unicode-encoder.html",
+      desc: "支持文本与 Unicode 编码互相转换，方便转义和调试。"
+    },
+    {
+      name: "单位换算",
+      url: "/unit.html",
+      desc: "支持长度、面积、体积、重量、温度等常见单位换算。"
+    },
+    {
+      name: "进制换算",
+      url: "/base.html",
+      desc: "支持二进制、八进制、十进制、十六进制之间的快速换算。"
+    },
+    {
+      name: "HTML 在线运行",
+      url: "/html-online-run.html",
+      desc: "支持在线编写、编辑、预览和运行 HTML 代码。"
+    },
+    {
+      name: "简繁转换",
+      url: "/jianfan.html",
+      desc: "支持简体中文与繁体中文互相转换，支持自动转换和手动转换。"
+    },
+    {
+      name: "汇率换算",
+      url: "/huilv.html",
+      desc: "支持常见货币之间的实时汇率换算。"
+    },
+    {
+      name: "robots.txt 生成器",
+      url: "/robots-txt-generator.html",
+      desc: "支持自定义 User-agent、Allow、Disallow、Crawl-delay、Sitemap 和 Host，快速生成 robots.txt。"
+    },
+    {
+      name: "数字大写",
+      url: "/shuzidaxie.html",
+      desc: "支持数字金额转换为中文大写，适用于财务和票据填写。"
+    }
+  ];
 
     const pageList = document.getElementById("pageList");
     const pageCount = document.getElementById("pageCount");
