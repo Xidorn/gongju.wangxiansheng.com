@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>快速查找首页 - 在线工具大全 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供常用在线工具导航首页，包含简繁转换、代码格式化、Base64 编解码、robots.txt 生成器、HTML 在线运行、时间戳转换等常用网页工具入口。" />
+  <meta name="keywords" content="在线工具,工具导航,JSON 格式化,UUID 生成器,Markdown 预览,文本对比,HTML 实体转义,颜色转换器,王先生工具" />
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="工具导航首页 - 在线工具大全 | 王先生工具" />
+  <meta property="og:description" content="王先生工具提供常用在线工具导航首页，包含简繁转换、代码格式化、Base64 编解码、robots.txt 生成器、HTML 在线运行、时间戳转换等常用网页工具入口。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="工具导航首页 - 在线工具大全 | 王先生工具" />
+  <meta name="twitter:description" content="王先生工具提供常用在线工具导航首页，包含简繁转换、代码格式化、Base64 编解码、robots.txt 生成器、HTML 在线运行、时间戳转换等常用网页工具入口。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .window-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 220px;
+      flex: 1;
+    }
+
+    .window-meta strong {
+      font-size: 14px;
+      color: #1e293b;
+    }
+
+    .window-meta span {
+      font-size: 12px;
+      color: var(--sub);
+    }
+
+    .tool-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: #fcfcfd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-head h2 {
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .card-head p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .segmented, .mini-tabs {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #f8fafc;
+    }
+
+    .segmented button, .mini-tabs button {
+      border: none;
+      background: transparent;
+      color: #334155;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .segmented button.active, .mini-tabs button.active {
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+    }
+
+    .status, .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .status.ready, .status-chip.success {
+      color: #065f46;
+      background: #ecfdf5;
+      border-color: #bbf7d0;
+    }
+
+    .status.ready .status-dot { background: var(--success); }
+
+    .status.error {
+      color: #991b1b;
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    .status.error .status-dot { background: var(--danger); }
+
+    .status.warn, .status.warning {
+      color: #92400e;
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .status.warn .status-dot, .status.warning .status-dot { background: var(--warning); }
+
+    .actions, .inline-actions, .toolbar-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .actions {
+      margin-bottom: 28px;
+    }
+
+    button { font: inherit; }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn.primary, .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn.primary:hover, .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn.soft {
+      background: var(--light);
+      color: var(--primary);
+      border: 1px solid #dbeafe;
+    }
+
+    .btn.ghost, .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: #fbfdff;
+      flex-wrap: wrap;
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .panel-meta {
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    textarea, input[type="text"], input[type="number"], select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 360px;
+      resize: vertical;
+      border: 0;
+      border-radius: 0;
+      padding: 16px 18px;
+      font-family: var(--mono);
+      line-height: 1.7;
+    }
+
+    textarea:focus, input[type="text"]:focus, input[type="number"]:focus, select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    textarea.output {
+      background: #f8fafc;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label, .check-item {
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .field small, .muted, .hint {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .check-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 18px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    .check-item input {
+      accent-color: var(--primary);
+    }
+
+    .preview {
+      min-height: 360px;
+      padding: 16px 18px;
+      background: #fff;
+      overflow: auto;
+    }
+
+    .preview h1, .preview h2, .preview h3, .preview h4 {
+      margin: 1.1em 0 0.5em;
+      line-height: 1.3;
+    }
+
+    .preview p { margin: .8em 0; }
+    .preview pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 16px;
+      border-radius: 14px;
+      overflow: auto;
+    }
+
+    .preview code {
+      background: #eef2ff;
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-family: var(--mono);
+    }
+
+    .preview pre code { background: transparent; padding: 0; }
+    .preview blockquote {
+      margin: 1em 0;
+      padding: 10px 14px;
+      border-left: 4px solid #93c5fd;
+      background: #eff6ff;
+      border-radius: 0 14px 14px 0;
+    }
+
+    .preview table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+
+    .preview th, .preview td {
+      border: 1px solid #dbe3ee;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .preview img {
+      max-width: 100%;
+      border-radius: 14px;
+    }
+
+    .preview hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.2em 0;
+    }
+
+    .kv {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 14px 18px;
+    }
+
+    .kv .k {
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .code-box, .result-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #f8fafc;
+      padding: 14px 16px;
+      overflow: auto;
+    }
+
+    .code-box pre, .result-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font: 13px/1.6 var(--mono);
+    }
+
+    .note {
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      color: #475569;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .section-title { font-size: 24px; margin: 0 0 14px; }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2, .article h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .article h3 {
+      font-size: 16px;
+      margin: 18px 0 10px;
+      color: #1e293b;
+    }
+
+    .content-card p, .content-card li, .article p, .article li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol, .content-card ul, .article ol, .article ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .hidden { display: none !important; }
+
+    .diff-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .add { background: #dcfce7; }
+    .remove { background: #fee2e2; }
+    .same { background: #f8fafc; }
+
+    .diff-line {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 7px 10px;
+      border-radius: 12px;
+      font-family: var(--mono);
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .diff-line + .diff-line { margin-top: 6px; }
+    .diff-line.same { background: #f8fafc; }
+    .diff-line.add { background: #ecfdf5; }
+    .diff-line.remove { background: #fef2f2; }
+    .diff-sign { font-weight: 800; }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+      padding: 14px 16px;
+    }
+
+    .stat .v {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #1e293b;
+    }
+
+    .stat .k {
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    .color-preview {
+      min-height: 180px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .preset-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .preset {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      cursor: pointer;
+    }
+
+    .copy-chip {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 12px;
+      background: #fff;
+      cursor: pointer;
+      color: #334155;
+      transition: 0.2s ease;
+    }
+
+    .copy-chip:hover {
+      background: var(--light);
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 980px) {
+      .grid-2, .grid-3, .stats-row, .field-grid, .kv {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar, .tool-body, .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .toolbar, .actions, .inline-actions {
+        justify-content: flex-start;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      textarea, .preview {
+        min-height: 280px;
+      }
+    }
+  </style>
+
+
+  <style>
+    .search-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .tool-count-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .tool-count-row strong {
+      color: #1e293b;
+    }
+
+    .filter-chip {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: #334155;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .filter-chip:hover {
+      background: var(--light);
+      border-color: #c7d2fe;
+    }
+
+    .filter-chip.active {
+      background: #eef4ff;
+      color: var(--primary);
+      border-color: #bfdbfe;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .tool-link-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .tool-link-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+      border-color: #c7d2fe;
+    }
+
+    .tool-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .tool-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+
+    .tool-card-desc {
+      min-height: 52px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .empty-state {
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      padding: 20px;
+      background: #f8fafc;
+      color: #64748b;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+
+    @media (max-width: 860px) {
+      .search-row { grid-template-columns: 1fr; }
+      .tool-grid { grid-template-columns: 1fr; }
+  </style>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "王先生工具",
+  "url": "https://gongju.wangxiansheng.com/"
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "工具导航首页",
+  "url": "https://gongju.wangxiansheng.com/",
+  "description": "王先生工具提供常用在线工具导航首页，包含简繁转换、代码格式化、Base64 编解码、robots.txt 生成器、HTML 在线运行、时间戳转换等常用网页工具入口。",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "王先生",
+      "item": "https://www.wangxiansheng.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "王先生工具",
+      "item": "https://gongju.wangxiansheng.com/"
+    }
+  ]
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "王先生工具导航",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "计算器",
+      "url": "https://gongju.wangxiansheng.com/jisuanqi.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "时间戳转换",
+      "url": "https://gongju.wangxiansheng.com/timestamp.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "代码格式化",
+      "url": "https://gongju.wangxiansheng.com/code-beautifier.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "URL 编码解码",
+      "url": "https://gongju.wangxiansheng.com/url-encode-decode.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "Base64 编解码",
+      "url": "https://gongju.wangxiansheng.com/base64.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "字数统计",
+      "url": "https://gongju.wangxiansheng.com/text-counter.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "name": "Unicode 编码",
+      "url": "https://gongju.wangxiansheng.com/unicode-encoder.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "name": "单位换算",
+      "url": "https://gongju.wangxiansheng.com/unit.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "name": "进制换算",
+      "url": "https://gongju.wangxiansheng.com/base.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "HTML 在线运行",
+      "url": "https://gongju.wangxiansheng.com/html-online-run.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "name": "简繁转换",
+      "url": "https://gongju.wangxiansheng.com/jianfan.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "name": "汇率换算",
+      "url": "https://gongju.wangxiansheng.com/huilv.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "name": "robots.txt 生成器",
+      "url": "https://gongju.wangxiansheng.com/robots-txt-generator.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "name": "数字大写",
+      "url": "https://gongju.wangxiansheng.com/shuzidaxie.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "name": "JSON 格式化工具",
+      "url": "https://gongju.wangxiansheng.com/json-format.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "name": "UUID / 随机密码生成器",
+      "url": "https://gongju.wangxiansheng.com/uuid-password-generator.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "name": "文本对比 Diff 工具",
+      "url": "https://gongju.wangxiansheng.com/text-diff.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "name": "Markdown 实时预览 / 转 HTML",
+      "url": "https://gongju.wangxiansheng.com/markdown-preview.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "name": "HTML 实体转义 / 反转义",
+      "url": "https://gongju.wangxiansheng.com/html-entity-escape-unescape.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "name": "颜色转换器",
+      "url": "https://gongju.wangxiansheng.com/color-converter.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <span aria-current="page">王先生工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>王先生工具</h1>
+      <p>这里收录了常用在线工具，覆盖开发、编码转换、文本处理、站长和效率等常见场景，方便打开后直接使用。</p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-list-title">
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+          <div class="window-meta">
+            <strong id="tool-list-title">快速查找</strong>
+            <span>输入工具名称、描述或类别，可快速定位目标页面。</span>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <section class="card">
+            <div class="card-body">
+              <div class="search-row">
+                <input id="searchInput" type="text" placeholder="搜索工具，例如：JSON、Markdown、时间戳、robots" />
+                <button class="btn btn-light" id="clearSearchBtn" type="button">清空搜索</button>
+              </div>
+              <div class="filter-row" id="filterRow"></div>
+              <div class="tool-count-row" id="toolCountRow" aria-live="polite">
+                <span>共 <strong id="totalToolCount">0</strong> 个工具</span>
+                <span>当前显示 <strong id="visibleToolCount">0</strong> 个</span>
+              </div>
+              <div id="toolGrid" class="tool-grid"></div>
+              <div id="emptyState" class="empty-state hidden">没有找到匹配的工具，请尝试更换关键词或分类。</div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card">
+          <h2>站点说明</h2>
+          <p>王先生工具专注于提供简洁、直接、打开即用的在线工具页面。每个工具页都采用统一的面包屑、标题区、工具壳、内容说明区和底部版权结构，便于维护，也更利于用户形成一致的使用习惯。</p>
+        </section>
+
+        <section class="content-card">
+          <h2>当前工具分类</h2>
+          <ul>
+            <li>开发工具：JSON、UUID、进制换算、代码格式化、Markdown、HTML 在线运行等。</li>
+            <li>编码转换：URL、Base64、Unicode、HTML 实体转义与反转义等。</li>
+            <li>文本处理：简繁转换、字数统计、文本对比 Diff、数字大写等。</li>
+            <li>效率工具：计算器、时间戳转换、单位换算、汇率换算等。</li>
+            <li>站长工具：robots.txt 生成器，后续也适合继续补 sitemap、meta robots 等。</li>
+          </ul>
+        </section>
+
+        <section class="content-card faq">
+          <h2>常见问题</h2>
+          <details open>
+            <summary>这些工具打开就能用吗？</summary>
+            <div class="answer">大部分页面都可以直接在浏览器中使用，日常处理文本、编码、格式化、转换这类需求会更方便一些。</div>
+          </details>
+          <details>
+            <summary>首页支持搜索和分类筛选吗？</summary>
+            <div class="answer">支持。可以按关键词搜索，也可以按分类快速筛选，工具多的时候找起来会更省事。</div>
+          </details>
+          <details>
+            <summary>后面还会继续补充新工具吗？</summary>
+            <div class="answer">会，后续会继续补充更常用、更实用的小工具，并尽量保持整体风格和使用体验一致。</div>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">© <span id="year"></span> 王先生 版权所有</footer>
+  </div>
+
+  <script>
+    const pages = [
+  {
+    "name": "计算器",
+    "url": "/jisuanqi.html",
+    "desc": "支持基础算术运算、括号表达式计算，适合日常快速计算。",
+    "category": "效率工具"
+  },
+  {
+    "name": "时间戳转换",
+    "url": "/timestamp.html",
+    "desc": "支持 Unix 时间戳（秒/毫秒）与日期时间互相转换。",
+    "category": "效率工具"
+  },
+  {
+    "name": "代码格式化",
+    "url": "/code-beautifier.html",
+    "desc": "支持 HTML、CSS、JavaScript 在线格式化，自动识别语言并实时美化代码。",
+    "category": "开发工具"
+  },
+  {
+    "name": "URL 编码解码",
+    "url": "/url-encode-decode.html",
+    "desc": "支持 URL 编码与解码，适用于参数处理和链接转换。",
+    "category": "编码转换"
+  },
+  {
+    "name": "Base64 编解码",
+    "url": "/base64.html",
+    "desc": "支持文本 Base64 编码与解码，适用于字符串转换与调试。",
+    "category": "编码转换"
+  },
+  {
+    "name": "字数统计",
+    "url": "/text-counter.html",
+    "desc": "支持中英文字符、字数、空格、段落等内容统计。",
+    "category": "文本处理"
+  },
+  {
+    "name": "Unicode 编码",
+    "url": "/unicode-encoder.html",
+    "desc": "支持文本与 Unicode 编码互相转换，方便转义和调试。",
+    "category": "编码转换"
+  },
+  {
+    "name": "单位换算",
+    "url": "/unit.html",
+    "desc": "支持长度、面积、体积、重量、温度等常见单位换算。",
+    "category": "效率工具"
+  },
+  {
+    "name": "进制换算",
+    "url": "/base.html",
+    "desc": "支持二进制、八进制、十进制、十六进制以及 2 到 36 进制快速换算。",
+    "category": "开发工具"
+  },
+  {
+    "name": "HTML 在线运行",
+    "url": "/html-online-run.html",
+    "desc": "支持在线编写、编辑、预览和运行 HTML 代码。",
+    "category": "开发工具"
+  },
+  {
+    "name": "简繁转换",
+    "url": "/jianfan.html",
+    "desc": "支持简体中文与繁体中文互相转换，支持自动转换和手动转换。",
+    "category": "文本处理"
+  },
+  {
+    "name": "汇率换算",
+    "url": "/huilv.html",
+    "desc": "支持常见货币之间的实时汇率换算。",
+    "category": "效率工具"
+  },
+  {
+    "name": "robots.txt 生成器",
+    "url": "/robots-txt-generator.html",
+    "desc": "支持自定义 User-agent、Allow、Disallow、Crawl-delay、Sitemap 和 Host，快速生成 robots.txt。",
+    "category": "站长工具"
+  },
+  {
+    "name": "数字大写",
+    "url": "/shuzidaxie.html",
+    "desc": "支持数字金额转换为中文大写，适用于财务和票据填写。",
+    "category": "文本处理"
+  },
+  {
+    "name": "JSON 格式化工具",
+    "url": "/json-format.html",
+    "desc": "支持 JSON 格式化、压缩和校验，适合接口调试、配置检查和数据处理。",
+    "category": "开发工具",
+    "isNew": true
+  },
+  {
+    "name": "UUID / 随机密码生成器",
+    "url": "/uuid-password-generator.html",
+    "desc": "支持标准 UUID v4 和多规则随机密码批量生成。",
+    "category": "开发工具",
+    "isNew": true
+  },
+  {
+    "name": "文本对比 Diff 工具",
+    "url": "/text-diff.html",
+    "desc": "支持按行比较文本差异，适合文案校对、配置比对和版本检查。",
+    "category": "文本处理",
+    "isNew": true
+  },
+  {
+    "name": "Markdown 实时预览 / 转 HTML",
+    "url": "/markdown-preview.html",
+    "desc": "支持 Markdown 实时预览、转 HTML 和源码复制。",
+    "category": "开发工具",
+    "isNew": true
+  },
+  {
+    "name": "HTML 实体转义 / 反转义",
+    "url": "/html-entity-escape-unescape.html",
+    "desc": "支持 HTML 实体安全转义与还原，适合模板处理和代码展示。",
+    "category": "编码转换",
+    "isNew": true
+  },
+  {
+    "name": "颜色转换器",
+    "url": "/color-converter.html",
+    "desc": "支持 HEX、RGB、RGBA、HSL、HSLA 常见颜色格式互转和预览。",
+    "category": "设计开发",
+    "isNew": true
+  }
+];
+    const categories = ['全部', ...Array.from(new Set(pages.map(page => page.category)))];
+    let currentCategory = '全部';
+
+    const toolGridEl = document.getElementById('toolGrid');
+    const filterRowEl = document.getElementById('filterRow');
+    const searchInputEl = document.getElementById('searchInput');
+    const emptyStateEl = document.getElementById('emptyState');
+    const totalToolCountEl = document.getElementById('totalToolCount');
+    const visibleToolCountEl = document.getElementById('visibleToolCount');
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function buildFilters() {
+      filterRowEl.innerHTML = categories.map(category => `
+        <button type="button" class="filter-chip ${category === currentCategory ? 'active' : ''}" data-category="${category}">${category}</button>
+      `).join('');
+
+      filterRowEl.querySelectorAll('.filter-chip').forEach(button => {
+        button.addEventListener('click', () => {
+          currentCategory = button.dataset.category;
+          buildFilters();
+          renderTools();
+        });
+      });
+    }
+
+    function getFilteredPages() {
+      const keyword = searchInputEl.value.trim().toLowerCase();
+      return pages.filter(page => {
+        const inCategory = currentCategory === '全部' || page.category === currentCategory;
+        const inKeyword = !keyword || `${page.name} ${page.desc} ${page.category}`.toLowerCase().includes(keyword);
+        return inCategory && inKeyword;
+      });
+    }
+
+    function renderCards(list, target) {
+      target.innerHTML = list.map(page => `
+        <a class="tool-link-card" href="${page.url}">
+          <div class="tool-card-top">
+            <div class="tool-card-title">${escapeHtml(page.name)}</div>
+          </div>
+          <div class="tool-card-desc">${escapeHtml(page.desc)}</div>
+          <span class="tag">${escapeHtml(page.category)}</span>
+        </a>
+      `).join('');
+    }
+
+    function renderTools() {
+      const filtered = getFilteredPages();
+      renderCards(filtered, toolGridEl);
+      totalToolCountEl.textContent = pages.length;
+      visibleToolCountEl.textContent = filtered.length;
+      emptyStateEl.classList.toggle('hidden', filtered.length > 0);
+    }
+
+    document.getElementById('clearSearchBtn').addEventListener('click', () => {
+      searchInputEl.value = '';
+      renderTools();
+    });
+
+    searchInputEl.addEventListener('input', renderTools);
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    buildFilters();
+    renderTools();
+  </script>
+</body>
+</html>
