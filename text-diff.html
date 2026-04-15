@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>文本对比 Diff 工具 - 在线比较文本差异 | 王先生工具</title>
+  <meta name="description" content="王先生工具提供简洁易用的在线文本对比 Diff 页面，支持按行比较文本差异，适合文案校对、配置比对、版本修改检查和日常内容对照场景快速使用。" />
+  
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/text-diff.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="文本对比 Diff 工具 - 在线比较文本差异 | 王先生工具" />
+  <meta property="og:description" content="王先生工具提供简洁易用的在线文本对比 Diff 页面，支持按行比较文本差异，适合文案校对、配置比对、版本修改检查和日常内容对照场景快速使用。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/text-diff.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="文本对比 Diff 工具 - 在线比较文本差异 | 王先生工具" />
+  <meta name="twitter:description" content="王先生工具提供简洁易用的在线文本对比 Diff 页面，支持按行比较文本差异，适合文案校对、配置比对、版本修改检查和日常内容对照场景快速使用。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .window-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 220px;
+      flex: 1;
+    }
+
+    .window-meta strong {
+      font-size: 14px;
+      color: #1e293b;
+    }
+
+    .window-meta span {
+      font-size: 12px;
+      color: var(--sub);
+    }
+
+    .tool-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: #fcfcfd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-head h2 {
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .card-head p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .segmented, .mini-tabs {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #f8fafc;
+    }
+
+    .segmented button, .mini-tabs button {
+      border: none;
+      background: transparent;
+      color: #334155;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .segmented button.active, .mini-tabs button.active {
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+    }
+
+    .status, .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .status.ready, .status-chip.success {
+      color: #065f46;
+      background: #ecfdf5;
+      border-color: #bbf7d0;
+    }
+
+    .status.ready .status-dot { background: var(--success); }
+
+    .status.error {
+      color: #991b1b;
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    .status.error .status-dot { background: var(--danger); }
+
+    .status.warn, .status.warning {
+      color: #92400e;
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .status.warn .status-dot, .status.warning .status-dot { background: var(--warning); }
+
+    .actions, .inline-actions, .toolbar-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .actions {
+      margin-bottom: 28px;
+    }
+
+    button { font: inherit; }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn.primary, .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn.primary:hover, .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn.soft {
+      background: var(--light);
+      color: var(--primary);
+      border: 1px solid #dbeafe;
+    }
+
+    .btn.ghost, .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: #fbfdff;
+      flex-wrap: wrap;
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .panel-meta {
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    textarea, input[type="text"], input[type="number"], select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 360px;
+      resize: vertical;
+      border: 0;
+      border-radius: 0;
+      padding: 16px 18px;
+      font-family: var(--mono);
+      line-height: 1.7;
+    }
+
+    textarea:focus, input[type="text"]:focus, input[type="number"]:focus, select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    textarea.output {
+      background: #f8fafc;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label, .check-item {
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .field small, .muted, .hint {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .check-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 18px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    .check-item input {
+      accent-color: var(--primary);
+    }
+
+    .preview {
+      min-height: 360px;
+      padding: 16px 18px;
+      background: #fff;
+      overflow: auto;
+    }
+
+    .preview h1, .preview h2, .preview h3, .preview h4 {
+      margin: 1.1em 0 0.5em;
+      line-height: 1.3;
+    }
+
+    .preview p { margin: .8em 0; }
+    .preview pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 16px;
+      border-radius: 14px;
+      overflow: auto;
+    }
+
+    .preview code {
+      background: #eef2ff;
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-family: var(--mono);
+    }
+
+    .preview pre code { background: transparent; padding: 0; }
+    .preview blockquote {
+      margin: 1em 0;
+      padding: 10px 14px;
+      border-left: 4px solid #93c5fd;
+      background: #eff6ff;
+      border-radius: 0 14px 14px 0;
+    }
+
+    .preview table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+
+    .preview th, .preview td {
+      border: 1px solid #dbe3ee;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .preview img {
+      max-width: 100%;
+      border-radius: 14px;
+    }
+
+    .preview hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.2em 0;
+    }
+
+    .kv {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 14px 18px;
+    }
+
+    .kv .k {
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .code-box, .result-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #f8fafc;
+      padding: 14px 16px;
+      overflow: auto;
+    }
+
+    .code-box pre, .result-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font: 13px/1.6 var(--mono);
+    }
+
+    .note {
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      color: #475569;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .section-title { font-size: 24px; margin: 0 0 14px; }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2, .article h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .article h3 {
+      font-size: 16px;
+      margin: 18px 0 10px;
+      color: #1e293b;
+    }
+
+    .content-card p, .content-card li, .article p, .article li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol, .content-card ul, .article ol, .article ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .hidden { display: none !important; }
+
+    .diff-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .add { background: #dcfce7; }
+    .remove { background: #fee2e2; }
+    .same { background: #f8fafc; }
+
+    .diff-line {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 7px 10px;
+      border-radius: 12px;
+      font-family: var(--mono);
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .diff-line + .diff-line { margin-top: 6px; }
+    .diff-line.same { background: #f8fafc; }
+    .diff-line.add { background: #ecfdf5; }
+    .diff-line.remove { background: #fef2f2; }
+    .diff-sign { font-weight: 800; }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+      padding: 14px 16px;
+    }
+
+    .stat .v {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #1e293b;
+    }
+
+    .stat .k {
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    .color-preview {
+      min-height: 180px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .preset-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .preset {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      cursor: pointer;
+    }
+
+    .copy-chip {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 12px;
+      background: #fff;
+      cursor: pointer;
+      color: #334155;
+      transition: 0.2s ease;
+    }
+
+    .copy-chip:hover {
+      background: var(--light);
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 980px) {
+      .grid-2, .grid-3, .stats-row, .field-grid, .kv {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar, .tool-body, .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .toolbar, .actions, .inline-actions {
+        justify-content: flex-start;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      textarea, .preview {
+        min-height: 280px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "王先生工具",
+  "url": "https://gongju.wangxiansheng.com/"
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "文本对比 Diff 工具",
+  "url": "https://gongju.wangxiansheng.com/text-diff.html",
+  "description": "王先生工具提供简洁易用的在线文本对比 Diff 页面，支持按行比较文本差异，适合文案校对、配置比对、版本修改检查和日常内容对照场景快速使用。",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "王先生",
+      "item": "https://www.wangxiansheng.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "王先生工具",
+      "item": "https://gongju.wangxiansheng.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "文本对比 Diff 工具",
+      "item": "https://gongju.wangxiansheng.com/text-diff.html"
+    }
+  ]
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "文本对比 Diff 工具",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "url": "https://gongju.wangxiansheng.com/text-diff.html",
+  "description": "王先生工具提供简洁易用的在线文本对比 Diff 页面，支持按行比较文本差异，适合文案校对、配置比对、版本修改检查和日常内容对照场景快速使用。",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "CNY"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+}
+  </script>
+
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">文本对比 Diff 工具</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>文本对比 Diff 工具</h1>
+      <p>王先生工具提供简洁易用的在线文本对比 Diff 页面，支持按行比较文本差异，适合文案校对、配置比对、版本修改检查和日常内容对照场景快速使用。</p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="screen-reader-text">文本对比 Diff 工具</h2>
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <section class="card">
+            <div class="card-body">
+              <div class="toolbar">
+  <div class="segmented">
+    <button class="active">文本对比 Diff</button>
+  </div>
+  <div id="statusBox" class="status ready">
+    <span class="status-dot"></span>
+    <span class="status-text">Ready</span>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn primary" id="compareBtn">立即对比</button>
+  <button class="btn" id="swapBtn">交换内容</button>
+  <button class="btn" id="copyBtn">复制差异结果</button>
+  <button class="btn" id="exampleBtn">填充示例</button>
+  <button class="btn" id="clearBtn">清空重置</button>
+</div>
+
+<div class="field" style="margin-bottom:28px">
+  <label>对比选项</label>
+  <div class="check-row">
+    <label class="check-item"><input type="checkbox" id="ignoreSpace" /> 忽略首尾空格</label>
+    <label class="check-item"><input type="checkbox" id="ignoreCase" /> 忽略大小写</label>
+    <label class="check-item"><input type="checkbox" id="filterEmpty" /> 忽略空行</label>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">原始文本</div>
+      <div class="panel-meta" id="leftCount">0 字符 · 1 行</div>
+    </div>
+    <textarea id="leftText" spellcheck="false" placeholder="请输入左侧文本"></textarea>
+  </div>
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">对比文本</div>
+      <div class="panel-meta" id="rightCount">0 字符 · 1 行</div>
+    </div>
+    <textarea id="rightText" spellcheck="false" placeholder="请输入右侧文本"></textarea>
+  </div>
+</div>
+
+<div style="margin-top:18px" class="stats-row">
+  <div class="stat"><div class="v" id="sameCount">0</div><div class="k">相同行数</div></div>
+  <div class="stat"><div class="v" id="addCount">0</div><div class="k">新增行数</div></div>
+  <div class="stat"><div class="v" id="removeCount">0</div><div class="k">删除行数</div></div>
+</div>
+
+<div class="panel">
+  <div class="panel-head">
+    <div class="panel-title">Diff 结果</div>
+    <div class="panel-meta" id="resultCount">0 行变化</div>
+  </div>
+  <div style="padding:18px">
+    <div class="diff-legend">
+      <div class="legend-item"><span class="legend-color same"></span> 相同</div>
+      <div class="legend-item"><span class="legend-color add"></span> 新增</div>
+      <div class="legend-item"><span class="legend-color remove"></span> 删除</div>
+    </div>
+    <div id="diffResult" class="result-box"><pre>请先输入左右两侧内容后开始对比。</pre></div>
+  </div>
+</div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card article">
+          <h2>工具介绍</h2>
+<p>文本对比 Diff 工具适合版本改动检查、文案校对、配置比对、接口请求体对比等场景。支持按行查看新增、删除和相同行内容，适合快速找出差异。</p>
+
+<h2>使用方法</h2>
+<ol>
+  <li>将两段文本分别粘贴到左侧和右侧输入框。</li>
+  <li>按需勾选忽略空格、忽略大小写、忽略空行等选项。</li>
+  <li>点击“立即对比”或直接实时查看差异结果。</li>
+  <li>确认后可复制下方的差异结果文本。</li>
+</ol>
+
+<h2>常见问题</h2>
+<h3>这是按字符还是按行对比？</h3>
+<p>当前页面以“按行对比”为主，更适合文案、配置、日志等多行内容的快速比较。</p>
+
+<h3>内容很多会不会卡？</h3>
+<p>一般短文本和中等体量文本都可以顺畅使用。若一次粘贴超大文本，建议分段对比以获得更好的体验。</p>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <div id="globalToast" class="status ready hidden" style="position:fixed;right:18px;bottom:18px;z-index:99;">
+    <span class="status-dot"></span>
+    <span>提示</span>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script>
+function $(id){ return document.getElementById(id); }
+function countText(value){
+  const text = value || '';
+  return {
+    chars: text.length,
+    lines: text.length ? text.split(/\r\n|\r|\n/).length : 1
+  };
+}
+function updateCounter(textareaId, counterId){
+  const info = countText($(textareaId).value);
+  $(counterId).textContent = `${info.chars} 字符 · ${info.lines} 行`;
+}
+function copyText(text, successText='已复制到剪贴板'){
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    toast(successText);
+  }).catch(() => {
+    toast('复制失败，请手动复制');
+  });
+}
+let toastTimer = null;
+function toast(text){
+  const el = $('globalToast');
+  if (!el) return;
+  el.textContent = text;
+  el.classList.remove('hidden');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.add('hidden'), 1800);
+}
+function setStatus(type, text){
+  const box = $('statusBox');
+  if (!box) return;
+  box.className = `status ${type}`;
+  box.querySelector('.status-text').textContent = text;
+}
+function escapeHtml(str){
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+const diffExampleLeft = `商品A
+商品B
+商品C
+发货时间：48小时内
+客服联系邮箱：old@example.com`;
+
+const diffExampleRight = `商品A
+商品B
+商品C（升级版）
+发货时间：24小时内
+客服联系邮箱：service@example.com
+支持七天无理由`;
+
+function normalizeLine(line){
+  let value = line;
+  if ($('ignoreSpace').checked) value = value.trim();
+  if ($('ignoreCase').checked) value = value.toLowerCase();
+  return value;
+}
+function getLines(text){
+  let lines = String(text || '').split(/\r\n|\r|\n/);
+  if ($('filterEmpty').checked){
+    lines = lines.filter(line => line.trim() !== '');
+  }
+  return lines;
+}
+function lcs(a, b){
+  const m = a.length;
+  const n = b.length;
+  const dp = Array.from({length: m + 1}, () => Array(n + 1).fill(0));
+  for (let i = m - 1; i >= 0; i--){
+    for (let j = n - 1; j >= 0; j--){
+      if (normalizeLine(a[i]) === normalizeLine(b[j])) dp[i][j] = dp[i + 1][j + 1] + 1;
+      else dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+    }
+  }
+  const result = [];
+  let i = 0;
+  let j = 0;
+  while (i < m && j < n){
+    if (normalizeLine(a[i]) === normalizeLine(b[j])){
+      result.push({type:'same', left:a[i], right:b[j]});
+      i++; j++;
+    }else if (dp[i + 1][j] >= dp[i][j + 1]){
+      result.push({type:'remove', left:a[i]});
+      i++;
+    }else{
+      result.push({type:'add', right:b[j]});
+      j++;
+    }
+  }
+  while (i < m){ result.push({type:'remove', left:a[i++]}); }
+  while (j < n){ result.push({type:'add', right:b[j++]}); }
+  return result;
+}
+function renderDiff(){
+  updateCounter('leftText','leftCount');
+  updateCounter('rightText','rightCount');
+
+  const left = getLines($('leftText').value);
+  const right = getLines($('rightText').value);
+
+  if (!left.join('').trim() && !right.join('').trim()){
+    $('diffResult').innerHTML = '<pre>请先输入左右两侧内容后开始对比。</pre>';
+    $('sameCount').textContent = '0';
+    $('addCount').textContent = '0';
+    $('removeCount').textContent = '0';
+    $('resultCount').textContent = '0 行变化';
+    setStatus('ready','Ready');
+    return;
+  }
+
+  const items = lcs(left, right);
+  let same = 0, add = 0, remove = 0;
+  const html = items.map(item => {
+    if (item.type === 'same'){
+      same++;
+      return `<div class="diff-line same"><div class="diff-sign">= 相同</div><div>${escapeHtml(item.right)}</div></div>`;
+    }
+    if (item.type === 'add'){
+      add++;
+      return `<div class="diff-line add"><div class="diff-sign">+ 新增</div><div>${escapeHtml(item.right)}</div></div>`;
+    }
+    remove++;
+    return `<div class="diff-line remove"><div class="diff-sign">- 删除</div><div>${escapeHtml(item.left)}</div></div>`;
+  }).join('');
+  $('diffResult').innerHTML = html || '<pre>两边内容完全一致。</pre>';
+  $('sameCount').textContent = String(same);
+  $('addCount').textContent = String(add);
+  $('removeCount').textContent = String(remove);
+  $('resultCount').textContent = `${add + remove} 行变化`;
+  if (add + remove === 0){
+    setStatus('ready','内容完全一致');
+  }else{
+    setStatus('warn','检测到差异');
+  }
+}
+['leftText','rightText','ignoreSpace','ignoreCase','filterEmpty'].forEach(id => {
+  $(id).addEventListener('input', renderDiff);
+  $(id).addEventListener('change', renderDiff);
+});
+$('compareBtn').addEventListener('click', renderDiff);
+$('swapBtn').addEventListener('click', () => {
+  const left = $('leftText').value;
+  $('leftText').value = $('rightText').value;
+  $('rightText').value = left;
+  renderDiff();
+});
+$('copyBtn').addEventListener('click', () => {
+  const text = Array.from(document.querySelectorAll('.diff-line')).map(line => line.innerText.replace(/\n/g,' ')).join('\n');
+  copyText(text || $('diffResult').innerText);
+});
+$('exampleBtn').addEventListener('click', () => {
+  $('leftText').value = diffExampleLeft;
+  $('rightText').value = diffExampleRight;
+  renderDiff();
+});
+$('clearBtn').addEventListener('click', () => {
+  $('leftText').value = '';
+  $('rightText').value = '';
+  $('ignoreSpace').checked = false;
+  $('ignoreCase').checked = false;
+  $('filterEmpty').checked = false;
+  renderDiff();
+});
+renderDiff();
+  </script>
+</body>
+</html>

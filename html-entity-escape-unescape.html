@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>HTML 实体转义 / 反转义 - 在线 Escape / Unescape | 王先生工具</title>
+  <meta name="description" content="王先生工具提供简洁易用的在线 HTML 实体转义 / 反转义页面，支持常见 HTML 字符安全转义与还原，适合代码展示、模板处理、富文本整理和开发调试场景快速使用。" />
+  
+  <meta name="author" content="王先生工具" />
+  <meta name="application-name" content="王先生工具" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no,email=no,address=no" />
+  <meta name="theme-color" content="#2563eb" />
+
+  <link rel="canonical" href="https://gongju.wangxiansheng.com/html-entity-escape-unescape.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="王先生工具" />
+  <meta property="og:title" content="HTML 实体转义 / 反转义 - 在线 Escape / Unescape | 王先生工具" />
+  <meta property="og:description" content="王先生工具提供简洁易用的在线 HTML 实体转义 / 反转义页面，支持常见 HTML 字符安全转义与还原，适合代码展示、模板处理、富文本整理和开发调试场景快速使用。" />
+  <meta property="og:url" content="https://gongju.wangxiansheng.com/html-entity-escape-unescape.html" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="HTML 实体转义 / 反转义 - 在线 Escape / Unescape | 王先生工具" />
+  <meta name="twitter:description" content="王先生工具提供简洁易用的在线 HTML 实体转义 / 反转义页面，支持常见 HTML 字符安全转义与还原，适合代码展示、模板处理、富文本整理和开发调试场景快速使用。" />
+
+  <style>
+    :root {
+      --bg1: #f7f9fc;
+      --bg2: #edf3fa;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-solid: #ffffff;
+      --text: #1d1d1f;
+      --sub: #6b7280;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --light: #eef2ff;
+      --light-hover: #e2e8f0;
+      --border: #e5e7eb;
+      --radius: 20px;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      --success: #16a34a;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --mono: "SF Mono", "Menlo", "Monaco", "Cascadia Code", "Consolas", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html, body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      padding: 24px 16px;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+      font-size: 14px;
+      color: var(--sub);
+    }
+
+    .breadcrumb a {
+      color: #475569;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .topbar {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .topbar h1 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .topbar p {
+      max-width: 860px;
+      margin: 0 auto;
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--sub);
+    }
+
+    .tool-shell {
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .window-bar {
+      min-height: 64px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.6);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      min-width: 72px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-red { background: #ff5f56; }
+    .dot-yellow { background: #ffbd2e; }
+    .dot-green { background: #27c93f; }
+
+    .window-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 220px;
+      flex: 1;
+    }
+
+    .window-meta strong {
+      font-size: 14px;
+      color: #1e293b;
+    }
+
+    .window-meta span {
+      font-size: 12px;
+      color: var(--sub);
+    }
+
+    .tool-body {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+
+    .card-head {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: #fcfcfd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .card-head h2 {
+      font-size: 18px;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .card-head p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--sub);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .segmented, .mini-tabs {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #f8fafc;
+    }
+
+    .segmented button, .mini-tabs button {
+      border: none;
+      background: transparent;
+      color: #334155;
+      cursor: pointer;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .segmented button.active, .mini-tabs button.active {
+      background: #fff;
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+    }
+
+    .status, .status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #64748b;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .status.ready, .status-chip.success {
+      color: #065f46;
+      background: #ecfdf5;
+      border-color: #bbf7d0;
+    }
+
+    .status.ready .status-dot { background: var(--success); }
+
+    .status.error {
+      color: #991b1b;
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    .status.error .status-dot { background: var(--danger); }
+
+    .status.warn, .status.warning {
+      color: #92400e;
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .status.warn .status-dot, .status.warning .status-dot { background: var(--warning); }
+
+    .actions, .inline-actions, .toolbar-right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .actions {
+      margin-bottom: 28px;
+    }
+
+    button { font: inherit; }
+
+    .btn {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      white-space: nowrap;
+      background: var(--light);
+      color: #334155;
+    }
+
+    .btn:hover {
+      background: var(--light-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn.primary, .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn.primary:hover, .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn.soft {
+      background: var(--light);
+      color: var(--primary);
+      border: 1px solid #dbeafe;
+    }
+
+    .btn.ghost, .btn-light {
+      background: var(--light);
+      color: #334155;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: #fbfdff;
+      flex-wrap: wrap;
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .panel-meta {
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    textarea, input[type="text"], input[type="number"], select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 360px;
+      resize: vertical;
+      border: 0;
+      border-radius: 0;
+      padding: 16px 18px;
+      font-family: var(--mono);
+      line-height: 1.7;
+    }
+
+    textarea:focus, input[type="text"]:focus, input[type="number"]:focus, select:focus {
+      border-color: #93c5fd;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    }
+
+    textarea.output {
+      background: #f8fafc;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label, .check-item {
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .field small, .muted, .hint {
+      font-size: 12px;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .check-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 18px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+    }
+
+    .check-item input {
+      accent-color: var(--primary);
+    }
+
+    .preview {
+      min-height: 360px;
+      padding: 16px 18px;
+      background: #fff;
+      overflow: auto;
+    }
+
+    .preview h1, .preview h2, .preview h3, .preview h4 {
+      margin: 1.1em 0 0.5em;
+      line-height: 1.3;
+    }
+
+    .preview p { margin: .8em 0; }
+    .preview pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 14px 16px;
+      border-radius: 14px;
+      overflow: auto;
+    }
+
+    .preview code {
+      background: #eef2ff;
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-family: var(--mono);
+    }
+
+    .preview pre code { background: transparent; padding: 0; }
+    .preview blockquote {
+      margin: 1em 0;
+      padding: 10px 14px;
+      border-left: 4px solid #93c5fd;
+      background: #eff6ff;
+      border-radius: 0 14px 14px 0;
+    }
+
+    .preview table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+
+    .preview th, .preview td {
+      border: 1px solid #dbe3ee;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .preview img {
+      max-width: 100%;
+      border-radius: 14px;
+    }
+
+    .preview hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 1.2em 0;
+    }
+
+    .kv {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 14px 18px;
+    }
+
+    .kv .k {
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .code-box, .result-box {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #f8fafc;
+      padding: 14px 16px;
+      overflow: auto;
+    }
+
+    .code-box pre, .result-box pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font: 13px/1.6 var(--mono);
+    }
+
+    .note {
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      color: #475569;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .section-title { font-size: 24px; margin: 0 0 14px; }
+
+    .content-sections {
+      margin-top: 20px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .content-card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+    }
+
+    .content-card h2, .article h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #1e293b;
+    }
+
+    .article h3 {
+      font-size: 16px;
+      margin: 18px 0 10px;
+      color: #1e293b;
+    }
+
+    .content-card p, .content-card li, .article p, .article li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .content-card ol, .content-card ul, .article ol, .article ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .faq details {
+      border-top: 1px solid #eef2f7;
+      padding: 12px 0;
+    }
+
+    .faq details:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+      color: #1e293b;
+      list-style: none;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq .answer {
+      margin-top: 10px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .hidden { display: none !important; }
+
+    .diff-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .add { background: #dcfce7; }
+    .remove { background: #fee2e2; }
+    .same { background: #f8fafc; }
+
+    .diff-line {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 7px 10px;
+      border-radius: 12px;
+      font-family: var(--mono);
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .diff-line + .diff-line { margin-top: 6px; }
+    .diff-line.same { background: #f8fafc; }
+    .diff-line.add { background: #ecfdf5; }
+    .diff-line.remove { background: #fef2f2; }
+    .diff-sign { font-weight: 800; }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+      margin-bottom: 28px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+      padding: 14px 16px;
+    }
+
+    .stat .v {
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #1e293b;
+    }
+
+    .stat .k {
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    .color-preview {
+      min-height: 180px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .preset-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .preset {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      border: 2px solid #fff;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      cursor: pointer;
+    }
+
+    .copy-chip {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 12px;
+      background: #fff;
+      cursor: pointer;
+      color: #334155;
+      transition: 0.2s ease;
+    }
+
+    .copy-chip:hover {
+      background: var(--light);
+    }
+
+    .footer {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--sub);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 980px) {
+      .grid-2, .grid-3, .stats-row, .field-grid, .kv {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .topbar h1 {
+        font-size: 1.9rem;
+      }
+
+      .window-bar, .tool-body, .card-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .toolbar, .actions, .inline-actions {
+        justify-content: flex-start;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      textarea, .preview {
+        min-height: 280px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "王先生工具",
+  "url": "https://gongju.wangxiansheng.com/"
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "HTML 实体转义 / 反转义",
+  "url": "https://gongju.wangxiansheng.com/html-entity-escape-unescape.html",
+  "description": "王先生工具提供简洁易用的在线 HTML 实体转义 / 反转义页面，支持常见 HTML 字符安全转义与还原，适合代码展示、模板处理、富文本整理和开发调试场景快速使用。",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "王先生",
+      "item": "https://www.wangxiansheng.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "王先生工具",
+      "item": "https://gongju.wangxiansheng.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "HTML 实体转义 / 反转义",
+      "item": "https://gongju.wangxiansheng.com/html-entity-escape-unescape.html"
+    }
+  ]
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "HTML 实体转义 / 反转义",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Web",
+  "url": "https://gongju.wangxiansheng.com/html-entity-escape-unescape.html",
+  "description": "王先生工具提供简洁易用的在线 HTML 实体转义 / 反转义页面，支持常见 HTML 字符安全转义与还原，适合代码展示、模板处理、富文本整理和开发调试场景快速使用。",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "CNY"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "王先生工具",
+    "url": "https://gongju.wangxiansheng.com/"
+  }
+}
+  </script>
+
+</head>
+<body>
+  <div class="page">
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <a href="https://www.wangxiansheng.com/" target="_blank" rel="noopener noreferrer">王先生</a>
+      <span>/</span>
+      <a href="https://gongju.wangxiansheng.com/">王先生工具</a>
+      <span>/</span>
+      <span aria-current="page">HTML 实体转义 / 反转义</span>
+    </nav>
+
+    <header class="topbar">
+      <h1>HTML 实体转义 / 反转义</h1>
+      <p>王先生工具提供简洁易用的在线 HTML 实体转义 / 反转义页面，支持常见 HTML 字符安全转义与还原，适合代码展示、模板处理、富文本整理和开发调试场景快速使用。</p>
+    </header>
+
+    <main>
+      <section class="tool-shell" aria-labelledby="tool-title">
+        <h2 id="tool-title" class="screen-reader-text">HTML 实体转义 / 反转义</h2>
+        <div class="window-bar">
+          <div class="window-controls" aria-hidden="true">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+        </div>
+
+        <div class="tool-body">
+          <section class="card">
+            <div class="card-body">
+              <div class="toolbar">
+  <div class="segmented" id="modeTabs">
+    <button class="active" data-mode="escape">HTML 实体转义</button>
+    <button data-mode="unescape">HTML 实体反转义</button>
+  </div>
+  <div id="statusBox" class="status ready">
+    <span class="status-dot"></span>
+    <span class="status-text">Ready</span>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn primary" id="runBtn">立即转换</button>
+  <button class="btn" id="swapBtn">交换内容</button>
+  <button class="btn" id="copyBtn">复制结果</button>
+  <button class="btn" id="exampleBtn">填充示例</button>
+  <button class="btn" id="clearBtn">清空重置</button>
+</div>
+
+<div class="grid-2">
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">输入内容</div>
+      <div class="panel-meta" id="inputCount">0 字符 · 1 行</div>
+    </div>
+    <textarea id="inputText" spellcheck="false" placeholder='请输入要转义或反转义的 HTML 内容'></textarea>
+  </div>
+  <div class="panel">
+    <div class="panel-head">
+      <div class="panel-title">输出结果</div>
+      <div class="panel-meta" id="outputCount">0 字符 · 1 行</div>
+    </div>
+    <textarea id="outputText" class="output" spellcheck="false" placeholder="转换结果会显示在这里"></textarea>
+  </div>
+</div>
+
+<div style="margin-top:18px" class="note">
+  支持常见 HTML 实体编码与还原，如 &lt;、&gt;、&amp;、&quot;、&#39; 等，适合代码展示、模板处理和富文本内容整理。
+</div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <div class="content-sections">
+        <section class="content-card article">
+          <h2>工具介绍</h2>
+<p>HTML 实体转义 / 反转义工具适合代码展示、模板输出、安全转义、富文本处理等场景。可以快速把 HTML 标签转成安全展示文本，也可以把实体字符还原成原始内容。</p>
+
+<h2>使用方法</h2>
+<ol>
+  <li>选择“HTML 实体转义”或“HTML 实体反转义”模式。</li>
+  <li>在左侧输入框中输入或粘贴内容。</li>
+  <li>系统会自动实时转换，也可点击“立即转换”手动执行。</li>
+  <li>可通过“交换内容”快速进行反向处理。</li>
+</ol>
+
+<h2>常见问题</h2>
+<h3>什么时候需要 HTML 转义？</h3>
+<p>当你想在网页里展示代码片段，而不是让浏览器直接渲染标签时，就需要先做 HTML 转义。</p>
+
+<h3>反转义后能直接渲染吗？</h3>
+<p>可以还原为原始字符内容，但是否渲染还取决于你后续把结果放在页面的哪个位置以及采用什么插入方式。</p>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      © <span id="year"></span> 王先生 版权所有
+    </footer>
+  </div>
+
+  <div id="globalToast" class="status ready hidden" style="position:fixed;right:18px;bottom:18px;z-index:99;">
+    <span class="status-dot"></span>
+    <span>提示</span>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script>
+function $(id){ return document.getElementById(id); }
+function countText(value){
+  const text = value || '';
+  return {
+    chars: text.length,
+    lines: text.length ? text.split(/\r\n|\r|\n/).length : 1
+  };
+}
+function updateCounter(textareaId, counterId){
+  const info = countText($(textareaId).value);
+  $(counterId).textContent = `${info.chars} 字符 · ${info.lines} 行`;
+}
+function copyText(text, successText='已复制到剪贴板'){
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    toast(successText);
+  }).catch(() => {
+    toast('复制失败，请手动复制');
+  });
+}
+let toastTimer = null;
+function toast(text){
+  const el = $('globalToast');
+  if (!el) return;
+  el.textContent = text;
+  el.classList.remove('hidden');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.add('hidden'), 1800);
+}
+function setStatus(type, text){
+  const box = $('statusBox');
+  if (!box) return;
+  box.className = `status ${type}`;
+  box.querySelector('.status-text').textContent = text;
+}
+function escapeHtml(str){
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+const entityExample = `<div class="card">
+  <h2>标题</h2>
+  <p>Tom & Jerry "Hello"</p>
+</div>`;
+let currentMode = 'escape';
+
+function htmlEscape(str){
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+function htmlUnescape(str){
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = String(str);
+  return textarea.value
+    .replace(/&quot;/g,'"')
+    .replace(/&#39;/g,"'");
+}
+function run(){
+  const input = $('inputText').value;
+  updateCounter('inputText','inputCount');
+  if (!input){
+    $('outputText').value = '';
+    updateCounter('outputText','outputCount');
+    setStatus('ready','Ready');
+    return;
+  }
+  try{
+    $('outputText').value = currentMode === 'escape' ? htmlEscape(input) : htmlUnescape(input);
+    updateCounter('outputText','outputCount');
+    setStatus('ready', currentMode === 'escape' ? 'HTML 转义成功' : 'HTML 反转义成功');
+  }catch(error){
+    $('outputText').value = '处理失败：' + (error.message || error);
+    updateCounter('outputText','outputCount');
+    setStatus('error','转换失败');
+  }
+}
+document.querySelectorAll('#modeTabs button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#modeTabs button').forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    currentMode = btn.dataset.mode;
+    run();
+  });
+});
+$('inputText').addEventListener('input', run);
+$('runBtn').addEventListener('click', run);
+$('swapBtn').addEventListener('click', () => {
+  const input = $('inputText').value;
+  $('inputText').value = $('outputText').value;
+  $('outputText').value = input;
+  currentMode = currentMode === 'escape' ? 'unescape' : 'escape';
+  document.querySelectorAll('#modeTabs button').forEach(x => x.classList.toggle('active', x.dataset.mode === currentMode));
+  run();
+});
+$('copyBtn').addEventListener('click', () => copyText($('outputText').value));
+$('exampleBtn').addEventListener('click', () => {
+  if (currentMode === 'escape'){
+    $('inputText').value = entityExample;
+  }else{
+    $('inputText').value = '&lt;div class=&quot;card&quot;&gt;Tom &amp; Jerry&lt;/div&gt;';
+  }
+  run();
+});
+$('clearBtn').addEventListener('click', () => {
+  $('inputText').value = '';
+  $('outputText').value = '';
+  updateCounter('inputText','inputCount');
+  updateCounter('outputText','outputCount');
+  setStatus('ready','Ready');
+});
+run();
+  </script>
+</body>
+</html>
