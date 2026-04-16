@@ -726,8 +726,8 @@
                 <p>支持。页面会在请求接口前自动尝试把中文或国际化域名转换为 ASCII 形式。</p>
             </article>
             <article class="faq-item">
-                <h3>可以直接通过 URL 打开某个域名结果吗？</h3>
-                <p>可以。支持通过路径或查询参数自动带入域名并发起查询。</p>
+                <h3>输入后没有自动显示结果怎么办？</h3>
+                <p>请输入完整域名后点击“开始查询”或直接按回车，例如 example.com。</p>
             </article>
             <article class="faq-item">
                 <h3>为什么保留 RDAP / Whois 原始数据？</h3>
@@ -825,23 +825,6 @@
             }
         }
 
-        function getDomainFromLocation() {
-            const pathPart = window.location.pathname.split('/').filter(Boolean).pop();
-            if (pathPart && pathPart !== 'whois' && pathPart.includes('.')) {
-                return decodeURIComponent(pathPart);
-            }
-            const q = new URLSearchParams(window.location.search).get('domain');
-            return q ? decodeURIComponent(q) : '';
-        }
-
-        function updateUrl(domain) {
-            const newPath = '/whois/' + encodeURIComponent(domain);
-            const current = window.location.pathname + window.location.search;
-            if (current !== newPath) {
-                history.replaceState(null, '', newPath);
-            }
-        }
-
         function formatDateValue(value) {
             if (!value || value === 'null') return '-';
             return String(value).replace('T', ' ').replace('Z', '').slice(0, 19);
@@ -915,7 +898,6 @@
             }
 
             els.domainInput.value = inputDomain;
-            updateUrl(inputDomain);
             document.title = inputDomain + ' 域名查询（Whois 查询） - 王先生工具';
 
             const requestId = ++currentRequestId;
@@ -1009,7 +991,6 @@
             els.domainInput.value = '';
             resetResults();
             document.title = 'Whois 查询 - 王先生工具';
-            history.replaceState(null, '', '/whois');
         });
 
         els.domainInput.addEventListener('keydown', event => {
@@ -1020,13 +1001,6 @@
             btn.addEventListener('click', () => queryDomain(btn.dataset.domain || ''));
         });
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const initialDomain = getDomainFromLocation();
-            if (initialDomain) {
-                els.domainInput.value = initialDomain;
-                queryDomain(initialDomain);
-            }
-        });
     </script>
 </body>
 </html>
