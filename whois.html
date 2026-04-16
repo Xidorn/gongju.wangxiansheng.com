@@ -905,7 +905,7 @@
 
             els.queryBtn.disabled = true;
             els.queryBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i><span> 查询中</span>';
-            setAlert('info', '正在查询 ' + inputDomain + ' 的 Whois / RDAP 信息...');
+            setAlert('info', '正在查询 ' + inputDomain + '...');
 
             try {
                 const response = await fetch('https://api.mrwang.com/whois.php?domain=' + encodeURIComponent(asciiDomain));
