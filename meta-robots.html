@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meta Robots 检查 - noindex、nofollow、X-Robots-Tag 在线检测 - 王先生工具</title>
+    <meta name="description" content="Meta Robots 检查工具，支持查看 meta robots、X-Robots-Tag、index 与 follow 状态，适合站长与 SEO 场景快速检查页面索引指令。">
+    <meta name="keywords" content="Meta Robots检查,noindex检测,nofollow检测,X-Robots-Tag检测,SEO工具,站长工具,王先生工具">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <link rel="canonical" href="https://gongju.wangxiansheng.com/meta-robots.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Meta Robots 检查 - noindex、nofollow、X-Robots-Tag 在线检测 - 王先生工具">
+    <meta property="og:description" content="Meta Robots 检查工具，支持查看 meta robots、X-Robots-Tag、index 与 follow 状态，适合站长与 SEO 场景快速检查页面索引指令。">
+    <meta property="og:url" content="https://gongju.wangxiansheng.com/meta-robots.html">
+    <meta property="og:site_name" content="王先生工具">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Meta Robots 检查 - noindex、nofollow、X-Robots-Tag 在线检测 - 王先生工具">
+    <meta name="twitter:description" content="Meta Robots 检查工具，支持查看 meta robots、X-Robots-Tag、index 与 follow 状态，适合站长与 SEO 场景快速检查页面索引指令。">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Meta Robots 检查 - noindex、nofollow、X-Robots-Tag 在线检测 - 王先生工具", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "url": "https://gongju.wangxiansheng.com/meta-robots.html", "description": "Meta Robots 检查工具，支持查看 meta robots、X-Robots-Tag、index 与 follow 状态，适合站长与 SEO 场景快速检查页面索引指令。", "publisher": {"@type": "Organization", "name": "王先生工具"}}</script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg: #f6f8fb;
+            --panel: #ffffff;
+            --panel-soft: #fbfcfe;
+            --line: #e5e7eb;
+            --text: #111827;
+            --muted: #6b7280;
+            --primary: #2563eb;
+            --primary-soft: #eff6ff;
+            --accent: #7c3aed;
+            --success: #059669;
+            --success-soft: #ecfdf5;
+            --warning: #d97706;
+            --warning-soft: #fffbeb;
+            --danger: #dc2626;
+            --danger-soft: #fef2f2;
+            --shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+            --radius-lg: 16px;
+            --radius-xl: 22px;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 30%),
+                radial-gradient(circle at top right, rgba(124, 58, 237, 0.07), transparent 28%),
+                var(--bg);
+            line-height: 1.6;
+        }
+        a { color: inherit; text-decoration: none; }
+        .container { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+        .site-header { padding: 28px 0 12px; }
+        .site-brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.1rem; font-weight: 800; }
+        .site-brand-badge { width: 42px; height: 42px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; color: #fff; background: linear-gradient(135deg, var(--primary), var(--accent)); box-shadow: var(--shadow); }
+        .breadcrumb { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--muted); font-size: 0.94rem; margin: 6px 0 18px; }
+        .breadcrumb i { font-size: 0.78rem; opacity: 0.7; }
+        .page-hero { background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92)); border: 1px solid rgba(255,255,255,0.7); box-shadow: var(--shadow); border-radius: 26px; padding: 28px; margin-bottom: 22px; }
+        .page-title { margin: 0; font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.15; letter-spacing: -0.02em; }
+        .page-desc { margin: 12px 0 0; color: var(--muted); max-width: 760px; }
+        .tool-shell { background: var(--panel); border-radius: 26px; box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.7); overflow: hidden; }
+        .tool-shell-head { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 18px 24px; border-bottom: 1px solid #eef2f7; background: linear-gradient(180deg, #ffffff, #fbfdff); }
+        .tool-shell-head strong { display: flex; align-items: center; gap: 10px; font-size: 1.02rem; }
+        .tool-shell-head span { color: var(--muted); font-size: 0.92rem; }
+        .tool-body { padding: 24px; }
+        .search-row { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center; }
+        .search-box { display: flex; align-items: center; gap: 12px; min-height: 58px; background: var(--panel-soft); border: 1px solid var(--line); border-radius: 18px; padding: 0 16px; }
+        .search-box i { color: var(--primary); font-size: 1rem; }
+        .search-box input, .search-box select { width: 100%; border: 0; background: transparent; outline: 0; color: var(--text); font-size: 1rem; }
+        .search-box select { cursor: pointer; }
+        .btn { min-height: 58px; border: 0; border-radius: 18px; padding: 0 22px; font-size: 0.96rem; font-weight: 700; cursor: pointer; transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease; }
+        .btn:hover { transform: translateY(-1px); }
+        .btn:active { transform: translateY(0); opacity: 0.92; }
+        .btn-primary { color: #fff; background: linear-gradient(135deg, var(--primary), var(--accent)); box-shadow: 0 10px 24px rgba(37, 99, 235, 0.24); }
+        .btn-secondary { color: #334155; background: #fff; border: 1px solid var(--line); }
+        .quick-list { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .quick-chip { border: 1px dashed #cbd5e1; background: #fff; color: #334155; border-radius: 999px; padding: 8px 12px; font-size: 0.88rem; cursor: pointer; }
+        .hint-line { margin-top: 12px; color: var(--muted); font-size: 0.92rem; }
+        .alert { display: none; margin-top: 16px; border-radius: 16px; padding: 14px 16px; font-weight: 600; border: 1px solid transparent; }
+        .alert-error { background: var(--danger-soft); color: var(--danger); border-color: #fecaca; }
+        .alert-info { background: var(--primary-soft); color: var(--primary); border-color: #bfdbfe; }
+        .result-panel { display: none; margin-top: 18px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+        .stat-card { position: relative; overflow: hidden; background: linear-gradient(180deg, #ffffff, #fbfdff); border: 1px solid #eaf0f7; border-radius: 20px; padding: 18px; min-height: 126px; }
+        .stat-card i.bg { position: absolute; right: 14px; bottom: 14px; font-size: 2rem; color: rgba(37, 99, 235, 0.08); }
+        .stat-label { font-size: 0.82rem; color: var(--muted); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+        .stat-value { margin-top: 10px; font-size: 1.45rem; font-weight: 800; line-height: 1.3; word-break: break-word; }
+        .stat-value b { color: var(--primary); }
+        .detail-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; margin-top: 16px; }
+        .card { background: #fff; border: 1px solid #eaf0f7; border-radius: 22px; padding: 20px; }
+        .card h3 { margin: 0 0 14px; font-size: 1.02rem; display: flex; align-items: center; gap: 10px; }
+        .info-list { display: grid; gap: 12px; }
+        .info-item { display: grid; grid-template-columns: 120px 1fr; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px dashed #e5e7eb; }
+        .info-item:first-child { border-top: 0; padding-top: 0; }
+        .info-key { color: var(--muted); font-size: 0.92rem; font-weight: 600; }
+        .info-value { font-weight: 600; color: #1f2937; word-break: break-word; }
+        .stack-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 8px 12px; background: #f8fafc; border: 1px solid #e5e7eb; color: #334155; font-size: 0.9rem; font-weight: 600; word-break: break-all; }
+        .pill i { color: var(--primary); }
+        details.raw-box { margin-top: 16px; border: 1px solid #e5e7eb; border-radius: 18px; overflow: hidden; background: #fff; }
+        details.raw-box summary { list-style: none; cursor: pointer; padding: 16px 18px; font-weight: 700; color: #334155; background: #f8fafc; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        details.raw-box summary::-webkit-details-marker { display: none; }
+        .raw-content { padding: 18px; max-height: 420px; overflow: auto; border-top: 1px solid #e5e7eb; background: #0f172a; color: #e2e8f0; font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace; font-size: 0.86rem; white-space: pre-wrap; line-height: 1.65; }
+        .desc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+        .desc-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 22px; padding: 22px; box-shadow: var(--shadow); }
+        .desc-card h2 { margin: 0 0 12px; font-size: 1.06rem; }
+        .desc-card p, .desc-card li { color: #4b5563; font-size: 0.95rem; }
+        .desc-card ul { margin: 0; padding-left: 18px; }
+        .faq-list { margin-top: 22px; display: grid; gap: 14px; }
+        .faq-item { background: #fff; border: 1px solid #e5e7eb; border-radius: 20px; padding: 18px 20px; box-shadow: var(--shadow); }
+        .faq-item h3 { margin: 0 0 8px; font-size: 1rem; }
+        .faq-item p { margin: 0; color: #4b5563; }
+        .site-footer { text-align: center; color: var(--muted); font-size: 0.92rem; padding: 34px 0 46px; }
+        .site-footer a { font-weight: 700; }
+        @media (max-width: 980px) {
+            .detail-grid, .desc-grid { grid-template-columns: 1fr; display: grid; }
+            .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 720px) {
+            .tool-shell-head { flex-direction: column; align-items: flex-start; }
+            .search-row { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .info-item { grid-template-columns: 1fr; gap: 8px; }
+            .page-hero, .tool-body, .desc-card, .faq-item, .card { padding-left: 18px; padding-right: 18px; }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a class="site-brand" href="/">
+                <span class="site-brand-badge"><i class="fas fa-screwdriver-wrench"></i></span>
+                <span>王先生工具</span>
+            </a>
+        </header>
+        <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="/">首页</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="/">站长工具</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Meta Robots 检查</span>
+        </nav>
+        <section class="page-hero">
+            <h1 class="page-title">Meta Robots 检查</h1>
+            <p class="page-desc">输入域名后可检查首页或目标页面的 Meta Robots 与 X-Robots-Tag 指令。</p>
+        </section>
+        <section class="tool-shell" aria-label="Meta Robots 检查工具">
+            <div class="tool-shell-head">
+                <div>
+                    <strong><i class="fas fa-globe"></i> 在线 Meta Robots 检查</strong>
+                    <span>输入域名或 URL 后即可检测 Meta Robots 与 X-Robots-Tag。</span>
+                </div>
+            </div>
+            <div class="tool-body">
+                <div class="search-row">
+                    <label class="search-box" for="domainInput">
+                        <i class="fas fa-magnifying-glass"></i>
+                        <input type="text" id="domainInput" placeholder="请输入域名，例如 wangxiansheng.com" spellcheck="false" autocomplete="off">
+                    </label>
+                    <button class="btn btn-primary" id="queryBtn" type="button"><i class="fas fa-bolt"></i><span> 开始检测</span></button>
+                    <button class="btn btn-secondary" id="clearBtn" type="button">清空</button>
+                </div>
+                <div class="quick-list" aria-label="示例域名">
+                    <button class="quick-chip" type="button" data-domain="wangxiansheng.com">wangxiansheng.com</button>
+                    <button class="quick-chip" type="button" data-domain="guan.wang">guan.wang</button>
+                    <button class="quick-chip" type="button" data-domain="wm.lt">wm.lt</button>
+                    <button class="quick-chip" type="button" data-domain="官方.网站">官方.网站（IDN）</button>
+                </div>
+                <div class="hint-line">输入域名或 URL 后可直接查看索引指令与原始数据。</div>
+                <div class="alert alert-error" id="errorBox"></div>
+                <div class="alert alert-info" id="infoBox"></div>
+                <div class="result-panel" id="resultPanel">
+                    <div class="stats-grid">
+                        <div class="stat-card"><div class="stat-label">检测地址</div><div class="stat-value" id="domainValue">-</div><i class="fas fa-globe bg"></i></div>
+                        <div class="stat-card"><div class="stat-label">Index 状态</div><div class="stat-value" id="indexValue">-</div><i class="fas fa-bookmark bg"></i></div>
+                        <div class="stat-card"><div class="stat-label">Follow 状态</div><div class="stat-value" id="followValue">-</div><i class="fas fa-link bg"></i></div>
+                        <div class="stat-card"><div class="stat-label">检测状态</div><div class="stat-value" id="statusValue">-</div><i class="fas fa-circle-check bg"></i></div>
+                    </div>
+                    <div class="detail-grid">
+                        <div class="card"><h3><i class="fas fa-circle-info" style="color:#2563eb"></i> 检测结果</h3><div class="info-list" id="baseInfoList"></div></div>
+                        <div class="card"><h3><i class="fas fa-list-check" style="color:#10b981"></i> 指令明细</h3><div class="info-list"><div class="info-item"><div class="info-key">明细列表</div><div class="info-value"><div class="stack-list" id="resultList"></div></div></div></div></div>
+                    </div>
+                    <details class="raw-box" id="rawBox1" open><summary><span><i class="fas fa-code" style="color:#4338ca"></i> 原始返回数据</span><span>展开 / 收起</span></summary><pre class="raw-content" id="rawContent1"></pre></details>
+                    <details class="raw-box" id="rawBox2"><summary><span><i class="fas fa-file-lines" style="color:#475569"></i> 附加输出</span><span>展开 / 收起</span></summary><pre class="raw-content" id="rawContent2"></pre></details>
+                </div>
+            </div>
+        </section>
+        <section class="desc-grid"><article class="desc-card"><h2>工具说明</h2><p>用于检查页面是否存在 meta robots 或 X-Robots-Tag，并快速判断是否允许索引与跟踪链接。</p></article><article class="desc-card"><h2>使用方法</h2><ul><li>输入域名或 URL</li><li>点击开始检测</li><li>查看索引指令与原始输出</li></ul></article><article class="desc-card"><h2>结果说明</h2><ul><li>Index 状态用于判断能否被搜索引擎索引</li><li>Follow 状态用于判断链接是否建议跟踪</li><li>原始 HTML 适合进一步核对</li></ul></article></section>
+        <section class="faq-list" aria-label="常见问题"><article class="faq-item"><h3>可以检测任意内页吗？</h3><p>可以，输入完整 URL 后即可检测对应页面的 Meta Robots 与响应头。</p></article><article class="faq-item"><h3>支持中文域名吗？</h3><p>支持。浏览器会先规范化输入，再把请求发送给接口处理。</p></article><article class="faq-item"><h3>X-Robots-Tag 也会一起检查吗？</h3><p>会，接口会同时读取响应头并返回 X-Robots-Tag。</p></article></section>
+        <footer class="site-footer">
+            © <span id="year"></span> <a href="https://www.wangxiansheng.com" target="_blank" rel="noreferrer noopener">王先生</a> 版权所有
+        </footer>
+    </div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+function show(el, display = 'block') { if (el) el.style.display = display; }
+function hide(el) { if (el) el.style.display = 'none'; }
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+function setAlert(type, message) {
+    const errorBox = $('errorBox');
+    const infoBox = $('infoBox');
+    hide(errorBox); hide(infoBox);
+    if (!message) return;
+    const target = type === 'error' ? errorBox : infoBox;
+    target.textContent = message;
+    show(target);
+}
+function makeInfoItem(label, value) {
+    if (value === undefined || value === null || value === '') return '';
+    return '<div class="info-item"><div class="info-key">' + escapeHtml(label) + '</div><div class="info-value">' + escapeHtml(String(value)) + '</div></div>';
+}
+function renderPills(container, items, iconClass) {
+    if (!container) return;
+    if (!Array.isArray(items) || !items.length) {
+        container.innerHTML = '<span class="info-value" style="color:#9ca3af;">暂无数据</span>';
+        return;
+    }
+    container.innerHTML = items.map(function(item) {
+        return '<span class="pill"><i class="' + iconClass + '"></i>' + escapeHtml(String(item)) + '</span>';
+    }).join('');
+}
+function setLoading(loading, text) {
+    const btn = $('queryBtn');
+    if (!btn) return;
+    btn.disabled = loading;
+    btn.innerHTML = loading
+        ? '<i class="fas fa-circle-notch fa-spin"></i><span> ' + (text || '查询中') + '</span>'
+        : '<i class="fas fa-bolt"></i><span> 开始检测</span>';
+}
+function resetCommon() {
+    hide($('resultPanel'));
+    hide($('errorBox'));
+    hide($('infoBox'));
+    hide($('rawBox1'));
+    hide($('rawBox2'));
+    const raw1 = $('rawContent1');
+    const raw2 = $('rawContent2');
+    if (raw1) raw1.textContent = '';
+    if (raw2) raw2.textContent = '';
+    const baseInfoList = $('baseInfoList');
+    const resultList = $('resultList') || $('answerList');
+    if (baseInfoList) baseInfoList.innerHTML = '';
+    if (resultList) resultList.innerHTML = '';
+}
+function toASCIIHost(input) {
+    try {
+        return new URL('http://' + String(input).trim()).hostname;
+    } catch (error) {
+        return String(input || '').trim();
+    }
+}
+function normalizeUrlInput(input) {
+    const raw = String(input || '').trim();
+    if (!raw) return '';
+    try {
+        const hasScheme = /^https?:\/\//i.test(raw);
+        const url = new URL(hasScheme ? raw : ('https://' + raw));
+        return url.href;
+    } catch (error) {
+        return raw;
+    }
+}
+async function fetchJsonSafely(url) {
+    const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    const text = await response.text();
+    const contentType = String(response.headers.get('content-type') || '').toLowerCase();
+    const trimmedText = text.replace(/^\s+/, '');
+    const looksJson = contentType.includes('application/json') || trimmedText.startsWith('{') || trimmedText.startsWith('[');
+    if (!looksJson) {
+        const shortText = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160);
+        throw new Error(shortText ? ('接口返回异常：' + shortText) : '接口返回的不是 JSON，请检查接口文件是否正常运行');
+    }
+    try {
+        return JSON.parse(text);
+    } catch (error) {
+        throw new Error('接口 JSON 解析失败，请检查接口输出是否包含报错信息');
+    }
+}
+document.addEventListener('DOMContentLoaded', function () {
+    const year = $('year');
+    if (year) year.textContent = new Date().getFullYear();
+});
+</script>
+
+<script>
+const ROBOTS_API = 'https://api.mrwang.com/meta_robots.php';
+function fillEmpty() { $('resultList').innerHTML = '<span class="info-value" style="color:#9ca3af;">暂无数据</span>'; }
+async function queryTool(domain) {
+    const inputDomain = (domain || $('domainInput').value).trim();
+    resetCommon();
+    fillEmpty();
+    if (!inputDomain || !inputDomain.includes('.')) {
+        setAlert('error', '请输入有效的域名或 URL，例如 wangxiansheng.com');
+        return;
+    }
+    const normalized = normalizeUrlInput(inputDomain);
+    setLoading(true, '检测中');
+    setAlert('info', '正在检查 ' + inputDomain + ' 的 Meta Robots ...');
+    try {
+        const data = await fetchJsonSafely(ROBOTS_API + '?domain=' + encodeURIComponent(normalized));
+        if (data.code !== 0 || !data.data) throw new Error(data.msg || '检测失败');
+        const d = data.data;
+        $('domainValue').textContent = d.url || inputDomain;
+        $('indexValue').textContent = d.indexStatus || '-';
+        $('followValue').textContent = d.followStatus || '-';
+        $('statusValue').innerHTML = d.found ? '<span style="color:var(--success);">已发现</span>' : '<span style="color:var(--warning);">未发现</span>';
+        $('baseInfoList').innerHTML = [
+            makeInfoItem('检测地址', d.url || inputDomain),
+            makeInfoItem('状态码', d.statusCode),
+            makeInfoItem('内容类型', d.contentType),
+            makeInfoItem('Meta Robots', d.metaRobots),
+            makeInfoItem('Googlebot', d.googlebot),
+            makeInfoItem('X-Robots-Tag', d.xRobotsTag),
+            makeInfoItem('Index 状态', d.indexStatus),
+            makeInfoItem('Follow 状态', d.followStatus)
+        ].filter(Boolean).join('');
+        renderPills($('resultList'), d.directives || [], 'fas fa-tags');
+        $('rawContent1').textContent = JSON.stringify(data, null, 2);
+        const extra = [];
+        if (d.raw && d.raw.headerText) extra.push(d.raw.headerText);
+        if (d.rawHtml) extra.push('----- HTML -----\n' + d.rawHtml);
+        $('rawContent2').textContent = extra.join('\n\n');
+        show($('rawBox1'));
+        if ($('rawContent2').textContent.trim() !== '') show($('rawBox2'));
+        show($('resultPanel'));
+        hide($('infoBox'));
+    } catch (error) {
+        setAlert('error', error && error.message ? error.message : 'Meta Robots 检查失败，请稍后重试。');
+    } finally {
+        setLoading(false);
+    }
+}
+$('queryBtn').addEventListener('click', function () { queryTool(); });
+$('clearBtn').addEventListener('click', function () { $('domainInput').value = ''; resetCommon(); fillEmpty(); });
+$('domainInput').addEventListener('keydown', function (event) { if (event.key === 'Enter') queryTool(); });
+document.querySelectorAll('.quick-chip').forEach(function(btn) { btn.addEventListener('click', function () { queryTool(btn.dataset.domain || ''); }); });
+</script>
+</body>
+</html>
