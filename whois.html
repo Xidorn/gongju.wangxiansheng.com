@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whois 查询（域名查询） - 王先生工具</title>
+    <meta name="description" content="王先生工具提供 Whois 域名查询服务，支持查询 RDAP、注册时间、到期时间、注册商、DNS 服务器和域名状态，快速获取域名核心信息与原始数据。">
+    <meta name="keywords" content="Whois查询,RDAP查询,域名查询,域名到期查询,域名注册时间查询,注册商查询,DNS查询,域名状态查询,王先生工具,站长工具">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg: #f6f8fb;
+            --panel: #ffffff;
+            --panel-soft: #fbfcfe;
+            --line: #e5e7eb;
+            --text: #111827;
+            --muted: #6b7280;
+            --primary: #2563eb;
+            --primary-soft: #eff6ff;
+            --accent: #7c3aed;
+            --success: #059669;
+            --success-soft: #ecfdf5;
+            --warning: #d97706;
+            --warning-soft: #fffbeb;
+            --danger: #dc2626;
+            --danger-soft: #fef2f2;
+            --shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
+            --radius-lg: 16px;
+            --radius-xl: 22px;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 30%),
+                radial-gradient(circle at top right, rgba(124, 58, 237, 0.07), transparent 28%),
+                var(--bg);
+            line-height: 1.6;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .container {
+            width: min(1100px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .site-header {
+            padding: 28px 0 12px;
+        }
+
+        .site-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .site-brand-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: var(--shadow);
+        }
+
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            color: var(--muted);
+            font-size: 0.94rem;
+            margin: 6px 0 18px;
+        }
+
+        .breadcrumb i {
+            font-size: 0.78rem;
+            opacity: 0.7;
+        }
+
+        .page-hero {
+            background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
+            border: 1px solid rgba(255,255,255,0.7);
+            box-shadow: var(--shadow);
+            border-radius: 26px;
+            padding: 28px;
+            margin-bottom: 22px;
+        }
+
+        .page-title {
+            margin: 0;
+            font-size: clamp(1.9rem, 4vw, 2.6rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .page-desc {
+            margin: 12px 0 0;
+            color: var(--muted);
+            max-width: 760px;
+        }
+
+        .tool-shell {
+            background: var(--panel);
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.7);
+            overflow: hidden;
+        }
+
+        .tool-shell-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: center;
+            padding: 18px 24px;
+            border-bottom: 1px solid #eef2f7;
+            background: linear-gradient(180deg, #ffffff, #fbfdff);
+        }
+
+        .tool-shell-head strong {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.02rem;
+        }
+
+        .tool-shell-head span {
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .tool-body {
+            padding: 24px;
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 58px;
+            background: var(--panel-soft);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 0 16px;
+        }
+
+        .search-box i {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            outline: 0;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .btn {
+            min-height: 58px;
+            border: 0;
+            border-radius: 18px;
+            padding: 0 22px;
+            font-size: 0.96rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+        }
+
+        .btn:hover { transform: translateY(-1px); }
+        .btn:active { transform: translateY(0); opacity: 0.92; }
+
+        .btn-primary {
+            color: #fff;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            box-shadow: 0 10px 24px rgba(37, 99, 235, 0.24);
+        }
+
+        .btn-secondary {
+            color: #334155;
+            background: #fff;
+            border: 1px solid var(--line);
+        }
+
+        .quick-list {
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .quick-chip {
+            border: 1px dashed #cbd5e1;
+            background: #fff;
+            color: #334155;
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 0.88rem;
+            cursor: pointer;
+        }
+
+        .alert {
+            display: none;
+            margin-top: 16px;
+            border-radius: 16px;
+            padding: 14px 16px;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+
+        .alert-error {
+            background: var(--danger-soft);
+            color: var(--danger);
+            border-color: #fecaca;
+        }
+
+        .alert-info {
+            background: var(--primary-soft);
+            color: var(--primary);
+            border-color: #bfdbfe;
+        }
+
+        .empty-state,
+        .result-panel {
+            display: none;
+            margin-top: 18px;
+        }
+
+        .empty-card {
+            border: 1px solid #d1fae5;
+            background: linear-gradient(180deg, #ffffff, #f0fdf4);
+            border-radius: 22px;
+            padding: 34px 24px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 16px;
+            border-radius: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--success-soft);
+            color: var(--success);
+            font-size: 1.8rem;
+        }
+
+        .empty-card h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .empty-card p {
+            margin: 10px 0 0;
+            color: var(--muted);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #ffffff, #fbfdff);
+            border: 1px solid #eaf0f7;
+            border-radius: 20px;
+            padding: 18px;
+            min-height: 126px;
+        }
+
+        .stat-card i {
+            position: absolute;
+            right: 14px;
+            bottom: 14px;
+            font-size: 2rem;
+            color: rgba(37, 99, 235, 0.08);
+        }
+
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--muted);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            margin-top: 10px;
+            font-size: 1.45rem;
+            font-weight: 800;
+            line-height: 1.3;
+            word-break: break-word;
+        }
+
+        .stat-value b { color: var(--primary); }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .badge-recent {
+            background: #f5f3ff;
+            color: #6d28d9;
+        }
+
+        .badge-warning {
+            background: var(--warning-soft);
+            color: #92400e;
+        }
+
+        .badge-success {
+            background: var(--success-soft);
+            color: #047857;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #eaf0f7;
+            border-radius: 22px;
+            padding: 20px;
+        }
+
+        .card h3 {
+            margin: 0 0 14px;
+            font-size: 1.02rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .info-item {
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-top: 1px dashed #e5e7eb;
+        }
+
+        .info-item:first-child { border-top: 0; padding-top: 0; }
+
+        .info-key {
+            color: var(--muted);
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #1f2937;
+            word-break: break-word;
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 999px;
+            padding: 8px 12px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            color: #334155;
+            font-size: 0.9rem;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        .pill i { color: var(--primary); }
+
+        details.raw-box {
+            margin-top: 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        details.raw-box summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 16px 18px;
+            font-weight: 700;
+            color: #334155;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        details.raw-box summary::-webkit-details-marker { display: none; }
+
+        .raw-content {
+            padding: 18px;
+            max-height: 420px;
+            overflow: auto;
+            border-top: 1px solid #e5e7eb;
+            background: #0f172a;
+            color: #e2e8f0;
+            font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+            font-size: 0.86rem;
+            white-space: pre-wrap;
+            line-height: 1.65;
+        }
+
+        .desc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .desc-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .desc-card h2 {
+            margin: 0 0 12px;
+            font-size: 1.06rem;
+        }
+
+        .desc-card p,
+        .desc-card li {
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+
+        .desc-card ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .faq-list {
+            margin-top: 22px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .faq-item {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-item h3 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+        }
+
+        .faq-item p {
+            margin: 0;
+            color: #4b5563;
+        }
+
+        .site-footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.92rem;
+            padding: 34px 0 46px;
+        }
+
+        .site-footer a { font-weight: 700; }
+
+        @media (max-width: 980px) {
+            .detail-grid,
+            .desc-grid {
+                grid-template-columns: 1fr;
+                display: grid;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 720px) {
+            .tool-shell-head {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-row {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .page-hero,
+            .tool-body,
+            .desc-card,
+            .faq-item,
+            .card {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="site-header">
+            <a class="site-brand" href="/">
+                <span class="site-brand-badge"><i class="fas fa-screwdriver-wrench"></i></span>
+                <span>王先生工具</span>
+            </a>
+        </header>
+
+        <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="/">首页</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="/">站长工具</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Whois 查询</span>
+        </nav>
+
+        <section class="page-hero">
+            <h1 class="page-title">Whois 查询</h1>
+            <p class="page-desc">
+                输入域名后可查看注册时间、到期时间、更新日期、注册商、DNS 服务器、域名状态，以及 Whois 和 RDAP 原始数据。
+                支持中文域名和国际化域名查询。
+            </p>
+        </section>
+
+        <section class="tool-shell" aria-label="Whois 查询工具">
+            <div class="tool-shell-head">
+                <div>
+                    <strong><i class="fas fa-globe"></i> 在线 Whois / RDAP 查询</strong>
+                    <span>输入域名后即可查询结果。</span>
+                </div>
+            </div>
+
+            <div class="tool-body">
+                <div class="search-row">
+                    <label class="search-box" for="domainInput">
+                        <i class="fas fa-magnifying-glass"></i>
+                        <input type="text" id="domainInput" placeholder="请输入域名，例如 example.com" spellcheck="false" autocomplete="off">
+                    </label>
+                    <button class="btn btn-primary" id="queryBtn" type="button">
+                        <i class="fas fa-bolt"></i>
+                        <span>开始查询</span>
+                    </button>
+                    <button class="btn btn-secondary" id="clearBtn" type="button">清空</button>
+                </div>
+
+                <div class="quick-list" aria-label="示例域名">
+                    <button class="quick-chip" type="button" data-domain="example.com">example.com</button>
+                    <button class="quick-chip" type="button" data-domain="wangxiansheng.com">wangxiansheng.com</button>
+                    <button class="quick-chip" type="button" data-domain="qq.com">qq.com</button>
+                    <button class="quick-chip" type="button" data-domain="xn--fiqs8s.cn">中国.中国（IDN）</button>
+                </div>
+
+                <div class="alert alert-error" id="errorBox"></div>
+                <div class="alert alert-info" id="infoBox"></div>
+
+                <div class="empty-state" id="unregisteredView">
+                    <div class="empty-card">
+                        <div class="empty-icon" id="unregIconWrap"><i id="unregIcon" class="fas fa-rocket"></i></div>
+                        <h3 id="unregTitle">该域名尚未被注册</h3>
+                        <p id="unregText">现在就可以注册并开始使用它。</p>
+                    </div>
+                </div>
+
+                <div class="result-panel" id="resultPanel">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">域名年龄</div>
+                            <div class="stat-value" id="ageValue">-</div>
+                            <div id="ageBadgeWrap"></div>
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">到期倒计时</div>
+                            <div class="stat-value" id="remainingValue">-</div>
+                            <div id="remainingBadgeWrap"></div>
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">注册商</div>
+                            <div class="stat-value" id="registrarValue">-</div>
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">注册状态</div>
+                            <div class="stat-value" id="registeredValue">-</div>
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+                    </div>
+
+                    <div class="detail-grid">
+                        <div class="card">
+                            <h3><i class="fas fa-clock" style="color:#f59e0b"></i> 时间与基础信息</h3>
+                            <div class="info-list" id="baseInfoList"></div>
+                        </div>
+
+                        <div class="card">
+                            <h3><i class="fas fa-server" style="color:#10b981"></i> DNS / 状态</h3>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <div class="info-key">DNS 服务器</div>
+                                    <div class="info-value">
+                                        <div class="stack-list" id="nsList"></div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-key">域名状态</div>
+                                    <div class="info-value">
+                                        <div class="stack-list" id="statusList"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <details class="raw-box" id="rdapBox" open>
+                        <summary>
+                            <span><i class="fas fa-microchip" style="color:#4338ca"></i> RDAP 原始数据</span>
+                            <span>展开 / 收起</span>
+                        </summary>
+                        <pre class="raw-content" id="rdapRaw"></pre>
+                    </details>
+
+                    <details class="raw-box" id="whoisBox">
+                        <summary>
+                            <span><i class="fas fa-fingerprint" style="color:#475569"></i> Whois 原始记录</span>
+                            <span>展开 / 收起</span>
+                        </summary>
+                        <pre class="raw-content" id="whoisRaw"></pre>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <section class="desc-grid">
+            <article class="desc-card">
+                <h2>工具说明</h2>
+                <p>
+                    这个页面用于查询域名的 Whois 与 RDAP 信息，并汇总展示注册时间、到期时间、注册商、DNS 服务器和域名状态。
+                </p>
+            </article>
+            <article class="desc-card">
+                <h2>使用方法</h2>
+                <ul>
+                    <li>输入要查询的域名，例如 example.com</li>
+                    <li>点击“开始查询”或直接按回车</li>
+                    <li>页面会显示核心信息与原始数据</li>
+                </ul>
+            </article>
+            <article class="desc-card">
+                <h2>结果说明</h2>
+                <ul>
+                    <li>域名年龄用于辅助判断注册时间长短</li>
+                    <li>到期倒计时可快速判断是否临近续费</li>
+                    <li>RDAP 与 Whois 原始数据适合进一步核对细节</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="faq-list" aria-label="常见问题">
+            <article class="faq-item">
+                <h3>支持中文域名吗？</h3>
+                <p>支持。页面会在请求接口前自动尝试把中文或国际化域名转换为 ASCII 形式。</p>
+            </article>
+            <article class="faq-item">
+                <h3>可以直接通过 URL 打开某个域名结果吗？</h3>
+                <p>可以。支持通过路径或查询参数自动带入域名并发起查询。</p>
+            </article>
+            <article class="faq-item">
+                <h3>为什么保留 RDAP / Whois 原始数据？</h3>
+                <p>核心摘要适合快速看结果，原始数据适合站长、运维和开发进一步排查细节。</p>
+            </article>
+        </section>
+
+        <footer class="site-footer">
+            © <span id="year"></span> <a href="https://www.wangxiansheng.com" target="_blank" rel="noreferrer noopener">王先生</a> 版权所有
+        </footer>
+    </div>
+
+    <script>
+        const els = {
+            year: document.getElementById('year'),
+            domainInput: document.getElementById('domainInput'),
+            queryBtn: document.getElementById('queryBtn'),
+            clearBtn: document.getElementById('clearBtn'),
+            errorBox: document.getElementById('errorBox'),
+            infoBox: document.getElementById('infoBox'),
+            unregisteredView: document.getElementById('unregisteredView'),
+            unregIcon: document.getElementById('unregIcon'),
+            unregTitle: document.getElementById('unregTitle'),
+            unregText: document.getElementById('unregText'),
+            resultPanel: document.getElementById('resultPanel'),
+            ageValue: document.getElementById('ageValue'),
+            remainingValue: document.getElementById('remainingValue'),
+            registrarValue: document.getElementById('registrarValue'),
+            registeredValue: document.getElementById('registeredValue'),
+            ageBadgeWrap: document.getElementById('ageBadgeWrap'),
+            remainingBadgeWrap: document.getElementById('remainingBadgeWrap'),
+            baseInfoList: document.getElementById('baseInfoList'),
+            nsList: document.getElementById('nsList'),
+            statusList: document.getElementById('statusList'),
+            rdapBox: document.getElementById('rdapBox'),
+            whoisBox: document.getElementById('whoisBox'),
+            rdapRaw: document.getElementById('rdapRaw'),
+            whoisRaw: document.getElementById('whoisRaw')
+        };
+
+        let currentRequestId = 0;
+        els.year.textContent = new Date().getFullYear();
+
+        function show(el, display = 'block') {
+            el.style.display = display;
+        }
+
+        function hide(el) {
+            el.style.display = 'none';
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function setAlert(type, message) {
+            hide(els.errorBox);
+            hide(els.infoBox);
+            if (!message) return;
+            const target = type === 'error' ? els.errorBox : els.infoBox;
+            target.textContent = message;
+            show(target);
+        }
+
+        function resetResults() {
+            hide(els.unregisteredView);
+            hide(els.resultPanel);
+            hide(els.errorBox);
+            hide(els.infoBox);
+            els.baseInfoList.innerHTML = '';
+            els.nsList.innerHTML = '';
+            els.statusList.innerHTML = '';
+            els.rdapRaw.textContent = '';
+            els.whoisRaw.textContent = '';
+            els.ageBadgeWrap.innerHTML = '';
+            els.remainingBadgeWrap.innerHTML = '';
+            els.ageValue.innerHTML = '-';
+            els.remainingValue.innerHTML = '-';
+            els.registrarValue.textContent = '-';
+            els.registeredValue.textContent = '-';
+            hide(els.rdapBox);
+            hide(els.whoisBox);
+        }
+
+        function toASCII(domain) {
+            try {
+                return new URL('http://' + domain).hostname;
+            } catch (error) {
+                return domain;
+            }
+        }
+
+        function getDomainFromLocation() {
+            const pathPart = window.location.pathname.split('/').filter(Boolean).pop();
+            if (pathPart && pathPart !== 'whois' && pathPart.includes('.')) {
+                return decodeURIComponent(pathPart);
+            }
+            const q = new URLSearchParams(window.location.search).get('domain');
+            return q ? decodeURIComponent(q) : '';
+        }
+
+        function updateUrl(domain) {
+            const newPath = '/whois/' + encodeURIComponent(domain);
+            const current = window.location.pathname + window.location.search;
+            if (current !== newPath) {
+                history.replaceState(null, '', newPath);
+            }
+        }
+
+        function formatDateValue(value) {
+            if (!value || value === 'null') return '-';
+            return String(value).replace('T', ' ').replace('Z', '').slice(0, 19);
+        }
+
+        function formatDuration(value, type) {
+            if (!value || value === 'null') {
+                return { html: '-', badgeHtml: '' };
+            }
+
+            const text = String(value).trim();
+            const y = (text.match(/(\d+)Y/) || [])[1];
+            const mo = (text.match(/(\d+)Mo/) || [])[1];
+            const d = (text.match(/-?(\d+)D/) || [])[1];
+
+            let html = text
+                .replace(/(\d+)Y/g, '<b>$1</b>年')
+                .replace(/(\d+)Mo/g, '<b>$1</b>月')
+                .replace(/-?(\d+)D/g, (m, n) => m.startsWith('-') ? '<b>' + n + '</b>天' : '<b>' + n + '</b>天');
+
+            let badgeHtml = '';
+            const days = d ? parseInt(d, 10) : null;
+
+            if (type === 'age' && !y && !mo && days !== null && days < 7 && !text.startsWith('-')) {
+                badgeHtml = '<span class="status-badge badge-recent"><i class="fas fa-burst"></i> 最近注册</span>';
+            }
+
+            if (type === 'remaining') {
+                const expired = text.startsWith('-') || text === '0D';
+                if (expired) {
+                    html = '<span style="color: var(--warning);">已过期 ' + html.replace('-', '') + '</span>';
+                    badgeHtml = '<span class="status-badge badge-warning"><i class="fas fa-triangle-exclamation"></i> 请及时续费</span>';
+                } else if (!y && !mo && days !== null && days < 7) {
+                    badgeHtml = '<span class="status-badge badge-warning"><i class="fas fa-hourglass-end"></i> 即将到期</span>';
+                } else {
+                    badgeHtml = '<span class="status-badge badge-success"><i class="fas fa-circle-check"></i> 状态正常</span>';
+                }
+            }
+
+            return { html, badgeHtml };
+        }
+
+        function makeInfoItem(label, value) {
+            if (!value || value === '-' || value === 'null') return '';
+            return [
+                '<div class="info-item">',
+                    '<div class="info-key">', escapeHtml(label), '</div>',
+                    '<div class="info-value">', escapeHtml(value), '</div>',
+                '</div>'
+            ].join('');
+        }
+
+        function renderList(container, items, icon) {
+            if (!Array.isArray(items) || items.length === 0) {
+                container.innerHTML = '<span class="info-value" style="color:#9ca3af;">暂无数据</span>';
+                return;
+            }
+            container.innerHTML = items.map(item => {
+                const text = typeof item === 'string' ? item : (item && item.text) ? item.text : '';
+                return '<span class="pill"><i class="' + icon + '"></i>' + escapeHtml(text || '-') + '</span>';
+            }).join('');
+        }
+
+        async function queryDomain(domain = '') {
+            const inputDomain = (domain || els.domainInput.value).trim();
+            resetResults();
+
+            if (!inputDomain || !inputDomain.includes('.')) {
+                setAlert('error', '请输入有效的域名，例如 example.com');
+                return;
+            }
+
+            els.domainInput.value = inputDomain;
+            updateUrl(inputDomain);
+            document.title = inputDomain + ' Whois 查询 - 王先生工具';
+
+            const requestId = ++currentRequestId;
+            const asciiDomain = toASCII(inputDomain);
+
+            els.queryBtn.disabled = true;
+            els.queryBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i><span> 查询中</span>';
+            setAlert('info', '正在查询 ' + inputDomain + ' 的 Whois / RDAP 信息...');
+
+            try {
+                const response = await fetch('https://api.mrwang.com/whois.php?domain=' + encodeURIComponent(asciiDomain));
+                const result = await response.json();
+
+                if (requestId !== currentRequestId) return;
+                hide(els.infoBox);
+
+                if (result.code !== 0 || !result.data) {
+                    setAlert('error', result.msg || '查询失败，请稍后重试');
+                    return;
+                }
+
+                const data = result.data;
+
+                if (data.registered === false) {
+                    show(els.unregisteredView);
+                    if (data.reserved === true) {
+                        els.unregIcon.className = 'fas fa-lock';
+                        els.unregTitle.textContent = inputDomain + ' 已被保留';
+                        els.unregText.textContent = '该域名当前不可注册。';
+                    } else {
+                        els.unregIcon.className = 'fas fa-rocket';
+                        els.unregTitle.textContent = inputDomain + ' 尚未被注册';
+                        els.unregText.textContent = '该域名当前可注册。';
+                    }
+                    return;
+                }
+
+                const age = formatDuration(data.age, 'age');
+                const remaining = formatDuration(data.remaining, 'remaining');
+                els.ageValue.innerHTML = age.html;
+                els.remainingValue.innerHTML = remaining.html;
+                els.ageBadgeWrap.innerHTML = age.badgeHtml;
+                els.remainingBadgeWrap.innerHTML = remaining.badgeHtml;
+                els.registrarValue.textContent = data.registrar || '-';
+                els.registeredValue.innerHTML = '<span style="color:var(--success);">已注册</span>';
+
+                const baseInfo = [
+                    makeInfoItem('查询域名', inputDomain),
+                    (asciiDomain && asciiDomain.toLowerCase() !== inputDomain.toLowerCase()) ? makeInfoItem('ASCII 域名', asciiDomain) : '',
+                    makeInfoItem('注册日期', formatDateValue(data.creationDateISO8601 || data.creationDate)),
+                    makeInfoItem('到期日期', formatDateValue(data.expirationDateISO8601 || data.expirationDate)),
+                    makeInfoItem('更新日期', formatDateValue(data.updatedDateISO8601 || data.updatedDate)),
+                    makeInfoItem('注册商', data.registrar || '-')
+                ].filter(Boolean).join('');
+                els.baseInfoList.innerHTML = baseInfo || '<div class="info-value" style="color:#9ca3af;">暂无数据</div>';
+
+                renderList(els.nsList, data.nameServers, 'fas fa-server');
+                renderList(els.statusList, data.status, 'fas fa-shield-halved');
+
+                if (data.rdapData && data.rdapData !== 'null') {
+                    try {
+                        const rdapData = typeof data.rdapData === 'string' ? JSON.parse(data.rdapData) : data.rdapData;
+                        els.rdapRaw.textContent = JSON.stringify(rdapData, null, 2);
+                    } catch (error) {
+                        els.rdapRaw.textContent = typeof data.rdapData === 'string' ? data.rdapData : JSON.stringify(data.rdapData, null, 2);
+                    }
+                    show(els.rdapBox, 'block');
+                }
+
+                if (data.whoisData && data.whoisData !== 'null') {
+                    els.whoisRaw.textContent = data.whoisData;
+                    show(els.whoisBox, 'block');
+                }
+
+                show(els.resultPanel, 'block');
+            } catch (error) {
+                if (requestId === currentRequestId) {
+                    setAlert('error', '获取数据失败，请检查接口是否可访问，或稍后重试。');
+                }
+            } finally {
+                if (requestId === currentRequestId) {
+                    els.queryBtn.disabled = false;
+                    els.queryBtn.innerHTML = '<i class="fas fa-bolt"></i><span> 开始查询</span>';
+                }
+            }
+        }
+
+        els.queryBtn.addEventListener('click', () => queryDomain());
+        els.clearBtn.addEventListener('click', () => {
+            currentRequestId += 1;
+            els.domainInput.value = '';
+            resetResults();
+            document.title = 'Whois 查询 - 王先生工具';
+            history.replaceState(null, '', '/whois');
+        });
+
+        els.domainInput.addEventListener('keydown', event => {
+            if (event.key === 'Enter') queryDomain();
+        });
+
+        document.querySelectorAll('.quick-chip').forEach(btn => {
+            btn.addEventListener('click', () => queryDomain(btn.dataset.domain || ''));
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialDomain = getDomainFromLocation();
+            if (initialDomain) {
+                els.domainInput.value = initialDomain;
+                queryDomain(initialDomain);
+            }
+        });
+    </script>
+</body>
+</html>
