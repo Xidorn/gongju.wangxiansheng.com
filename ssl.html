@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>SSL 证书检测 - 证书有效期、签发机构、SAN 在线检查 - 王先生工具</title>
     <meta name="description" content="SSL 证书检测工具，支持查看证书有效期、签发机构、主题名称、SAN 列表与原始结果，适合站长与运维快速检查 HTTPS 证书状态。">
     <meta name="keywords" content="SSL证书检测,HTTPS证书检测,证书到期查询,证书签发机构,SAN查询,站长工具,王先生工具">
@@ -18,7 +17,6 @@
     <meta name="twitter:title" content="SSL 证书检测 - 证书有效期、签发机构、SAN 在线检查 - 王先生工具">
     <meta name="twitter:description" content="SSL 证书检测工具，支持查看证书有效期、签发机构、主题名称、SAN 列表与原始结果，适合站长与运维快速检查 HTTPS 证书状态。">
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "SSL 证书检测 - 证书有效期、签发机构、SAN 在线检查 - 王先生工具", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "url": "https://gongju.wangxiansheng.com/ssl.html", "description": "SSL 证书检测工具，支持查看证书有效期、签发机构、主题名称、SAN 列表与原始结果，适合站长与运维快速检查 HTTPS 证书状态。", "publisher": {"@type": "Organization", "name": "王先生工具"}}</script>
-
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -130,7 +128,6 @@
             .page-hero, .tool-body, .desc-card, .faq-item, .card { padding-left: 18px; padding-right: 18px; }
         }
     </style>
-
 </head>
 <body>
     <div class="container">
@@ -140,6 +137,7 @@
                 <span>王先生工具</span>
             </a>
         </header>
+
         <nav class="breadcrumb" aria-label="面包屑导航">
             <a href="/">首页</a>
             <i class="fas fa-chevron-right"></i>
@@ -147,10 +145,12 @@
             <i class="fas fa-chevron-right"></i>
             <span>SSL 证书检测</span>
         </nav>
+
         <section class="page-hero">
             <h1 class="page-title">SSL 证书检测</h1>
             <p class="page-desc">输入域名后可查看 HTTPS 证书的签发机构、有效期、主题名称和 SAN 列表。</p>
         </section>
+
         <section class="tool-shell" aria-label="SSL 证书检测工具">
             <div class="tool-shell-head">
                 <div>
@@ -158,6 +158,7 @@
                     <span>输入域名后即可检测证书信息。</span>
                 </div>
             </div>
+
             <div class="tool-body">
                 <div class="search-row">
                     <label class="search-box" for="domainInput">
@@ -167,33 +168,117 @@
                     <button class="btn btn-primary" id="queryBtn" type="button"><i class="fas fa-bolt"></i><span> 开始检测</span></button>
                     <button class="btn btn-secondary" id="clearBtn" type="button">清空</button>
                 </div>
+
                 <div class="quick-list" aria-label="示例域名">
                     <button class="quick-chip" type="button" data-domain="wangxiansheng.com">wangxiansheng.com</button>
                     <button class="quick-chip" type="button" data-domain="guan.wang">guan.wang</button>
                     <button class="quick-chip" type="button" data-domain="wm.lt">wm.lt</button>
                     <button class="quick-chip" type="button" data-domain="官方.网站">官方.网站（IDN）</button>
                 </div>
+
                 <div class="hint-line">输入域名后可直接查看证书摘要与原始数据。</div>
                 <div class="alert alert-error" id="errorBox"></div>
                 <div class="alert alert-info" id="infoBox"></div>
+
                 <div class="result-panel" id="resultPanel">
                     <div class="stats-grid">
-                        <div class="stat-card"><div class="stat-label">检测域名</div><div class="stat-value" id="domainValue">-</div><i class="fas fa-globe bg"></i></div>
-                        <div class="stat-card"><div class="stat-label">签发机构</div><div class="stat-value" id="issuerValue">-</div><i class="fas fa-certificate bg"></i></div>
-                        <div class="stat-card"><div class="stat-label">到期时间</div><div class="stat-value" id="expireValue">-</div><i class="fas fa-calendar-days bg"></i></div>
-                        <div class="stat-card"><div class="stat-label">剩余天数</div><div class="stat-value" id="daysValue">-</div><i class="fas fa-hourglass-half bg"></i></div>
+                        <div class="stat-card">
+                            <div class="stat-label">检测域名</div>
+                            <div class="stat-value" id="domainValue">-</div>
+                            <i class="fas fa-globe bg"></i>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">签发机构</div>
+                            <div class="stat-value" id="issuerValue">-</div>
+                            <i class="fas fa-certificate bg"></i>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">到期时间</div>
+                            <div class="stat-value" id="expireValue">-</div>
+                            <i class="fas fa-calendar-days bg"></i>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">剩余天数</div>
+                            <div class="stat-value" id="daysValue">-</div>
+                            <i class="fas fa-hourglass-half bg"></i>
+                        </div>
                     </div>
+
                     <div class="detail-grid">
-                        <div class="card"><h3><i class="fas fa-circle-info" style="color:#2563eb"></i> 检测结果</h3><div class="info-list" id="baseInfoList"></div></div>
-                        <div class="card"><h3><i class="fas fa-list-check" style="color:#10b981"></i> SAN / 结果明细</h3><div class="info-list"><div class="info-item"><div class="info-key">明细列表</div><div class="info-value"><div class="stack-list" id="resultList"></div></div></div></div></div>
+                        <div class="card">
+                            <h3><i class="fas fa-circle-info" style="color:#2563eb"></i> 检测结果</h3>
+                            <div class="info-list" id="baseInfoList"></div>
+                        </div>
+                        <div class="card">
+                            <h3><i class="fas fa-list-check" style="color:#10b981"></i> SAN / 结果明细</h3>
+                            <div class="info-list">
+                                <div class="info-item">
+                                    <div class="info-key">明细列表</div>
+                                    <div class="info-value">
+                                        <div class="stack-list" id="resultList"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <details class="raw-box" id="rawBox1" open><summary><span><i class="fas fa-code" style="color:#4338ca"></i> 原始返回数据</span><span>展开 / 收起</span></summary><pre class="raw-content" id="rawContent1"></pre></details>
-                    <details class="raw-box" id="rawBox2"><summary><span><i class="fas fa-file-lines" style="color:#475569"></i> 附加输出</span><span>展开 / 收起</span></summary><pre class="raw-content" id="rawContent2"></pre></details>
+
+                    <details class="raw-box" id="rawBox1" open>
+                        <summary>
+                            <span><i class="fas fa-code" style="color:#4338ca"></i> 原始返回数据</span>
+                            <span>展开 / 收起</span>
+                        </summary>
+                        <pre class="raw-content" id="rawContent1"></pre>
+                    </details>
+
+                    <details class="raw-box" id="rawBox2">
+                        <summary>
+                            <span><i class="fas fa-file-lines" style="color:#475569"></i> 附加输出</span>
+                            <span>展开 / 收起</span>
+                        </summary>
+                        <pre class="raw-content" id="rawContent2"></pre>
+                    </details>
                 </div>
             </div>
         </section>
-        <section class="desc-grid"><article class="desc-card"><h2>工具说明</h2><p>用于检查网站 HTTPS 证书信息，包括签发机构、证书主题、有效期与扩展域名列表。</p></article><article class="desc-card"><h2>使用方法</h2><ul><li>输入域名</li><li>点击开始检测</li><li>查看证书摘要与原始数据</li></ul></article><article class="desc-card"><h2>结果说明</h2><ul><li>剩余天数可判断是否临近到期</li><li>SAN 用于查看证书覆盖的域名列表</li><li>原始输出便于进一步核对</li></ul></article></section>
-        <section class="faq-list" aria-label="常见问题"><article class="faq-item"><h3>支持中文域名吗？</h3><p>支持。页面会自动把中文域名转换为 ASCII 形式后再发起检测。</p></article><article class="faq-item"><h3>为什么签发机构有时会为空？</h3><p>不同证书返回的签发者字段结构不完全一致，本页已兼容常见 issuer 字段；如果接口未返回标准字段，会继续尝试从 issuer 明细中提取。</p></article><article class="faq-item"><h3>为什么保留原始输出？</h3><p>原始输出更适合进一步核对证书详情、签名算法和完整证书文本。</p></article></section>
+
+        <section class="desc-grid">
+            <article class="desc-card">
+                <h2>工具说明</h2>
+                <p>用于检查网站 HTTPS 证书信息，包括签发机构、证书主题、有效期与扩展域名列表。</p>
+            </article>
+            <article class="desc-card">
+                <h2>使用方法</h2>
+                <ul>
+                    <li>输入域名</li>
+                    <li>点击开始检测</li>
+                    <li>查看证书摘要与原始数据</li>
+                </ul>
+            </article>
+            <article class="desc-card">
+                <h2>结果说明</h2>
+                <ul>
+                    <li>剩余天数可判断是否临近到期</li>
+                    <li>SAN 用于查看证书覆盖的域名列表</li>
+                    <li>原始输出便于进一步核对</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="faq-list" aria-label="常见问题">
+            <article class="faq-item">
+                <h3>支持中文域名吗？</h3>
+                <p>支持。页面会自动把中文域名转换为 ASCII 形式后再发起检测。</p>
+            </article>
+            <article class="faq-item">
+                <h3>为什么签发机构有时会为空？</h3>
+                <p>不同证书返回的签发者字段结构不完全一致，本页已兼容常见 issuer 字段；如果接口未返回标准字段，会继续尝试从 issuer 明细中提取。</p>
+            </article>
+            <article class="faq-item">
+                <h3>为什么保留原始输出？</h3>
+                <p>原始输出更适合进一步核对证书详情、签名算法和完整证书文本。</p>
+            </article>
+        </section>
+
         <footer class="site-footer">
             © <span id="year"></span> <a href="https://www.wangxiansheng.com" target="_blank" rel="noreferrer noopener">王先生</a> 版权所有
         </footer>
@@ -201,8 +286,15 @@
 
 <script>
 const $ = (id) => document.getElementById(id);
-function show(el, display = 'block') { if (el) el.style.display = display; }
-function hide(el) { if (el) el.style.display = 'none'; }
+
+function show(el, display = 'block') {
+    if (el) el.style.display = display;
+}
+
+function hide(el) {
+    if (el) el.style.display = 'none';
+}
+
 function escapeHtml(str) {
     return String(str)
         .replace(/&/g, '&amp;')
@@ -211,19 +303,23 @@ function escapeHtml(str) {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
 }
+
 function setAlert(type, message) {
     const errorBox = $('errorBox');
     const infoBox = $('infoBox');
-    hide(errorBox); hide(infoBox);
+    hide(errorBox);
+    hide(infoBox);
     if (!message) return;
     const target = type === 'error' ? errorBox : infoBox;
     target.textContent = message;
     show(target);
 }
+
 function makeInfoItem(label, value) {
     if (value === undefined || value === null || value === '') return '';
     return '<div class="info-item"><div class="info-key">' + escapeHtml(label) + '</div><div class="info-value">' + escapeHtml(String(value)) + '</div></div>';
 }
+
 function renderPills(container, items, iconClass) {
     if (!container) return;
     if (!Array.isArray(items) || !items.length) {
@@ -234,6 +330,7 @@ function renderPills(container, items, iconClass) {
         return '<span class="pill"><i class="' + iconClass + '"></i>' + escapeHtml(String(item)) + '</span>';
     }).join('');
 }
+
 function setLoading(loading, text) {
     const btn = $('queryBtn');
     if (!btn) return;
@@ -242,21 +339,25 @@ function setLoading(loading, text) {
         ? '<i class="fas fa-circle-notch fa-spin"></i><span> ' + (text || '查询中') + '</span>'
         : '<i class="fas fa-bolt"></i><span> 开始检测</span>';
 }
+
 function resetCommon() {
     hide($('resultPanel'));
     hide($('errorBox'));
     hide($('infoBox'));
     hide($('rawBox1'));
     hide($('rawBox2'));
+
     const raw1 = $('rawContent1');
     const raw2 = $('rawContent2');
     if (raw1) raw1.textContent = '';
     if (raw2) raw2.textContent = '';
+
     const baseInfoList = $('baseInfoList');
-    const resultList = $('resultList') || $('answerList');
+    const resultList = $('resultList');
     if (baseInfoList) baseInfoList.innerHTML = '';
     if (resultList) resultList.innerHTML = '';
 }
+
 function toASCIIHost(input) {
     try {
         return new URL('http://' + String(input).trim()).hostname;
@@ -264,6 +365,7 @@ function toASCIIHost(input) {
         return String(input || '').trim();
     }
 }
+
 function normalizeUrlInput(input) {
     const raw = String(input || '').trim();
     if (!raw) return '';
@@ -275,22 +377,28 @@ function normalizeUrlInput(input) {
         return raw;
     }
 }
+
 async function fetchJsonSafely(url) {
-    const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    const response = await fetch(url, {
+        headers: { 'Accept': 'application/json' }
+    });
     const text = await response.text();
     const contentType = String(response.headers.get('content-type') || '').toLowerCase();
     const trimmedText = text.replace(/^\s+/, '');
     const looksJson = contentType.includes('application/json') || trimmedText.startsWith('{') || trimmedText.startsWith('[');
+
     if (!looksJson) {
         const shortText = text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160);
         throw new Error(shortText ? ('接口返回异常：' + shortText) : '接口返回的不是 JSON，请检查接口文件是否正常运行');
     }
+
     try {
         return JSON.parse(text);
     } catch (error) {
         throw new Error('接口 JSON 解析失败，请检查接口输出是否包含报错信息');
     }
 }
+
 document.addEventListener('DOMContentLoaded', function () {
     const year = $('year');
     if (year) year.textContent = new Date().getFullYear();
@@ -299,37 +407,99 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <script>
 const SSL_API = 'https://api.mrwang.com/ssl.php';
-function fillEmpty() { $('resultList').innerHTML = '<span class="info-value" style="color:#9ca3af;">暂无数据</span>'; }
-function pickIssuer(d) {
-    return d.issuer || d.issuerName || d.issuerCN || (d.issuerDetail && (d.issuerDetail.O || d.issuerDetail.CN || d.issuerDetail.OU)) || '-';
+
+function fillEmpty() {
+    $('resultList').innerHTML = '<span class="info-value" style="color:#9ca3af;">暂无数据</span>';
 }
+
+function pickIssuer(d) {
+    return d.issuer
+        || d.issuerName
+        || d.issuerCN
+        || (d.issuerDetail && (d.issuerDetail.organizationName || d.issuerDetail.commonName || d.issuerDetail.O || d.issuerDetail.CN || d.issuerDetail.OU))
+        || '-';
+}
+
+function parseCnFromSubject(subject) {
+    const text = String(subject || '').trim();
+    if (!text) return '';
+    const match = text.match(/(?:^|\/)CN=([^\/]+)/i);
+    return match ? match[1].trim() : '';
+}
+
+function pickCommonName(d) {
+    return d.commonName
+        || (d.raw && d.raw.parsed && d.raw.parsed.subject && d.raw.parsed.subject.commonName)
+        || parseCnFromSubject(d.subject)
+        || '';
+}
+
+function pickSubject(d) {
+    return d.subject
+        || (d.raw && d.raw.parsed && d.raw.parsed.name)
+        || '';
+}
+
+function pickSANs(d) {
+    if (Array.isArray(d.san) && d.san.length) return d.san;
+    if (Array.isArray(d.subjectAltNames) && d.subjectAltNames.length) return d.subjectAltNames;
+
+    const sanText =
+        d.raw &&
+        d.raw.parsed &&
+        d.raw.parsed.extensions &&
+        d.raw.parsed.extensions.subjectAltName;
+
+    if (typeof sanText === 'string' && sanText.trim()) {
+        return sanText
+            .split(',')
+            .map(function(item) {
+                return item.replace(/^DNS:/i, '').trim();
+            })
+            .filter(Boolean);
+    }
+
+    return [];
+}
+
 async function queryTool(domain) {
     const inputDomain = (domain || $('domainInput').value).trim();
     resetCommon();
     fillEmpty();
+
     if (!inputDomain || !inputDomain.includes('.')) {
         setAlert('error', '请输入有效的域名，例如 wangxiansheng.com');
         return;
     }
+
     const asciiDomain = toASCIIHost(inputDomain);
     setLoading(true, '检测中');
     setAlert('info', '正在检测 ' + inputDomain + ' 的 SSL 证书信息...');
+
     try {
         const data = await fetchJsonSafely(SSL_API + '?domain=' + encodeURIComponent(asciiDomain));
-        if (data.code !== 0 || !data.data) throw new Error(data.msg || '检测失败');
+        if (data.code !== 0 || !data.data) {
+            throw new Error(data.msg || '检测失败');
+        }
+
         const d = data.data;
         const issuer = pickIssuer(d);
+        const commonName = pickCommonName(d);
+        const subject = pickSubject(d);
+        const sanList = pickSANs(d);
+
         $('domainValue').textContent = d.domain || asciiDomain;
         $('issuerValue').textContent = issuer;
         $('expireValue').textContent = d.validTo || d.expireAt || '-';
         $('daysValue').innerHTML = typeof d.daysRemaining === 'number' ? '<b>' + d.daysRemaining + '</b> 天' : '-';
+
         $('baseInfoList').innerHTML = [
             makeInfoItem('查询域名', inputDomain),
             (asciiDomain.toLowerCase() !== inputDomain.toLowerCase()) ? makeInfoItem('ASCII 域名', asciiDomain) : '',
             makeInfoItem('目标 IP', d.ip),
             makeInfoItem('端口', d.port),
-            makeInfoItem('证书主题', d.subject || d.commonName),
-            makeInfoItem('通用名称', d.commonName),
+            makeInfoItem('证书主题', subject),
+            makeInfoItem('通用名称', commonName),
             makeInfoItem('签发机构', issuer),
             makeInfoItem('生效时间', d.validFrom),
             makeInfoItem('到期时间', d.validTo || d.expireAt),
@@ -337,11 +507,17 @@ async function queryTool(domain) {
             makeInfoItem('签名算法', d.signatureAlgorithm),
             makeInfoItem('自签证书', d.selfSigned ? '是' : '否')
         ].filter(Boolean).join('');
-        renderPills($('resultList'), d.san || d.subjectAltNames || [], 'fas fa-shield-halved');
+
+        renderPills($('resultList'), sanList, 'fas fa-shield-halved');
+
         $('rawContent1').textContent = JSON.stringify(data, null, 2);
         $('rawContent2').textContent = d.opensslText || JSON.stringify(d.raw || {}, null, 2);
+
         show($('rawBox1'));
-        if ($('rawContent2').textContent.trim() !== '') show($('rawBox2'));
+        if ($('rawContent2').textContent.trim() !== '') {
+            show($('rawBox2'));
+        }
+
         show($('resultPanel'));
         hide($('infoBox'));
     } catch (error) {
@@ -350,10 +526,28 @@ async function queryTool(domain) {
         setLoading(false);
     }
 }
-$('queryBtn').addEventListener('click', function () { queryTool(); });
-$('clearBtn').addEventListener('click', function () { $('domainInput').value = ''; resetCommon(); fillEmpty(); });
-$('domainInput').addEventListener('keydown', function (event) { if (event.key === 'Enter') queryTool(); });
-document.querySelectorAll('.quick-chip').forEach(function(btn) { btn.addEventListener('click', function () { queryTool(btn.dataset.domain || ''); }); });
+
+$('queryBtn').addEventListener('click', function () {
+    queryTool();
+});
+
+$('clearBtn').addEventListener('click', function () {
+    $('domainInput').value = '';
+    resetCommon();
+    fillEmpty();
+});
+
+$('domainInput').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        queryTool();
+    }
+});
+
+document.querySelectorAll('.quick-chip').forEach(function(btn) {
+    btn.addEventListener('click', function () {
+        queryTool(btn.dataset.domain || '');
+    });
+});
 </script>
 </body>
 </html>
