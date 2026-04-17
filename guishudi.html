@@ -9,14 +9,14 @@
     <meta name="robots" content="index,follow,max-image-preview:large">
     <link rel="canonical" href="https://gongju.wangxiansheng.com/guishudi.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="号码归属地查询 - 手机号省市运营商在线查询 - 王先生工具">
+    <meta property="og:title" content="号码归属地查询 - 手机号运营商在线查询 - 王先生工具">
     <meta property="og:description" content="支持查询手机号归属地、省份、城市、运营商与原始返回数据，界面简洁，查询快速。">
     <meta property="og:url" content="https://gongju.wangxiansheng.com/guishudi.html">
     <meta property="og:site_name" content="王先生工具">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="号码归属地查询 - 手机号省市运营商在线查询 - 王先生工具">
+    <meta name="twitter:title" content="号码归属地查询 - 手机号运营商在线查询 - 王先生工具">
     <meta name="twitter:description" content="支持查询手机号归属地、省份、城市、运营商与原始返回数据，界面简洁，查询快速。">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"号码归属地查询 - 手机号省市运营商在线查询 - 王先生工具","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","url":"https://gongju.wangxiansheng.com/guishudi.html","description":"手机号码归属地查询工具，支持查询手机号所属省份、城市、运营商及相关字段信息。","publisher":{"@type":"Organization","name":"王先生工具"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"号码归属地查询 - 手机号运营商在线查询 - 王先生工具","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","url":"https://gongju.wangxiansheng.com/guishudi.html","description":"手机号码归属地查询工具，支持查询手机号所属省份、城市、运营商及相关字段信息。","publisher":{"@type":"Organization","name":"王先生工具"}}</script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -30,18 +30,12 @@
             --primary: #2563eb;
             --primary-soft: #eff6ff;
             --accent: #7c3aed;
-            --success: #059669;
-            --success-soft: #ecfdf5;
-            --warning: #d97706;
-            --warning-soft: #fffbeb;
             --danger: #dc2626;
             --danger-soft: #fef2f2;
             --shadow: 0 16px 32px rgba(15, 23, 42, 0.06);
-            --radius-lg: 16px;
-            --radius-xl: 22px;
         }
+
         * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
         body {
             margin: 0;
             font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
@@ -52,8 +46,10 @@
                 var(--bg);
             line-height: 1.6;
         }
+
         a { color: inherit; text-decoration: none; }
         .container { width: min(1100px, calc(100% - 32px)); margin: 0 auto; }
+
         .site-header { padding: 28px 0 12px; }
         .site-brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.1rem; font-weight: 800; }
         .site-brand-badge {
@@ -67,6 +63,7 @@
             background: linear-gradient(135deg, var(--primary), var(--accent));
             box-shadow: var(--shadow);
         }
+
         .breadcrumb {
             display: flex;
             flex-wrap: wrap;
@@ -77,6 +74,7 @@
             margin: 6px 0 18px;
         }
         .breadcrumb i { font-size: 0.78rem; opacity: 0.7; }
+
         .page-hero {
             background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
             border: 1px solid rgba(255,255,255,0.7);
@@ -92,6 +90,7 @@
             letter-spacing: -0.02em;
         }
         .page-desc { margin: 12px 0 0; color: var(--muted); max-width: 760px; }
+
         .tool-shell {
             background: var(--panel);
             border-radius: 26px;
@@ -100,10 +99,6 @@
             overflow: hidden;
         }
         .tool-shell-head {
-            display: flex;
-            justify-content: space-between;
-            gap: 16px;
-            align-items: center;
             padding: 18px 24px;
             border-bottom: 1px solid #eef2f7;
             background: linear-gradient(180deg, #ffffff, #fbfdff);
@@ -114,8 +109,15 @@
             gap: 10px;
             font-size: 1.02rem;
         }
-        .tool-shell-head span { color: var(--muted); font-size: 0.92rem; }
+        .tool-shell-head span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
         .tool-body { padding: 24px; }
+
         .search-row {
             display: grid;
             grid-template-columns: 1fr auto auto;
@@ -132,7 +134,7 @@
             border-radius: 18px;
             padding: 0 16px;
         }
-        .search-box i { color: var(--primary); font-size: 1rem; }
+        .search-box i { color: var(--primary); }
         .search-box input {
             width: 100%;
             border: 0;
@@ -141,6 +143,7 @@
             color: var(--text);
             font-size: 1rem;
         }
+
         .btn {
             min-height: 58px;
             border: 0;
@@ -149,10 +152,11 @@
             font-size: 0.96rem;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+            transition: transform 0.18s ease, opacity 0.18s ease;
         }
         .btn:hover { transform: translateY(-1px); }
         .btn:active { transform: translateY(0); opacity: 0.92; }
+
         .btn-primary {
             color: #fff;
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -163,6 +167,7 @@
             background: #fff;
             border: 1px solid var(--line);
         }
+
         .quick-list {
             margin-top: 14px;
             display: flex;
@@ -178,6 +183,7 @@
             font-size: 0.88rem;
             cursor: pointer;
         }
+
         .alert {
             display: none;
             margin-top: 16px;
@@ -196,7 +202,9 @@
             color: var(--primary);
             border-color: #bfdbfe;
         }
+
         .result-panel { display: none; margin-top: 18px; }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -232,14 +240,9 @@
             line-height: 1.3;
             word-break: break-word;
         }
-        .stat-value b { color: var(--primary); }
-        .detail-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 16px;
-            margin-top: 16px;
-        }
+
         .card {
+            margin-top: 16px;
             background: #fff;
             border: 1px solid #eaf0f7;
             border-radius: 22px;
@@ -252,7 +255,7 @@
             align-items: center;
             gap: 10px;
         }
-        .info-list { display: grid; gap: 12px; }
+
         .info-item {
             display: grid;
             grid-template-columns: 120px 1fr;
@@ -275,21 +278,7 @@
             color: #1f2937;
             word-break: break-word;
         }
-        .stack-list { display: flex; flex-wrap: wrap; gap: 10px; }
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border-radius: 999px;
-            padding: 8px 12px;
-            background: #f8fafc;
-            border: 1px solid #e5e7eb;
-            color: #334155;
-            font-size: 0.9rem;
-            font-weight: 600;
-            word-break: break-all;
-        }
-        .pill i { color: var(--primary); }
+
         details.raw-box {
             margin-top: 16px;
             border: 1px solid #e5e7eb;
@@ -310,6 +299,7 @@
             gap: 12px;
         }
         details.raw-box summary::-webkit-details-marker { display: none; }
+
         .raw-content {
             padding: 18px;
             max-height: 420px;
@@ -322,32 +312,39 @@
             white-space: pre-wrap;
             line-height: 1.65;
         }
+
         .desc-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px;
             margin-top: 22px;
         }
-        .desc-card {
+        .desc-card,
+        .faq-item {
             background: #fff;
             border: 1px solid #e5e7eb;
             border-radius: 22px;
             padding: 22px;
             box-shadow: var(--shadow);
         }
-        .desc-card h2 { margin: 0 0 12px; font-size: 1.06rem; }
-        .desc-card p, .desc-card li { color: #4b5563; font-size: 0.95rem; }
-        .desc-card ul { margin: 0; padding-left: 18px; }
-        .faq-list { margin-top: 22px; display: grid; gap: 14px; }
-        .faq-item {
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 20px;
-            padding: 18px 20px;
-            box-shadow: var(--shadow);
+        .desc-card h2,
+        .faq-item h3 {
+            margin: 0 0 12px;
         }
-        .faq-item h3 { margin: 0 0 8px; font-size: 1rem; }
-        .faq-item p { margin: 0; color: #4b5563; }
+        .desc-card p,
+        .desc-card li,
+        .faq-item p {
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+        .desc-card ul { margin: 0; padding-left: 18px; }
+
+        .faq-list {
+            margin-top: 22px;
+            display: grid;
+            gap: 14px;
+        }
+
         .site-footer {
             text-align: center;
             color: var(--muted);
@@ -357,15 +354,30 @@
         .site-footer a { font-weight: 700; }
 
         @media (max-width: 980px) {
-            .detail-grid, .desc-grid { grid-template-columns: 1fr; display: grid; }
-            .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .stats-grid,
+            .desc-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
+
         @media (max-width: 720px) {
-            .tool-shell-head { flex-direction: column; align-items: flex-start; }
-            .search-row { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: 1fr; }
-            .info-item { grid-template-columns: 1fr; gap: 8px; }
-            .page-hero, .tool-body, .desc-card, .faq-item, .card { padding-left: 18px; padding-right: 18px; }
+            .search-row,
+            .stats-grid,
+            .desc-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .page-hero,
+            .tool-body,
+            .desc-card,
+            .faq-item,
+            .card {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
         }
     </style>
 </head>
@@ -388,7 +400,7 @@
 
         <section class="page-hero">
             <h1 class="page-title">号码归属地查询</h1>
-            <p class="page-desc">输入手机号码后可查看所属省份、城市、运营商以及接口返回的相关字段信息。</p>
+            <p class="page-desc">输入手机号码后可查看所属省份、城市、运营商，以及邮编、区号、行政区划代码等信息。</p>
         </section>
 
         <section class="tool-shell" aria-label="号码归属地查询工具">
@@ -403,16 +415,16 @@
                 <div class="search-row">
                     <label class="search-box" for="phoneInput">
                         <i class="fas fa-magnifying-glass"></i>
-                        <input type="text" id="phoneInput" placeholder="请输入 11 位手机号，例如 18812345687" spellcheck="false" autocomplete="off" inputmode="numeric">
+                        <input type="text" id="phoneInput" placeholder="请输入 11 位手机号，例如 18900000000" spellcheck="false" autocomplete="off" inputmode="numeric">
                     </label>
                     <button class="btn btn-primary" id="queryBtn" type="button"><i class="fas fa-bolt"></i><span> 开始查询</span></button>
                     <button class="btn btn-secondary" id="clearBtn" type="button">清空</button>
                 </div>
 
                 <div class="quick-list" aria-label="示例号码">
+                    <button class="quick-chip" type="button" data-phone="18900000000">18900000000</button>
                     <button class="quick-chip" type="button" data-phone="18812345687">18812345687</button>
                     <button class="quick-chip" type="button" data-phone="15895277728">15895277728</button>
-                    <button class="quick-chip" type="button" data-phone="13900000000">13900000000</button>
                     <button class="quick-chip" type="button" data-phone="13612345678">13612345678</button>
                 </div>
 
@@ -443,11 +455,9 @@
                         </div>
                     </div>
 
-                    <div class="detail-grid">
-                        <div class="card">
-                            <h3><i class="fas fa-circle-info" style="color:#2563eb"></i> 查询结果</h3>
-                            <div class="info-list" id="baseInfoList"></div>
-                        </div>
+                    <div class="card">
+                        <h3><i class="fas fa-circle-info" style="color:#2563eb"></i> 查询结果</h3>
+                        <div id="baseInfoList"></div>
                     </div>
 
                     <details class="raw-box" id="rawBox1" open>
@@ -464,14 +474,14 @@
         <section class="desc-grid">
             <article class="desc-card">
                 <h2>工具说明</h2>
-                <p>用于查询手机号码归属地信息，包含省份、城市、运营商以及接口返回的其他字段。</p>
+                <p>用于查询手机号码归属地信息，包含省份、城市、运营商、邮编、区号以及行政区划代码。</p>
             </article>
             <article class="desc-card">
                 <h2>使用方法</h2>
                 <ul>
                     <li>输入 11 位手机号码</li>
                     <li>点击开始查询</li>
-                    <li>查看归属地摘要与原始数据</li>
+                    <li>查看归属地信息与原始 JSON 数据</li>
                 </ul>
             </article>
         </section>
@@ -482,8 +492,8 @@
                 <p>当前页面默认按中国大陆 11 位手机号进行校验，适合常见号码归属地查询场景。</p>
             </article>
             <article class="faq-item">
-                <h3>为什么要显示原始数据？</h3>
-                <p>原始 JSON 返回更适合开发调试、接口联调与字段核对，也方便你后续继续扩展页面。</p>
+                <h3>字段怎么理解？</h3>
+                <p>postcode 为邮编，areacode 为区号，citycode 为行政区划代码，city 为城市名称。</p>
             </article>
         </section>
 
@@ -494,6 +504,7 @@
 
 <script>
 const $ = (id) => document.getElementById(id);
+const PHONE_API = 'https://api.mrwang.com/phone.php';
 
 function show(el, display = 'block') {
     if (el) el.style.display = display;
@@ -530,17 +541,6 @@ function makeInfoItem(label, value) {
     return '<div class="info-item"><div class="info-key">' + escapeHtml(label) + '</div><div class="info-value">' + escapeHtml(String(value)) + '</div></div>';
 }
 
-function renderPills(container, items, iconClass) {
-    if (!container) return;
-    if (!Array.isArray(items) || !items.length) {
-        container.innerHTML = '<span class="info-value" style="color:#9ca3af;">暂无数据</span>';
-        return;
-    }
-    container.innerHTML = items.map(function(item) {
-        return '<span class="pill"><i class="' + iconClass + '"></i>' + escapeHtml(String(item)) + '</span>';
-    }).join('');
-}
-
 function setLoading(loading, text) {
     const btn = $('queryBtn');
     if (!btn) return;
@@ -555,14 +555,8 @@ function resetCommon() {
     hide($('errorBox'));
     hide($('infoBox'));
     hide($('rawBox1'));
-
-    const raw1 = $('rawContent1');
-    if (raw1) raw1.textContent = '';
-
-    const baseInfoList = $('baseInfoList');
-    const resultList = $('resultList');
-    if (baseInfoList) baseInfoList.innerHTML = '';
-    if (resultList) resultList.innerHTML = '';
+    $('rawContent1').textContent = '';
+    $('baseInfoList').innerHTML = '';
 }
 
 function normalizePhone(input) {
@@ -591,26 +585,12 @@ async function fetchJsonSafely(url) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const year = $('year');
-    if (year) year.textContent = new Date().getFullYear();
-});
-</script>
-
-<script>
-const PHONE_API = 'https://api.mrwang.com/phone.php';
-
-function fillEmpty() {
-    $('resultList').innerHTML = '<span class="info-value" style="color:#9ca3af;">暂无数据</span>';
-}
-
 async function queryTool(phone) {
     const inputPhone = normalizePhone(phone || $('phoneInput').value);
     resetCommon();
-    fillEmpty();
 
     if (!/^1\d{10}$/.test(inputPhone)) {
-        setAlert('error', '请输入有效的 11 位手机号，例如 18812345687');
+        setAlert('error', '请输入有效的 11 位手机号，例如 18900000000');
         return;
     }
 
@@ -626,15 +606,6 @@ async function queryTool(phone) {
         }
 
         const d = data.data;
-        const locationText = [d.province, d.city].filter(Boolean).join(' ');
-        const summaryTags = [
-            d.mobile ? '号码：' + d.mobile : '',
-            locationText ? '归属地：' + locationText : '',
-            d.isp ? '运营商：' + d.isp : '',
-            d.postcode ? '邮编：' + d.postcode : '',
-            d.areacode ? '区号：' + d.areacode : '',
-            d.citycode ? '行政区划代码：' + d.citycode : ''
-        ].filter(Boolean);
 
         $('mobileValue').textContent = d.mobile || inputPhone;
         $('provinceValue').textContent = d.province || '-';
@@ -643,6 +614,7 @@ async function queryTool(phone) {
 
         $('baseInfoList').innerHTML = [
             makeInfoItem('查询号码', inputPhone),
+            makeInfoItem('返回号码', d.mobile),
             makeInfoItem('省份', d.province),
             makeInfoItem('城市', d.city),
             makeInfoItem('运营商', d.isp),
@@ -650,8 +622,6 @@ async function queryTool(phone) {
             makeInfoItem('区号', d.areacode),
             makeInfoItem('行政区划代码', d.citycode)
         ].filter(Boolean).join('');
-
-        renderPills($('resultList'), summaryTags, 'fas fa-location-dot');
 
         $('rawContent1').textContent = JSON.stringify(data, null, 2);
 
@@ -665,25 +635,26 @@ async function queryTool(phone) {
     }
 }
 
-$('queryBtn').addEventListener('click', function () {
-    queryTool();
-});
+document.addEventListener('DOMContentLoaded', function () {
+    $('year').textContent = new Date().getFullYear();
 
-$('clearBtn').addEventListener('click', function () {
-    $('phoneInput').value = '';
-    resetCommon();
-    fillEmpty();
-});
-
-$('phoneInput').addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
+    $('queryBtn').addEventListener('click', function () {
         queryTool();
-    }
-});
+    });
 
-document.querySelectorAll('.quick-chip').forEach(function(btn) {
-    btn.addEventListener('click', function () {
-        queryTool(btn.dataset.phone || '');
+    $('clearBtn').addEventListener('click', function () {
+        $('phoneInput').value = '';
+        resetCommon();
+    });
+
+    $('phoneInput').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') queryTool();
+    });
+
+    document.querySelectorAll('.quick-chip').forEach(function(btn) {
+        btn.addEventListener('click', function () {
+            queryTool(btn.dataset.phone || '');
+        });
     });
 });
 </script>
