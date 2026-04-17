@@ -178,7 +178,6 @@
             font-size: 0.88rem;
             cursor: pointer;
         }
-        .hint-line { margin-top: 12px; color: var(--muted); font-size: 0.92rem; }
         .alert {
             display: none;
             margin-top: 16px;
@@ -417,7 +416,6 @@
                     <button class="quick-chip" type="button" data-phone="13612345678">13612345678</button>
                 </div>
 
-                <div class="hint-line">支持直接展示查询结果与原始 JSON 返回内容，便于调试和核对。</div>
                 <div class="alert alert-error" id="errorBox"></div>
                 <div class="alert alert-info" id="infoBox"></div>
 
@@ -656,7 +654,6 @@ async function queryTool(phone) {
 
         $('baseInfoList').innerHTML = [
             makeInfoItem('查询号码', inputPhone),
-            makeInfoItem('返回号码', d.mobile),
             makeInfoItem('省份', d.province),
             makeInfoItem('城市', d.city),
             makeInfoItem('运营商', d.isp),
